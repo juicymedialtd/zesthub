@@ -4,7 +4,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'nav-bg': '#0F2649',
+        'main-bg': '#0A1A34',
+        'topnav-bg': '#08152A'
+      },
+      backgroundImage: {
+        'pattern': 'url(/images/pattern.svg)'
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

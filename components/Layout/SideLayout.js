@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   CalendarIcon,
@@ -10,6 +10,7 @@ import {
   SunIcon,
   AdjustmentsIcon,
 } from "@heroicons/react/outline";
+import { BellIcon, PlusSmIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 
@@ -22,6 +23,7 @@ function classNames(...classes) {
 export default function SideLayout({ children }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [pageName, setPageName] = useState("");
 
   const { data: session, status } = useSession();
 
@@ -48,276 +50,305 @@ export default function SideLayout({ children }) {
       name: "Milage",
       href: "/mileage",
       icon: TruckIcon,
-      current: router.pathname.includes('/mileage'),
+      current: router.pathname.includes("/mileage"),
     },
     {
       name: "Expenses",
       href: "/expenses",
       icon: CashIcon,
-      current: router.pathname.includes('/expense'),
+      current: router.pathname.includes("/expense"),
+    },
+    {
+      name: "Documents",
+      href: "/documents",
+      icon: CashIcon,
+      current: router.pathname.includes("/documents"),
+    },
+    {
+      name: "Wiki",
+      href: "/wiki",
+      icon: CashIcon,
+      current: router.pathname.includes("/wiki"),
     },
   ];
 
+  function setHeader() {
+    const path = router.pathname;
+    if (path === "/") {
+      setPageName("Dashboard");
+    } else if (path.includes("/calendar")) {
+      setPageName("Calendar");
+    } else if (path.includes("/holidays")) {
+      setPageName("Holidays");
+    } else if (path.includes("/mileage")) {
+      setPageName("Milage");
+    } else if (path.includes("/expense")) {
+      setPageName("Expenses");
+    } else if (path.includes("/documents")) {
+      setPageName("Documents");
+    } else if (path.includes("/wiki")) {
+      setPageName("Wiki");
+    }
+  }
+
+  useEffect(() => {
+    setHeader();
+  }, [router]);
+
   return (
-    <>
-      <div>
-        <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog
-            as="div"
-            className="relative z-40 md:hidden"
-            onClose={setSidebarOpen}
+    <div className="min-h-screen">
+      <Transition.Root show={sidebarOpen} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-40 md:hidden"
+          onClose={setSidebarOpen}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="transition-opacity ease-linear duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity ease-linear duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
+            <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 flex z-40">
             <Transition.Child
               as={Fragment}
-              enter="transition-opacity ease-linear duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity ease-linear duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
+              enter="transition ease-in-out duration-300 transform"
+              enterFrom="-translate-x-full"
+              enterTo="translate-x-0"
+              leave="transition ease-in-out duration-300 transform"
+              leaveFrom="translate-x-0"
+              leaveTo="-translate-x-full"
             >
-              <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
-            </Transition.Child>
-
-            <div className="fixed inset-0 flex z-40">
-              <Transition.Child
-                as={Fragment}
-                enter="transition ease-in-out duration-300 transform"
-                enterFrom="-translate-x-full"
-                enterTo="translate-x-0"
-                leave="transition ease-in-out duration-300 transform"
-                leaveFrom="translate-x-0"
-                leaveTo="-translate-x-full"
-              >
-                <Dialog.Panel className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
-                  <Transition.Child
-                    as={Fragment}
-                    enter="ease-in-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in-out duration-300"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <div className="absolute top-0 right-0 -mr-12 pt-2">
-                      <button
-                        type="button"
-                        className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        onClick={() => setSidebarOpen(false)}
-                      >
-                        <span className="sr-only">Close sidebar</span>
-                        <XIcon
-                          className="h-6 w-6 text-white"
-                          aria-hidden="true"
-                        />
-                      </button>
-                    </div>
-                  </Transition.Child>
-                  <div className="flex-shrink-0 flex items-center px-4">
-                    <img
-                      className="h-8 w-auto"
-                      src="https://www.juicymedia.co.uk/application/themes/juicy/images/juicy-logo.svg"
-                      alt="Workflow"
-                    />
+              <Dialog.Panel className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-nav-bg">
+                <Transition.Child
+                  as={Fragment}
+                  enter="ease-in-out duration-300"
+                  enterFrom="opacity-0"
+                  enterTo="opacity-100"
+                  leave="ease-in-out duration-300"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="absolute top-0 right-0 -mr-12 pt-2">
+                    <button
+                      type="button"
+                      className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <span className="sr-only">Close sidebar</span>
+                      <XIcon
+                        className="h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
+                    </button>
                   </div>
-                  <div className="mt-5 flex-1 h-0 overflow-y-auto">
-                    <nav className="px-2 space-y-1">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
+                </Transition.Child>
+                <div className="flex-shrink-0 flex items-center px-4">
+                  {/* <img
+                    className="h-8 w-auto"
+                    src="https://www.juicymedia.co.uk/application/themes/juicy/images/juicy-logo.svg"
+                    alt="Workflow"
+                  /> */}
+                </div>
+                <div className="mt-5 flex-1 h-0 overflow-y-auto">
+                  <nav className="px-2 space-y-1">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.current
+                            ? "bg-amber-300 text-gray-900"
+                            : "text-white hover:bg-amber-300 hover:text-white",
+                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                        )}
+                      >
+                        <item.icon
                           className={classNames(
                             item.current
-                              ? "bg-gray-100 text-gray-900"
-                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                            "group flex items-center px-2 py-2 text-base font-medium rounded-md"
+                              ? "text-gray-900"
+                              : "text-amber-300 group-hover:text-white",
+                            "mr-4 flex-shrink-0 h-6 w-6"
                           )}
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "text-gray-500"
-                                : "text-gray-400 group-hover:text-gray-500",
-                              "mr-4 flex-shrink-0 h-6 w-6"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </a>
-                      ))}
-                    </nav>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-              <div className="flex-shrink-0 w-14" aria-hidden="true">
-                {/* Dummy element to force sidebar to shrink to fit close icon */}
-              </div>
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+            <div className="flex-shrink-0 w-14" aria-hidden="true">
+              {/* Dummy element to force sidebar to shrink to fit close icon */}
             </div>
-          </Dialog>
-        </Transition.Root>
+          </div>
+        </Dialog>
+      </Transition.Root>
 
-        {/* Static sidebar for desktop */}
-        <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
-            <div className="flex items-center flex-shrink-0 px-4">
-              <img
-                className="h-8 w-auto"
-                src="https://www.juicymedia.co.uk/application/themes/juicy/images/juicy-logo.svg"
-                alt="Workflow"
-              />
-            </div>
-            <div className="mt-5 flex-grow flex flex-col">
-              <nav className="flex-1 px-2 pb-4 space-y-1">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
+      {/* Static sidebar for desktop */}
+      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+        {/* Sidebar component, swap this element with another sidebar if you like */}
+        <div className="flex flex-col flex-grow pt-5 bg-nav-bg overflow-y-auto">
+          <div className="flex items-center flex-shrink-0 px-4 py-4">
+            <img
+              className="h-20 w-auto mx-auto"
+              src="zest-draft-logo.svg"
+              alt="Workflow"
+            />
+          </div>
+          <div className="mt-5 flex-grow flex flex-col">
+            <nav className="flex-1 px-2 pb-4 space-y-1">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={classNames(
+                    item.current
+                      ? "bg-amber-300 text-gray-900"
+                      : "text-white hover:bg-amber-300 hover:text-white",
+                    "group flex items-center px-2 py-2 text-md font-bold rounded-md"
+                  )}
+                >
+                  <item.icon
                     className={classNames(
                       item.current
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                        ? "text-gray-900"
+                        : "text-amber-300 group-hover:text-white",
+                      "mr-3 flex-shrink-0 h-6 w-6"
                     )}
-                  >
-                    <item.icon
-                      className={classNames(
-                        item.current
-                          ? "text-gray-500"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
-                      )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </a>
-                ))}
-                {session.user.role === "ADMIN" && (
-                  <a
-                    href="/admin"
+                    aria-hidden="true"
+                  />
+                  {item.name}
+                </a>
+              ))}
+              {session.user.role === "ADMIN" && (
+                <a
+                  href="/admin"
+                  className={classNames(
+                    router.pathname === "/admin"
+                      ? "bg-gray-100 text-gray-900"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                  )}
+                >
+                  <AdjustmentsIcon
                     className={classNames(
                       router.pathname === "/admin"
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                        ? "text-gray-500"
+                        : "text-gray-400 group-hover:text-gray-500",
+                      "mr-3 flex-shrink-0 h-6 w-6"
                     )}
-                  >
-                    <AdjustmentsIcon
-                      className={classNames(
-                        router.pathname === "/admin"
-                          ? "text-gray-500"
-                          : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
-                      )}
-                      aria-hidden="true"
-                    />
-                    Admin
-                  </a>
-                )}
-              </nav>
-            </div>
+                    aria-hidden="true"
+                  />
+                  Admin
+                </a>
+              )}
+            </nav>
           </div>
-        </div>
-        <div className="md:pl-64 flex flex-col flex-1">
-          <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
-            <button
-              type="button"
-              className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
-              <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
-            <div className="flex-1 px-4 flex justify-between">
-              <div className="flex-1 flex">
-                {/* <form className="w-full flex md:ml-0" action="#" method="GET">
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <input
-                      id="search-field"
-                      className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                      name="search"
-                    />
-                  </div>
-                </form> */}
-              </div>
-              <div className="ml-4 flex items-center md:ml-6">
-                {/* <button
-                  type="button"
-                  className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button> */}
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 relative z-40">
-                  <div>
-                    <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                      <span className="sr-only">Open user menu</span>
-                      <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
-                        <span className="text-sm font-medium leading-none text-white">
-                          {session.user.name[0].toLocaleUpperCase()}
-                        </span>
-                      </span>
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700 w-full"
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </Menu.Item>
-                      ))}
-                      <Menu.Item>
-                        {({ active }) => (
-                          <span
-                            type="button"
-                            onClick={() => signOut()}
-                            className={classNames(
-                              active ? "bg-gray-100 cursor-pointer" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign Out
-                          </span>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            </div>
-          </div>
-
-          <main className="flex-1">{children}</main>
         </div>
       </div>
-    </>
+      <div className="flex flex-col flex-1 min-h-screen md:pl-64">
+        <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-topnav-bg">
+          <button
+            type="button"
+            className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <span className="sr-only">Open sidebar</span>
+            <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
+          </button>
+
+          <div className="flex-1 px-4 flex justify-between">
+            <div className="flex-1 flex">
+              <h1 className="text-3xl font-bold text-white p-3">{pageName}</h1>
+            </div>
+            <div className="ml-4 flex items-center space-x-4">
+              <button
+                type="button"
+                className="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-amber-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className="bg-white p-2 rounded-full text-gray-900 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                <span className="sr-only">View notifications</span>
+                <BellIcon className="h-4 w-4" aria-hidden="true" />
+              </button>
+              {/* Profile dropdown */}
+              <Menu as="div" className="ml-3 relative z-40">
+                <div>
+                  <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <span className="sr-only">Open user menu</span>
+                    <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
+                      <span className="text-sm font-medium leading-none text-white">
+                        {session.user.name[0].toLocaleUpperCase()}
+                      </span>
+                    </span>
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    {userNavigation.map((item) => (
+                      <Menu.Item key={item.name}>
+                        {({ active }) => (
+                          <a
+                            href={item.href}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700 w-full"
+                            )}
+                          >
+                            {item.name}
+                          </a>
+                        )}
+                      </Menu.Item>
+                    ))}
+                    <Menu.Item>
+                      {({ active }) => (
+                        <span
+                          type="button"
+                          onClick={() => signOut()}
+                          className={classNames(
+                            active ? "bg-gray-100 cursor-pointer" : "",
+                            "block px-4 py-2 text-sm text-gray-700"
+                          )}
+                        >
+                          Sign Out
+                        </span>
+                      )}
+                    </Menu.Item>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
+          </div>
+        </div>
+
+        <main className="flex-1 relative z-0 focus:outline-none overflow-y-auto bg-main-bg bg-pattern">
+          <div className="">
+            <div className="max-w-screen-2xl mx-auto px-4 sm:px-6">
+              <div className="">{children}</div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
   );
 }
