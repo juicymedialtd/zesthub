@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+enum HolidayType {
+  ANNUAL
+  SICK
+  DENTIST
+  TRAINING
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  name         String
+  password     String
+  email        String   @unique
+  holidaysLeft Int      @default(21)
+  role         Role     @default(USER)
+
+  holidays Holiday[]
+  expenses Expense[]
+  miles    Mileage[]
+}
+
+model Holiday {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  daysUsed  Int
+  startDate String
+  endDate   String
+  status    Status   @default(PENDING)
+  type      HolidayType @default(ANNUAL )      
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model Expense {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  title     String
+  total     Int
+  status    Status   @default(PENDING)
+  receipt   String
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+}
+
+model Mileage {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+}
