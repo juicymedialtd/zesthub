@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { SessionProvider, useSession } from "next-auth/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
-import SideLayout from "../components/Layout/SideLayout";
+import SideLayout from "../layout/SideLayout";
 
 const queryClient = new QueryClient();
 
