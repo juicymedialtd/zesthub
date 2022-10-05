@@ -1,11 +1,11 @@
 const { prisma } = require("../../../prisma/prisma");
 import { getSession } from "next-auth/react";
-import { differenceInBusinessDays, formatISO, parseISO } from "date-fns";
+import { differenceInBusinessDays, parseISO } from "date-fns";
 
 export default async function createRequest(req, res) {
   const session = await getSession({ req });
 
-  const { start, end, reason } = req.body;
+  const { start, end, type } = req.body;
 
   const daysUsed = differenceInBusinessDays(parseISO(end), parseISO(start));
 
@@ -17,11 +17,11 @@ export default async function createRequest(req, res) {
         await prisma.holiday.create({
           data: {
             userId: session.user.id,
-            reason: reason,
+            type: type.type,
             startDate: parseISO(start),
             endDate: parseISO(end),
             status: "PENDING",
-            daysUsed: (Number(daysUsed) + 1),
+            daysUsed: Number(daysUsed) + 1,
           },
         });
 

@@ -13,9 +13,9 @@ export default function Holidays() {
 
   return (
     <div className="py-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Holidays</h1>
-      </div>
+      {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+        <h1 className="text-2xl font-semibold text-white">Holidays</h1>
+      </div> */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">
           {status === "loading" && (
@@ -31,7 +31,7 @@ export default function Holidays() {
                 <>
                   <div className="sm:flex sm:items-center">
                     <div className="sm:flex-auto">
-                      <p className="mt-2 text-sm text-gray-700">
+                      <p className="mt-2 text-sm text-white">
                         Here is a list of all your the holidays you have taken.
                       </p>
                     </div>
@@ -85,7 +85,7 @@ export default function Holidays() {
                         {data.holidays.map((item) => (
                           <tr key={item.id}>
                             <td className="w-3/4 max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                              {item.reason}
+                              {item.type}
                               <dl className="font-normal lg:hidden">
                                 <dt className="sr-only">Title</dt>
                                 <dt className="mt-1">Status - {item.status}</dt>
@@ -130,10 +130,10 @@ export default function Holidays() {
               )}
               {data.holidays.length === 0 && (
                 <>
-                  <div className="text-center mt-36">
+                  <div className="text-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="mx-auto h-12 w-12 text-gray-400"
+                      className="mx-auto h-12 w-12 text-white"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -145,10 +145,10 @@ export default function Holidays() {
                         d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                       />
                     </svg>
-                    <h3 className="mt-2 text-sm font-medium text-gray-900">
+                    <h3 className="mt-2 text-sm font-medium text-white">
                       You haven't requested any time off yet!
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-white">
                       Book time off using the link below.
                     </p>
                     <div className="mt-6">

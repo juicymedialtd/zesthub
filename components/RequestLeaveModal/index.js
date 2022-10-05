@@ -1,10 +1,12 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, forwardRef } from "react";
 import { Dialog, Transition, Combobox } from "@headlessui/react";
 import { XIcon, PlusIcon } from "@heroicons/react/outline";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import { DateRangePicker } from "react-dates";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,10 +14,8 @@ function classNames(...classes) {
 
 export default function RequestLeaveModal() {
   const [open, setOpen] = useState(false);
-  const [focusedInput, setFocusedInput] = useState(null);
   const [sD, setStartDate] = useState(null);
   const [eD, setEndDate] = useState(null);
-  const [reason, setReason] = useState();
   const [query, setQuery] = useState("");
   const [selectedType, setSelectedType] = useState();
 
@@ -23,6 +23,7 @@ export default function RequestLeaveModal() {
     { id: 1, name: "Annual Leave", type: "ANNUAL" },
     { id: 2, name: "Training", type: "Training" },
     { id: 3, name: "Dentist", type: "DENTIST" },
+    { id: 4, name: "Sick Leave", type: "SICK" },
     { id: 3, name: "Sick Leave", type: "SICK" },
   ];
 
@@ -33,11 +34,6 @@ export default function RequestLeaveModal() {
           return item.name.toLowerCase().includes(query.toLowerCase());
         });
 
-  const handleDatesChange = ({ startDate, endDate }) => {
-    setStartDate(startDate);
-    setEndDate(endDate);
-  };
-
   async function submitLeave() {
     await fetch("/api/holidays/create-request", {
       method: "POST",
@@ -47,7 +43,7 @@ export default function RequestLeaveModal() {
       body: JSON.stringify({
         start: sD,
         end: eD,
-        reason: reason,
+        type: selectedType,
       }),
     });
     setOpen(false);
@@ -89,7 +85,7 @@ export default function RequestLeaveModal() {
                   leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                   leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
-                  <Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-3xl sm:w-full sm:p-6">
+                  <Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left  shadow-xl transform transition-all sm:my-8 sm:max-w-3xl sm:w-full sm:p-6">
                     <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                       <button
                         type="button"
@@ -101,33 +97,17 @@ export default function RequestLeaveModal() {
                       </button>
                     </div>
                     <div className="sm:flex sm:items-start">
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                         <Dialog.Title
                           as="h3"
                           className="text-lg leading-6 font-medium text-gray-900"
                         >
                           Please select your requested timeframe
                         </Dialog.Title>
-                        <div className="mt-2">
-                          {/* <label
-                            htmlFor="email"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Reason
-                          </label>
-                          <div className="mt-1">
-                            <input
-                              type="reason"
-                              name="reason"
-                              id="reason"
-                              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                              placeholder="Holiday :)"
-                              onChange={(e) => setReason(e.target.value)}
-                              value={reason}
-                            />
-                          </div> */}
+                        <div className="mt-6">
+                        
 
-                          <div className="mt-1">
+                          <div className="mt-6 w-full">
                             <Combobox
                               as="div"
                               value={selectedType}
@@ -206,19 +186,23 @@ export default function RequestLeaveModal() {
                             </Combobox>
                           </div>
 
-                          <div className={focusedInput ? "mt-2 mb-80" : "mt-2 mb-12"}>
-                            <DateRangePicker
-                              startDate={sD}
-                              startDateId="tata-start-date"
-                              endDate={eD}
-                              endDateId="tata-end-date"
-                              onDatesChange={handleDatesChange}
-                              focusedInput={focusedInput}
-                              onFocusChange={(focusedInput) =>
-                                setFocusedInput(focusedInput)
-                              }
-                              className="z-50"
-                            />
+                          <div className="flex flex-row mt-8 mb-12">
+                            <div>
+                              <label>Start Date</label>
+                              <DatePicker
+                                selected={sD}
+                                onChange={(date) => setStartDate(date)}
+                              />
+                            </div>
+
+                            <div>
+                              <label>End Date</label>
+                              <DatePicker
+                                selected={eD}
+                                onChange={(date) => setEndDate(date)}
+                              />
+                            </div>
+
                           </div>
                         </div>
                       </div>

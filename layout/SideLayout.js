@@ -193,9 +193,9 @@ export default function SideLayout({ children }) {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 bg-nav-bg ">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex flex-col flex-grow pt-5 bg-nav-bg overflow-y-auto">
+        <div className="flex flex-col flex-grow pt-5 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4 py-4">
             <img
               className="h-20 w-auto mx-auto"
@@ -212,7 +212,7 @@ export default function SideLayout({ children }) {
                   className={classNames(
                     item.current
                       ? "bg-amber-300 text-gray-900"
-                      : "text-white hover:bg-amber-300 hover:text-white",
+                      : "text-white hover:bg-amber-300 hover:text-gray-800",
                     "group flex items-center px-2 py-2 text-md font-bold rounded-md"
                   )}
                 >
@@ -220,7 +220,7 @@ export default function SideLayout({ children }) {
                     className={classNames(
                       item.current
                         ? "text-gray-900"
-                        : "text-amber-300 group-hover:text-white",
+                        : "text-amber-300 group-hover:text-gray-800",
                       "mr-3 flex-shrink-0 h-6 w-6"
                     )}
                     aria-hidden="true"
@@ -228,30 +228,32 @@ export default function SideLayout({ children }) {
                   {item.name}
                 </a>
               ))}
-              {session.user.role === "ADMIN" && (
-                <a
-                  href="/admin"
-                  className={classNames(
-                    router.pathname === "/admin"
-                      ? "bg-gray-100 text-gray-900"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                    "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                  )}
-                >
-                  <AdjustmentsIcon
-                    className={classNames(
-                      router.pathname === "/admin"
-                        ? "text-gray-500"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
-                    )}
-                    aria-hidden="true"
-                  />
-                  Admin
-                </a>
-              )}
             </nav>
           </div>
+        </div>
+        <div className="flex flex-shrink-0 p-4">
+          {session.user.role === "ADMIN" && (
+            <a
+              href="/admin"
+              className={classNames(
+                router.pathname === "/admin"
+                  ? "bg-amber-300 text-gray-900"
+                  : "text-white hover:bg-amber-300 hover:text-white",
+                "group flex items-center px-2 py-2 text-md font-bold rounded-md"
+              )}
+            >
+              <AdjustmentsIcon
+                className={classNames(
+                  router.pathname === "/admin"
+                    ? "text-gray-900"
+                    : "text-amber-300 group-hover:text-white",
+                  "mr-3 flex-shrink-0 h-6 w-6"
+                )}
+                aria-hidden="true"
+              />
+              Admin
+            </a>
+          )}
         </div>
       </div>
       <div className="flex flex-col flex-1 min-h-screen md:pl-64">
@@ -342,11 +344,11 @@ export default function SideLayout({ children }) {
         </div>
 
         <main className="flex-1 relative z-0 focus:outline-none overflow-y-auto bg-main-bg bg-pattern">
-          <div className="">
+          <>
             <div className="max-w-screen-2xl mx-auto px-4 sm:px-6">
-              <div className="">{children}</div>
+              <>{children}</>
             </div>
-          </div>
+          </>
         </main>
       </div>
     </div>

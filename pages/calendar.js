@@ -113,12 +113,15 @@ export default function Calendar() {
   return (
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Calendar</h1>
+        <h1 className="text-2xl font-semibold text-white">Overview</h1>
+        <div>
+          
+        </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">
-          <div className="lg:flex lg:h-full lg:flex-col">
-            <header className="relative flex items-center justify-between border-b border-gray-200 py-4  lg:flex-none">
+          <div className="lg:flex lg:h-full lg:flex-col border bg-white rounded-md">
+            <header className="relative flex items-center space-x-12 border-b border-gray-200 py-4 ml-4 lg:flex-none">
               <h1 className="text-lg font-semibold text-gray-900">
                 <time dateTime="2022-01">
                   {format(firstDayCurrentMonth, "MMMM yyyy")}
