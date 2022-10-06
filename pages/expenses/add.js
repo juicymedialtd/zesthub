@@ -8,7 +8,7 @@ export default function AddExpense() {
   async function postData() {
     const formData = new FormData();
 
-    formData.append("File", receipt[0]);
+    // formData.append("File", receipt[0]);
     formData.append("reason", reason);
     formData.append("total", total);
 
@@ -21,7 +21,7 @@ export default function AddExpense() {
   return (
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">
+        <h1 className="text-2xl font-semibold text-white">
           Submit a new expense
         </h1>
       </div>
@@ -34,7 +34,7 @@ export default function AddExpense() {
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
                       htmlFor="username"
-                      className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                      className="block text-sm font-medium text-white sm:mt-px sm:pt-2"
                     >
                       Reason
                     </label>
@@ -56,21 +56,15 @@ export default function AddExpense() {
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
                       htmlFor="about"
-                      className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                      className="block text-sm font-medium text-white sm:mt-px sm:pt-2"
                     >
                       Total
                     </label>
                     <div className="mt-1 sm:mt-0 sm:col-span-2">
                       <div>
-                        <label
-                          htmlFor="price"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Price
-                        </label>
                         <div className="mt-1 relative rounded-md shadow-sm max-w-lg ">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="text-gray-500 sm:text-sm">£</span>
+                            <span className="text-white sm:text-sm">£</span>
                           </div>
                           <input
                             type="text"
@@ -98,7 +92,7 @@ export default function AddExpense() {
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
                       htmlFor="cover-photo"
-                      className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                      className="block text-sm font-medium text-white sm:mt-px sm:pt-2"
                     >
                       Receipt
                     </label>

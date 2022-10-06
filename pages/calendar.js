@@ -292,7 +292,7 @@ export default function Calendar() {
                                               className="group flex"
                                             >
                                               <p className="flex-auto truncate font-medium text-white ml-2">
-                                                {e.User.name + " - " + e.reason}
+                                                {e.User.name + " - " + e.type}
                                               </p>
                                             </span>
                                           </li>

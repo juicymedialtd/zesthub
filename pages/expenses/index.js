@@ -44,9 +44,6 @@ export default function Expenses() {
   return (
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Expenses</h1>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
@@ -68,55 +65,78 @@ export default function Expenses() {
           </div>
           {!loading && (
             <div className=" mt-8 flex flex-col sm:-mx-6 md:mx-0">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead>
+              <table className="min-w-full">
+                <thead className="bg-topnav-bg">
                   <tr>
                     <th
                       scope="col"
-                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 md:pl-0"
+                      className="py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
                     >
                       Reason
                     </th>
+
                     <th
                       scope="col"
-                      className="hidden py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                    >
-                      Receipt
-                    </th>
-                    <th
-                      scope="col"
-                      className="hidden py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                      className="hidden py-2 px-3 text-left text-sm font-semibold text-white sm:table-cell"
                     >
                       Status
                     </th>
                     <th
                       scope="col"
-                      className="hidden py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                      className="hidden py-2 px-3 text-left text-sm font-semibold text-white sm:table-cell"
                     >
                       Date Submitted
                     </th>
                     <th
                       scope="col"
-                      className="py-3.5 pl-3 pr-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0"
+                      className="hidden py-2 px-3 text-left text-sm font-semibold text-white sm:table-cell"
+                    >
+                      Receipt
+                    </th>
+                    <th
+                      scope="col"
+                      className="py-2 pl-3 pr-4 text-right text-sm font-semibold text-white sm:pr-6 md:pr-12"
                     >
                       Price
                     </th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-white">
                   {data !== undefined &&
                     data.map((item) => {
+
+                      let status
+
+                      switch(item.status) {
+                        case item.status === 'APPROVED': 
+                          status = 'bg-white'
+                          break;
+                        case item.status === 'PENDING':
+                          status = 'bg-yellow-300'
+                          break;
+                        case item.status === 'DECLINED':
+                          status = 'bg-red-300'
+                          break
+                      }
+
                       return (
-                        <tr key={item.id} className="border-b border-gray-200">
-                          <td className="py-4 pl-4 pr-3 text-sm sm:pl-6 md:pl-0">
-                            <div className="font-medium text-gray-900">
+                        <tr key={item.id} className={status}>
+                          <td className="py-2 pl-4 pr-3 text-sm sm:pl-6">
+                            <div className="font-bold text-gray-900 capitalize">
                               {item.title}
                             </div>
-                            <div className="mt-0.5 text-gray-500 sm:hidden">
+                            <div className="mt-0.5 text-gray-900 sm:hidden">
                               {item.status} - Submitted on {item.createdAt}
                             </div>
                           </td>
-                          <td className="hidden py-4 px-3 text-right text-sm text-gray-500 sm:table-cell">
+                          
+                          <td className="hidden py-1 px-3 text-left text-sm text-gray-900 sm:table-cell font-bold">
+                            {item.status}
+                          </td>
+                          <td className="hidden py-1 px-3 text-left text-sm text-gray-900 sm:table-cell font-bold">
+                            {format(parseISO(item.createdAt), "dd/MM/yyyy")}
+                          </td>
+                          <td className="hidden py-1 px-3 text-right text-sm text-gray-900 sm:table-cell font-bold">
                             <a href={item.receipt}>
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -139,40 +159,13 @@ export default function Expenses() {
                               </svg>
                             </a>
                           </td>
-                          <td className="hidden py-4 px-3 text-left text-sm text-gray-500 sm:table-cell">
-                            {item.status}
-                          </td>
-                          <td className="hidden py-4 px-3 text-left text-sm text-gray-500 sm:table-cell">
-                            {format(parseISO(item.createdAt), "dd/MM/yyyy")}
-                          </td>
-
-                          <td className="py-4 pl-3 pr-4 text-right text-sm text-gray-500 sm:pr-6 md:pr-0">
+                          <td className="py-2 pl-3 pr-4 text-right text-sm text-gray-900 sm:pr-6 md:pr-12 font-bold">
                             £{item.total}
                           </td>
                         </tr>
                       );
                     })}
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th
-                      scope="row"
-                      colSpan={4}
-                      className="hidden pl-6 pr-3 pt-4 text-right text-sm font-semibold text-gray-900 sm:table-cell md:pl-0"
-                    >
-                      Approved Total
-                    </th>
-                    <th
-                      scope="row"
-                      className="pl-4 pr-3 pt-4 text-right text-sm font-semibold text-gray-900 sm:hidden"
-                    >
-                      Approved Total
-                    </th>
-                    <td className="pl-3 pr-4 pt-4 text-right text-sm font-semibold text-gray-900 sm:pr-6 md:pr-0">
-                      £{total.toLocaleString()}
-                    </td>
-                  </tr>
-                </tfoot>
               </table>
             </div>
           )}

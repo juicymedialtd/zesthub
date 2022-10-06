@@ -58,18 +58,18 @@ export default function SideLayout({ children }) {
       icon: CashIcon,
       current: router.pathname.includes("/expense"),
     },
-    {
-      name: "Documents",
-      href: "/documents",
-      icon: CashIcon,
-      current: router.pathname.includes("/documents"),
-    },
-    {
-      name: "Wiki",
-      href: "/wiki",
-      icon: CashIcon,
-      current: router.pathname.includes("/wiki"),
-    },
+    // {
+    //   name: "Documents",
+    //   href: "/documents",
+    //   icon: CashIcon,
+    //   current: router.pathname.includes("/documents"),
+    // },
+    // {
+    //   name: "Wiki",
+    //   href: "/wiki",
+    //   icon: CashIcon,
+    //   current: router.pathname.includes("/wiki"),
+    // },
   ];
 
   function setHeader() {
