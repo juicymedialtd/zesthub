@@ -15,7 +15,7 @@ export default async function createRequest(req, res) {
           id: Number(id),
         },
         data: {
-          status: "DENIED",
+          status: "denied",
         },
       });
 

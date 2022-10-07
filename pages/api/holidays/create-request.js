@@ -20,7 +20,7 @@ export default async function createRequest(req, res) {
             type: type.type,
             startDate: parseISO(start),
             endDate: parseISO(end),
-            status: "PENDING",
+            status: "pending",
             daysUsed: Number(daysUsed) + 1,
           },
         });

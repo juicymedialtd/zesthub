@@ -89,14 +89,26 @@ export default function Calendar() {
       let colour;
 
       const annual = "bg-[#6261A5]";
-      const training = 'bg-[#3887C9]';
-      const healthcare = ''
-      const nationalHoliday = ''
-      const other = ''
+      const training = "bg-[#3887C9]";
+      const health = "bg-[#50AC56]";
+      const nationalHoliday = "bg-[#E37638]";
+      const other = "bg-[#B8354C]";
 
       switch (holidays[i].type) {
-        case "ANNUAL":
+        case "annual":
           colour = annual;
+          break;
+        case "training":
+          colour = training;
+          break;
+        case "health":
+          colour = health;
+          break;
+        case "nationalHoliday":
+          colour = nationalHoliday;
+          break;
+        case "other":
+          colour = other;
           break;
       }
 
@@ -116,7 +128,28 @@ export default function Calendar() {
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 className="text-2xl font-semibold text-white">Overview</h1>
-        <div></div>
+        <div className="flex flex-row mt-2 gap-4">
+          <div className="flex flex-row gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#6261A5] font-semibold text-white" />
+            <span className="text-white">Annual Leave</span>
+          </div>
+          <div className="flex flex-row gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#3887C9] font-semibold text-white" />
+            <span className="text-white">Training</span>
+          </div>
+          <div className="flex flex-row gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#50AC56] font-semibold text-white" />
+            <span className="text-white">Health</span>
+          </div>
+          <div className="flex flex-row gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#E37638] font-semibold text-white" />
+            <span className="text-white">National Holiday</span>
+          </div>
+          <div className="flex flex-row gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#B8354C] font-semibold text-white" />
+            <span className="text-white">Other</span>
+          </div>
+        </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">
@@ -258,17 +291,16 @@ export default function Calendar() {
                         "relative h-32"
                       )}
                     >
-                      <time
-                        dateTime={format(day, "yyyy-MM-dd")}
+                      <div
                         className={classNames(
                           isEqual(selectedDay, day)
-                            ? "flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 font-semibold text-white"
+                            ? "flex h-6 w-6 items-center justify-center rounded-full bg-secondary font-semibold text-white"
                             : undefined,
-                          "ml-3"
+                          "ml-2 mt-1"
                         )}
                       >
                         {format(day, "d")}
-                      </time>
+                      </div>
 
                       <div className="mt-2">
                         {events.length > 0 &&

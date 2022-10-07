@@ -20,11 +20,10 @@ export default function RequestLeaveModal() {
   const [selectedType, setSelectedType] = useState();
 
   const HolidayType = [
-    { id: 1, name: "Annual Leave", type: "ANNUAL" },
-    { id: 2, name: "Training", type: "Training" },
-    { id: 3, name: "Dentist", type: "DENTIST" },
-    { id: 4, name: "Sick Leave", type: "SICK" },
-    { id: 3, name: "Sick Leave", type: "SICK" },
+    { id: 1, name: "Annual Leave", type: "annual" },
+    { id: 2, name: "Training", type: "training" },
+    { id: 3, name: "Dentist", type: "detnist" },
+    { id: 4, name: "Health", type: "health" },
   ];
 
   const filteredPeople =
