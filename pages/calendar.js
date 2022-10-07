@@ -86,17 +86,19 @@ export default function Calendar() {
         currentDate = addDays(currentDate, 1);
       }
 
-      let bg = [
-        "bg-green-700",
-        "bg-blue-700",
-        "bg-red-700",
-        "bg-amber-700",
-        "bg-yellow-700",
-        "bg-lime-500",
-        "bg-cyan-700",
-      ];
+      let colour;
 
-      let colour = bg[Math.floor(Math.random() * bg.length)];
+      const annual = "bg-[#6261A5]";
+      const training = 'bg-[#3887C9]';
+      const healthcare = ''
+      const nationalHoliday = ''
+      const other = ''
+
+      switch (holidays[i].type) {
+        case "ANNUAL":
+          colour = annual;
+          break;
+      }
 
       events.push(...range);
       holidays[i].range = events;
@@ -114,9 +116,7 @@ export default function Calendar() {
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 className="text-2xl font-semibold text-white">Overview</h1>
-        <div>
-          
-        </div>
+        <div></div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">

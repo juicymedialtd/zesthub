@@ -16,17 +16,16 @@ enum Role {
 }
 
 enum Status {
-  PENDING
-  APPROVED
-  DENIED
+  pending
+  approved
+  denied
 }
 
 enum HolidayType {
-  ANNUAL
-  SICK
-  DENTIST
-  TRAINING
-  OTHER
+  annual
+  health
+  training
+  other
 }
 
 model User {
@@ -45,14 +44,15 @@ model User {
 }
 
 model Holiday {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id        Int         @id @default(autoincrement())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now())
   daysUsed  Int
   startDate String
   endDate   String
-  status    Status   @default(PENDING)
-  type      HolidayType @default(ANNUAL )      
+  status    Status      @default(pending)
+  type      HolidayType @default(annual)
+  note      String?
 
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
@@ -64,7 +64,7 @@ model Expense {
   updatedAt DateTime @default(now())
   title     String
   total     Int
-  status    Status   @default(PENDING)
+  status    Status   @default(pending)
   receipt   String
 
   User   User? @relation(fields: [userId], references: [id])
@@ -78,4 +78,10 @@ model Mileage {
 
   User   User? @relation(fields: [userId], references: [id])
   userId Int?
+
+  status        Status @default(pending)
+  miles         Int
+  Reason        String
+  startPostcode String
+  stops         Json?
 }

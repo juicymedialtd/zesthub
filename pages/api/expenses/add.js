@@ -67,7 +67,7 @@ export default async function createRequest(req, res) {
             total: Number(fields.total),
             receipt: 'url',
             userId: session.user.id,
-            status: "PENDING",
+            status: "pending",
           },
         });
       });

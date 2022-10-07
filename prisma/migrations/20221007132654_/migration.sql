@@ -2,7 +2,10 @@
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 
 -- CreateEnum
-CREATE TYPE "Status" AS ENUM ('PENDING', 'APPROVED', 'DENIED');
+CREATE TYPE "Status" AS ENUM ('pending', 'approved', 'denied');
+
+-- CreateEnum
+CREATE TYPE "HolidayType" AS ENUM ('annual', 'health', 'training', 'other');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -26,8 +29,9 @@ CREATE TABLE "Holiday" (
     "daysUsed" INTEGER NOT NULL,
     "startDate" TEXT NOT NULL,
     "endDate" TEXT NOT NULL,
-    "reason" TEXT NOT NULL,
-    "status" "Status" NOT NULL DEFAULT E'PENDING',
+    "status" "Status" NOT NULL DEFAULT E'pending',
+    "type" "HolidayType" NOT NULL DEFAULT E'annual',
+    "note" TEXT,
     "userId" INTEGER,
 
     CONSTRAINT "Holiday_pkey" PRIMARY KEY ("id")
@@ -40,6 +44,8 @@ CREATE TABLE "Expense" (
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "title" TEXT NOT NULL,
     "total" INTEGER NOT NULL,
+    "status" "Status" NOT NULL DEFAULT E'pending',
+    "receipt" TEXT NOT NULL,
     "userId" INTEGER,
 
     CONSTRAINT "Expense_pkey" PRIMARY KEY ("id")
@@ -51,6 +57,11 @@ CREATE TABLE "Mileage" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER,
+    "status" "Status" NOT NULL DEFAULT E'pending',
+    "miles" INTEGER NOT NULL,
+    "Reason" TEXT NOT NULL,
+    "startPostcode" TEXT NOT NULL,
+    "stops" JSONB,
 
     CONSTRAINT "Mileage_pkey" PRIMARY KEY ("id")
 );

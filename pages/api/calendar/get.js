@@ -10,7 +10,7 @@ export default async function createRequest(req, res) {
 
       const holidays = await prisma.holiday.findMany({
         where: {
-          status: "APPROVED",
+          status: "approved",
         },
         include: {
           User: {
