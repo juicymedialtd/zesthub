@@ -239,7 +239,7 @@ export default function SideLayout({ children }) {
                 router.pathname === "/admin"
                   ? "bg-amber-300 text-gray-900"
                   : "text-white hover:bg-amber-300 hover:text-white",
-                "group flex items-center px-2 py-2 text-md font-bold rounded-md"
+                "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
               )}
             >
               <AdjustmentsIcon

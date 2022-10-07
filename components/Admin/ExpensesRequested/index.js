@@ -39,10 +39,10 @@ export default function ExpensesRequested() {
         <>
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-gray-900">
+              <h1 className="text-xl font-semibold text-white">
                 Active Expense Requests
               </h1>
-              <p className="mt-2 text-sm text-gray-700">
+              <p className="mt-2 text-sm text-white">
                 A list of all the user who currently have pending holiday
                 requests.
               </p>
@@ -54,25 +54,25 @@ export default function ExpensesRequested() {
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell"
                   >
                     Reason
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white sm:table-cell"
                   >
                     Date Submitted
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white sm:table-cell"
                   >
                     Total
                   </th>
@@ -86,25 +86,25 @@ export default function ExpensesRequested() {
                 {data !== undefined &&
                   data.map((item) => (
                     <tr key={item.id}>
-                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-white sm:w-auto sm:max-w-none sm:pl-6">
                         {item.User.name}
                         <dl className="font-normal lg:hidden">
                           <dd className="mt-1 truncate text-gray-700">
                             {item.title}
                           </dd>
-                          {/* <dd className="mt-1 truncate text-gray-500 sm:hidden">
+                          {/* <dd className="mt-1 truncate text-white sm:hidden">
                             {format(parseISO(item.startDate), "dd/MM/yyyy")} -{" "}
                             {format(parseISO(item.endDate), "dd/MM/yyyy")}
                           </dd> */}
                         </dl>
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
+                      <td className="hidden px-3 py-4 text-sm text-white lg:table-cell">
                         {item.title}
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                      <td className="hidden px-3 py-4 text-sm text-white sm:table-cell">
                         {format(parseISO(item.createdAt), "dd/MM/yyyy")}
                       </td>
-                      <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap sm:table-cell">
+                      <td className="px-3 py-4 text-sm text-white whitespace-nowrap sm:table-cell">
                         £{item.total.toLocaleString()}
                       </td>
                       <td className="py-4 text-right text-sm font-medium whitespace-nowrap">
@@ -129,7 +129,7 @@ export default function ExpensesRequested() {
                           className="relative inline-block text-left sm:hidden"
                         >
                           <div>
-                            <Menu.Button className="rounded-full flex items-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-blue-500">
+                            <Menu.Button className="rounded-full flex items-center text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-blue-500">
                               <span className="sr-only">Open options</span>
                               <DotsVerticalIcon
                                 className="h-5 w-5"
@@ -155,7 +155,7 @@ export default function ExpensesRequested() {
                                       onClick={() => approveRequest(item.id)}
                                       className={classNames(
                                         active
-                                          ? "bg-gray-100 text-gray-900"
+                                          ? "bg-gray-100 text-white"
                                           : "text-gray-700",
                                         "block px-4 py-2 text-sm"
                                       )}
@@ -171,7 +171,7 @@ export default function ExpensesRequested() {
                                       onClick={() => denyRequest(item.id)}
                                       className={classNames(
                                         active
-                                          ? "bg-gray-100 text-gray-900"
+                                          ? "bg-gray-100 text-white"
                                           : "text-gray-700",
                                         "block px-4 py-2 text-sm"
                                       )}
@@ -210,7 +210,7 @@ export default function ExpensesRequested() {
                   d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <h3 className="mt-2 text-sm font-medium text-gray-900">
+              <h3 className="mt-2 text-sm font-medium text-white">
                 There are no current pending requests
               </h3>
             </div>

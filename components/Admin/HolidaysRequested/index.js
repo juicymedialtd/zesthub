@@ -4,9 +4,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-  
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function HolidaysRequested() {
   const [data, setData] = useState([]);
@@ -40,10 +39,10 @@ export default function HolidaysRequested() {
         <>
           <div className="sm:flex sm:items-center">
             <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-gray-900">
+              <h1 className="text-xl font-semibold text-white">
                 Active Holiday Requests
               </h1>
-              <p className="mt-2 text-sm text-gray-700">
+              <p className="mt-2 text-sm text-white">
                 A list of all the user who currently have pending holiday
                 requests.
               </p>
@@ -55,31 +54,31 @@ export default function HolidaysRequested() {
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell"
                   >
                     Reason
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white sm:table-cell"
                   >
                     Start Date
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
+                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white sm:table-cell"
                   >
                     End Date
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-white"
                   >
                     Days Used
                   </th>
@@ -92,7 +91,7 @@ export default function HolidaysRequested() {
                 {data !== undefined &&
                   data.map((item) => (
                     <tr key={item.id}>
-                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-white sm:w-auto sm:max-w-none sm:pl-6">
                         {item.User.name}
                         <dl className="font-normal lg:hidden">
                           <dd className="mt-1 truncate text-gray-700">
@@ -104,16 +103,16 @@ export default function HolidaysRequested() {
                           </dd>
                         </dl>
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">
-                        {item.reason}
+                      <td className="hidden px-3 py-4 text-sm text-white lg:table-cell">
+                        {item.type}
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                      <td className="hidden px-3 py-4 text-sm text-white sm:table-cell">
                         {format(parseISO(item.startDate), "dd/MM/yyyy")}
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                      <td className="hidden px-3 py-4 text-sm text-white sm:table-cell">
                         {format(parseISO(item.endDate), "dd/MM/yyyy")}
                       </td>
-                      <td className="px-3 py-4 text-sm text-gray-500 whitespace-nowrap sm:table-cell">
+                      <td className="px-3 py-4 text-sm text-white whitespace-nowrap sm:table-cell">
                         {item.daysUsed} days
                       </td>
                       <td className="py-4 text-right text-sm font-medium whitespace-nowrap">
@@ -138,7 +137,7 @@ export default function HolidaysRequested() {
                           className="relative inline-block text-left sm:hidden"
                         >
                           <div>
-                            <Menu.Button className="rounded-full flex items-center text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-blue-500">
+                            <Menu.Button className="rounded-full flex items-center text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-300 focus:ring-blue-500">
                               <span className="sr-only">Open options</span>
                               <DotsVerticalIcon
                                 className="h-5 w-5"
@@ -164,7 +163,7 @@ export default function HolidaysRequested() {
                                       onClick={() => approveRequest(item.id)}
                                       className={classNames(
                                         active
-                                          ? "bg-gray-100 text-gray-900"
+                                          ? "bg-gray-100 text-white"
                                           : "text-gray-700",
                                         "block px-4 py-2 text-sm"
                                       )}
@@ -180,7 +179,7 @@ export default function HolidaysRequested() {
                                       onClick={() => denyRequest(item.id)}
                                       className={classNames(
                                         active
-                                          ? "bg-gray-100 text-gray-900"
+                                          ? "bg-gray-100 text-white"
                                           : "text-gray-700",
                                         "block px-4 py-2 text-sm"
                                       )}
@@ -203,11 +202,11 @@ export default function HolidaysRequested() {
       )}
       {data.length === 0 && (
         <>
-          <div className="flex h-screen flex-col">
+          <div className="flex flex-col mt-80">
             <div className="m-auto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mx-auto h-12 w-12 text-gray-400"
+                className="mx-auto h-12 w-12 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -219,7 +218,7 @@ export default function HolidaysRequested() {
                   d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <h3 className="mt-2 text-sm font-medium text-gray-900">
+              <h3 className="mt-2 text-sm font-medium text-white">
                 There are no current pending requests
               </h3>
             </div>

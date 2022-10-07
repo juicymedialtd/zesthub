@@ -18,7 +18,7 @@ export default function AdminPage() {
   return (
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-gray-900">Admin Panel</h1>
+        <h1 className="text-2xl font-semibold text-white">Admin Panel</h1>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">
@@ -48,8 +48,8 @@ export default function AdminPage() {
                       onClick={() => setShow(tab.id)}
                       className={classNames(
                         tab.id === show
-                          ? "border-indigo-500 text-indigo-600"
-                          : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-200",
+                          ? "border-primary text-white hover:text-secondary"
+                          : "border-transparent text-gray-500 hover:text-secondary hover:border-gray-200",
                         "whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
                       )}
                       aria-current={show === tab.id ? "page" : undefined}
