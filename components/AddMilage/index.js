@@ -1,15 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
-import {
-  MapContainer,
-  TileLayer,
-  withLeaflet,
-  MapControl,
-} from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
+import AwesomeDebouncePromise from "awesome-debounce-promise";
 
 import "leaflet/dist/leaflet.css";
-import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
-
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 
@@ -22,6 +16,11 @@ export default function AddMileage() {
     {
       postcode: "",
     },
+  ]);
+  const [waypoints, setWaypoints] = useState([
+    // L.latLng(53.522516, -2.492623),
+    // L.latLng(53.513342, -2.443597),
+    // L.latLng(53.472857, -2.299675),
   ]);
 
   function classNames(...classes) {
@@ -39,6 +38,47 @@ export default function AddMileage() {
     data[index][event.target.name] = event.target.value;
     setInput(data);
   }
+
+  // Loop over postcode array & find latLong for each postcode, update waypoint array with LatLong
+  async function calculateLatLong() {
+    const data = [start];
+
+    for (let i = 0; i < input.length; i++) {
+      data.push(input[i].postcode);
+    }
+
+    await fetch("https://api.postcodes.io/postcodes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postcodes: data,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const result = res.result;
+
+        const waypoints = [];
+
+        result.map((item) => {
+          if (item.result !== null) {
+            waypoints.push(
+              L.latLng(item.result.latitude, item.result.longitude)
+            );
+          }
+        });
+
+        setWaypoints(waypoints);
+      });
+  }
+
+  const asyncFunctionDebounced = AwesomeDebouncePromise(calculateLatLong, 1500);
+
+  useEffect(() => {
+    asyncFunctionDebounced();
+  }, [input, start]);
 
   return (
     <div className="py-6">
@@ -68,7 +108,7 @@ export default function AddMileage() {
                 </div>
               </div>
 
-              <div className="flex flex-row mt-4 space-y-3 gap-4 h-72">
+              <div className="flex flex-row mt-4 space-y-3 gap-4 h-[75vh]">
                 <div className=" flex-col w-1/2">
                   <label
                     htmlFor="email"
@@ -83,6 +123,7 @@ export default function AddMileage() {
                       id="email"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                       placeholder="m50 2st"
+                      onChange={(e) => setStart(e.target.value)}
                     />
                   </div>
 
@@ -106,18 +147,20 @@ export default function AddMileage() {
                   </div>
                 </div>
 
-                <div className="w-1/2">
+                <div className="w-full">
                   <MapContainer
                     center={[51.505, -0.09]}
                     zoom={13}
-                    scrollWheelZoom={false}
-                    style={{ height: "100%", width: "100%" }}
+                    zoomAnimation='false'
+                    style={{ height: "100%", width: "100%", padding: 0 }}
                   >
                     <TileLayer
                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Routing />
+                    {waypoints !== undefined && waypoints.length > 1 && (
+                      <Routing waypoints={waypoints} />
+                    )}
                   </MapContainer>
                 </div>
               </div>

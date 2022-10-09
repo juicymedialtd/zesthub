@@ -13,6 +13,7 @@
     "@heroicons/react": "^1.0.6",
     "@prisma/client": "^3.14.0",
     "@tailwindcss/forms": "^0.5.1",
+    "awesome-debounce-promise": "^2.1.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "date-fns": "^2.28.0",
@@ -41,5 +42,10 @@
   "prisma": {
     "seed": "node prisma/seed.js",
     "schema": "./prisma/schema.prisma"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
