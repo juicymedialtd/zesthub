@@ -1,13 +1,8 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import {
-  DotsVerticalIcon,
-  CashIcon,
-  GlobeIcon,
-  LocationMarkerIcon,
-} from "@heroicons/react/outline";
-import { format, parseISO } from "date-fns";
-import { PlusIcon, SunIcon, TruckIcon } from "@heroicons/react/solid";
+import { CashIcon, SunIcon, TruckIcon } from "@heroicons/react/outline";
+import { format, parse, parseISO } from "date-fns";
+import { PlusIcon } from "@heroicons/react/solid";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -15,7 +10,10 @@ function classNames(...classes) {
 
 export default function Home() {
   const [events, setEvents] = useState([]);
-  const [data, setData] = useState();
+  const [expenses, setExpenses] = useState();
+  const [miles, setMiles] = useState();
+  const [holidays, setHolidays] = useState();
+  const [feed, setFeed] = useState();
 
   async function CalendarData() {
     const res = await fetch("/api/calendar/get").then((res) => res.json());
@@ -26,34 +24,23 @@ export default function Home() {
 
   async function getStats() {
     const res = await fetch("/api/user/stats").then((res) => res.json());
-    setData(res.holidayCount);
+    setHolidays(res.holidayCount.holidaysLeft);
+    setMiles(res.totalMilage);
+    setExpenses(res.totalExpenses);
+  }
+
+  async function getFeed() {
+    const res = await fetch("/api/user/feed").then((res) => res.json());
+    setFeed(res.feed);
   }
 
   useEffect(() => {
     CalendarData();
     getStats();
+    getFeed();
   }, []);
 
-  const cards = [
-    {
-      name: "Expenses submitted",
-      href: "/expenses",
-      icon: CashIcon,
-      amount: "£0.00",
-    },
-    {
-      name: "Miles submitted",
-      href: "/miles",
-      icon: LocationMarkerIcon,
-      amount: "0",
-    },
-    {
-      name: "Holidays Left",
-      href: "/holidays",
-      icon: GlobeIcon,
-      amount: data !== undefined ? data.holidaysLeft : "",
-    },
-  ];
+  console.log(holidays);
 
   return (
     <>
@@ -75,14 +62,15 @@ export default function Home() {
                         Expense submitted
                       </h3>
                       <div className="">
-                        <span className="text-3xl font-bold">£520.00</span>
+                        <span className="text-3xl font-bold">{expenses}</span>
                       </div>
-                      <button
+                      <a
+                        href="/expenses"
                         type="button"
                         className="inline-flex items-center rounded-md border border-transparent bg-gradient-to-r from-primary to-secondary px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
                       >
                         View All
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -102,14 +90,15 @@ export default function Home() {
                         Miles submitted
                       </h3>
                       <div className="">
-                        <span className="text-3xl font-bold">£520.00</span>
+                        <span className="text-3xl font-bold">{miles}</span>
                       </div>
-                      <button
+                      <a
+                        href="/mileage"
                         type="button"
                         className="inline-flex items-center rounded-md border border-transparent bg-gradient-to-r from-primary to-secondary px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
                       >
                         View All
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -129,17 +118,60 @@ export default function Home() {
                         Holidays Left
                       </h3>
                       <div className="">
-                        <span className="text-3xl font-bold">£520.00</span>
+                        <span className="text-3xl font-bold">{holidays}</span>
                       </div>
-                      <button
+                      <a
+                        href="holidays"
                         type="button"
                         className="inline-flex items-center rounded-md border border-transparent bg-gradient-to-r from-primary to-secondary px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
                       >
                         View All
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-row">
+          <div className="bg-white w-1/3 mr-8 rounded-md">
+            <div className="p-4">
+              <h1 className="font-bold text-xl">Upcoming Events</h1>
+              {feed !== undefined &&
+                feed.map((item) => (
+                  <div key={item.id} className="py-4">
+                    <div className="flex space-x-3">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
+                        <span className="text-xs font-medium leading-none text-white">
+                          TW
+                        </span>
+                      </span>
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-sm font-medium capitalize">
+                            {item.type}
+                          </h3>
+                        </div>
+                        <p className="text-sm text-gray-500">
+                          {format(parseISO(item.startDate), "MM/dd/yyyy")} -{" "}
+                          {format(parseISO(item.endDate), "MM/dd/yyyy")}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          <div className="w-2/3 rounded-md bg-white">
+            <div className="p-4 flex flex-row divide-x h-full divide-gray-600">
+              <div className="w-1/2">
+                <h1 className="text-xl font-bold ">Wiki</h1>
+              </div>
+              <div className="w-1/2 pl-4 mr-6" >
+                <h1 className="text-xl font-bold ">Documents</h1>
               </div>
             </div>
           </div>
