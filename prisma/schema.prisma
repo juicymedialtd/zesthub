@@ -76,12 +76,13 @@ model Mileage {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  User   User? @relation(fields: [userId], references: [id])
-  userId Int?
-
   status        Status @default(pending)
-  miles         Int
+  miles         Float
   Reason        String
   startPostcode String
   stops         Json?
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
 }

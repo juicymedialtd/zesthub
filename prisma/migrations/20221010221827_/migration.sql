@@ -56,12 +56,12 @@ CREATE TABLE "Mileage" (
     "id" SERIAL NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "userId" INTEGER,
     "status" "Status" NOT NULL DEFAULT E'pending',
-    "miles" INTEGER NOT NULL,
+    "miles" DOUBLE PRECISION NOT NULL,
     "Reason" TEXT NOT NULL,
     "startPostcode" TEXT NOT NULL,
     "stops" JSONB,
+    "userId" INTEGER,
 
     CONSTRAINT "Mileage_pkey" PRIMARY KEY ("id")
 );

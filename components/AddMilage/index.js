@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { PlusIcon } from "@heroicons/react/solid";
 import { MapContainer, TileLayer } from "react-leaflet";
 import AwesomeDebouncePromise from "awesome-debounce-promise";
+import "leaflet-routing-machine";
+import { useRouter } from "next/router";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
@@ -10,6 +12,8 @@ import "leaflet-defaulticon-compatibility";
 import Routing from "../Routing";
 
 export default function AddMileage() {
+  const router = useRouter();
+
   const [reason, setReason] = useState();
   const [start, setStart] = useState();
   const [input, setInput] = useState([
@@ -22,6 +26,7 @@ export default function AddMileage() {
     // L.latLng(53.513342, -2.443597),
     // L.latLng(53.472857, -2.299675),
   ]);
+  const [distance, setDistance] = useState();
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -74,6 +79,31 @@ export default function AddMileage() {
       });
   }
 
+  async function submitMiles() {
+    const miles = distance * 0.621371;
+
+    await fetch("/api/mileage/new-request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        reason,
+        start,
+        stops: input,
+        miles,
+      }),
+    })
+      // .then((res) => res.json())
+      // .then((res) => router.push("/mileage"));
+  }
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'gbp',
+  });
+
+
   const asyncFunctionDebounced = AwesomeDebouncePromise(calculateLatLong, 1500);
 
   useEffect(() => {
@@ -83,11 +113,29 @@ export default function AddMileage() {
   return (
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-white">Add a new trip</h1>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="mt-12 ">
-          <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+          <div className="bg-[#0F2649] p-4 rounded-t-md">
+            <div className="flex flex-row justify-between">
+              <h1 className="text-white text-3xl font-bold">
+                {distance !== undefined
+                  ? (distance * 0.621371).toFixed(2)
+                  : "0"}{" "}
+                Miles / Cost of trip ={" "}
+                {distance !== undefined
+                  ? formatter.format((distance * 0.621371).toFixed(2) * 0.45)
+                  : "0"}
+              </h1>
+
+              <button
+                onClick={() => submitMiles()}
+                type="button"
+                className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-secondary  sm:w-auto"
+              >
+                Submit Requst
+              </button>
+            </div>
+          </div>
+          <div className="overflow-hidden bg-white shadow">
             <div className="px-4 py-5 sm:p-6">
               <div>
                 <label
@@ -108,7 +156,7 @@ export default function AddMileage() {
                 </div>
               </div>
 
-              <div className="flex flex-row mt-4 space-y-3 gap-4 h-[75vh]">
+              <div className="flex flex-row mt-4 space-y-3 gap-4 min-h-[60vh]">
                 <div className=" flex-col w-1/2">
                   <label
                     htmlFor="email"
@@ -149,9 +197,9 @@ export default function AddMileage() {
 
                 <div className="w-full">
                   <MapContainer
-                    center={[51.505, -0.09]}
-                    zoom={13}
-                    zoomAnimation='false'
+                    center={[51.805, -2]}
+                    zoom={7}
+                    zoomAnimation="false"
                     style={{ height: "100%", width: "100%", padding: 0 }}
                   >
                     <TileLayer
@@ -159,7 +207,10 @@ export default function AddMileage() {
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     {waypoints !== undefined && waypoints.length > 1 && (
-                      <Routing waypoints={waypoints} />
+                      <Routing
+                        waypoints={waypoints}
+                        setDistance={setDistance}
+                      />
                     )}
                   </MapContainer>
                 </div>

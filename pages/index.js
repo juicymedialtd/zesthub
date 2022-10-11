@@ -136,7 +136,7 @@ export default function Home() {
         </div>
 
         <div className="mt-8 flex flex-row">
-          <div className="bg-white w-1/3 mr-8 rounded-md">
+          <div className="bg-white w-1/4 mr-8 rounded-md">
             <div className="p-4">
               <h1 className="font-bold text-xl">Upcoming Events</h1>
               {feed !== undefined &&
@@ -165,7 +165,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-2/3 rounded-md bg-white">
+          <div className="w-3/4 ml-8 rounded-md bg-white">
             <div className="p-4 flex flex-row divide-x h-full divide-gray-600">
               <div className="w-1/2">
                 <h1 className="text-xl font-bold ">Wiki</h1>

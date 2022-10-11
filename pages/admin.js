@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ExpensesRequested from "../components/Admin/ExpensesRequested";
 import HolidaysRequested from "../components/Admin/HolidaysRequested";
+import MilageRequested from "../components/Admin/MilageRequested";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -12,7 +13,7 @@ export default function AdminPage() {
   const tabs = [
     { name: "Pending Holiday Requests", current: true, id: "hol" },
     { name: "Pending Expense Requests", current: false, id: "exp" },
-    { name: "Pending Mileage Requests", current: false, id: "mile" },
+    { name: "Pending Mileage Requests", current: false, id: "mil" },
   ];
 
   return (
@@ -83,6 +84,11 @@ export default function AdminPage() {
             {show === "exp" && (
               <>
                 <ExpensesRequested />
+              </>
+            )}
+            {show === "mil" && (
+              <>
+                <MilageRequested />
               </>
             )}
           </div>
