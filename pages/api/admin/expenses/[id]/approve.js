@@ -12,23 +12,12 @@ export default async function createRequest(req, res) {
 
       const update = await prisma.expense.update({
         where: {
-          id: Number(id),
+          id,
         },
         data: {
           status: "approved",
         },
       });
-
-      //   await prisma.user.update({
-      //     where: {
-      //       id: update.userId,
-      //     },
-      //     data: {
-      //       holidaysLeft: {
-      //         decrement: update.daysUsed,
-      //       },
-      //     },
-      //   });
 
       res.status(200).json({ message: "Record updated :)" });
     } else {

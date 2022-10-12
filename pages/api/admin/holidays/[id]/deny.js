@@ -12,7 +12,7 @@ export default async function createRequest(req, res) {
 
       await prisma.holiday.update({
         where: {
-          id: Number(id),
+          id,
         },
         data: {
           status: "denied",

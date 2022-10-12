@@ -12,7 +12,7 @@ export default async function createRequest(req, res) {
 
       await prisma.mileage.update({
         where: {
-          id: Number(id),
+          id,
         },
         data: {
           status: "approved",
