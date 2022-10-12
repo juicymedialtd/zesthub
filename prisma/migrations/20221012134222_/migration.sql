@@ -9,13 +9,14 @@ CREATE TYPE "HolidayType" AS ENUM ('annual', 'health', 'training', 'other');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "holidaysLeft" INTEGER NOT NULL DEFAULT 21,
+    "HolidayAllowance" INTEGER NOT NULL DEFAULT 21,
     "role" "Role" NOT NULL DEFAULT E'USER',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -23,47 +24,62 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Holiday" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "daysUsed" INTEGER NOT NULL,
+    "daysUsed" TEXT NOT NULL,
     "startDate" TEXT NOT NULL,
     "endDate" TEXT NOT NULL,
     "status" "Status" NOT NULL DEFAULT E'pending',
     "type" "HolidayType" NOT NULL DEFAULT E'annual',
     "note" TEXT,
-    "userId" INTEGER,
+    "userId" TEXT,
 
     CONSTRAINT "Holiday_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Expense" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "title" TEXT NOT NULL,
     "total" INTEGER NOT NULL,
     "status" "Status" NOT NULL DEFAULT E'pending',
     "receipt" TEXT NOT NULL,
-    "userId" INTEGER,
+    "userId" TEXT,
 
     CONSTRAINT "Expense_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Mileage" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" "Status" NOT NULL DEFAULT E'pending',
     "miles" DOUBLE PRECISION NOT NULL,
-    "Reason" TEXT NOT NULL,
+    "reason" TEXT NOT NULL,
     "startPostcode" TEXT NOT NULL,
     "stops" JSONB,
-    "userId" INTEGER,
+    "userId" TEXT,
 
     CONSTRAINT "Mileage_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Wiki" (
+    "id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "homescreen" BOOLEAN NOT NULL DEFAULT false,
+    "title" TEXT NOT NULL,
+    "text" TEXT,
+    "public" BOOLEAN NOT NULL DEFAULT true,
+    "access" JSONB,
+    "EditedBy" JSONB,
+
+    CONSTRAINT "Wiki_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

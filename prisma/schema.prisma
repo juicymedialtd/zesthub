@@ -29,7 +29,7 @@ enum HolidayType {
 }
 
 model User {
-  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id               String   @id @default(uuid())
   createdAt        DateTime @default(now())
   updatedAt        DateTime @default(now())
   name             String
@@ -45,8 +45,8 @@ model User {
 }
 
 model Holiday {
-  id        Int         @id @default(autoincrement())
-  createdAt DateTime    @default(now())
+ id               String   @id @default(uuid())
+createdAt DateTime    @default(now())
   updatedAt DateTime    @default(now())
   daysUsed  String
   startDate String
@@ -60,7 +60,7 @@ model Holiday {
 }
 
 model Expense {
-  id        Int      @id @default(autoincrement())
+   id               String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   title     String
@@ -73,7 +73,7 @@ model Expense {
 }
 
 model Mileage {
-  id        Int      @id @default(autoincrement())
+   id               String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
@@ -88,7 +88,7 @@ model Mileage {
 }
 
 model Wiki {
-  id        Int      @id @default(autoincrement())
+  id               String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
