@@ -45,26 +45,25 @@ export default function Expenses() {
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="py-4">
-          <div className="sm:flex sm:items-center">
-            <div className="sm:flex-auto">
-              {/* <p className="mt-2 text-sm text-gray-700">
-                  For claims submitted from{" "}
-                  <time dateTime="2022-08-01">May 1, 2022</time> to{" "}
-                  <time dateTime="2022-08-31">May 31, 2022</time>.
-                </p> */}
-            </div>
-            <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-              <button
-                onClick={() => router.push("/expenses/add")}
-                type="button"
-                className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-              >
-                Add Expense
-              </button>
-            </div>
-          </div>
           {!loading && (
             <div className=" mt-8 flex flex-col sm:-mx-6 md:mx-0">
+              <div className="flex flex-row justify-between p-4 bg-nav-bg ">
+                <div className="flex flex-col">
+                  <span className="text-primary font-bold">
+                    Expenses submitted
+                  </span>
+                  <span className="text-4xl font-bold text-white">£500</span>
+                </div>
+                <div className="mt-4">
+                  <button
+                    onClick={() => router.push("/expenses/add")}
+                    type="button"
+                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+                  >
+                    Request Expense
+                  </button>
+                </div>
+              </div>
               <table className="min-w-full">
                 <thead className="bg-topnav-bg">
                   <tr>
@@ -104,19 +103,18 @@ export default function Expenses() {
                 <tbody className="bg-white">
                   {data !== undefined &&
                     data.map((item) => {
+                      let status;
 
-                      let status
-
-                      switch(item.status) {
-                        case item.status === 'APPROVED': 
-                          status = 'bg-white'
+                      switch (item.status) {
+                        case item.status === "APPROVED":
+                          status = "bg-white";
                           break;
-                        case item.status === 'PENDING':
-                          status = 'bg-yellow-300'
+                        case item.status === "PENDING":
+                          status = "bg-yellow-300";
                           break;
-                        case item.status === 'DECLINED':
-                          status = 'bg-red-300'
-                          break
+                        case item.status === "DECLINED":
+                          status = "bg-red-300";
+                          break;
                       }
 
                       return (
@@ -129,7 +127,7 @@ export default function Expenses() {
                               {item.status} - Submitted on {item.createdAt}
                             </div>
                           </td>
-                          
+
                           <td className="hidden py-1 px-3 text-left text-sm text-gray-900 sm:table-cell font-bold">
                             {item.status}
                           </td>
