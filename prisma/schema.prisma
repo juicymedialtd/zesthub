@@ -28,6 +28,15 @@ enum HolidayType {
   other
 }
 
+model Team {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  name  String @unique
+  users User[]
+}
+
 model User {
   id               String   @id @default(uuid())
   createdAt        DateTime @default(now())
@@ -42,11 +51,14 @@ model User {
   holidays Holiday[]
   expenses Expense[]
   miles    Mileage[]
+
+  team   Team?   @relation(fields: [teamId], references: [id])
+  teamId String?
 }
 
 model Holiday {
- id               String   @id @default(uuid())
-createdAt DateTime    @default(now())
+  id        String      @id @default(uuid())
+  createdAt DateTime    @default(now())
   updatedAt DateTime    @default(now())
   daysUsed  String
   startDate String
@@ -60,7 +72,7 @@ createdAt DateTime    @default(now())
 }
 
 model Expense {
-   id               String   @id @default(uuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   title     String
@@ -73,7 +85,7 @@ model Expense {
 }
 
 model Mileage {
-   id               String   @id @default(uuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
@@ -88,7 +100,7 @@ model Mileage {
 }
 
 model Wiki {
-  id               String   @id @default(uuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
@@ -98,5 +110,4 @@ model Wiki {
   public     Boolean @default(true)
   access     Json?
   EditedBy   Json?
-  
 }
