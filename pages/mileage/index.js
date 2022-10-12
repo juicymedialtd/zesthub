@@ -1,12 +1,12 @@
 import { useQuery } from "react-query";
 
-async function getHolidays() {
+async function miles() {
   const res = await fetch("/api/mileage/all");
   return res.json();
 }
 
 export default function Miles() {
-  const { data, status, error } = useQuery("getUserHolidays", getHolidays);
+  const { data, status, error } = useQuery("miles", miles);
 
   return (
     <div className="py-6">
@@ -90,7 +90,7 @@ export default function Miles() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {data.submissions.length > 0 &&
+                      {/* {data.submissions.length > 0 &&
                         data.submissions.map((item) => (
                           <tr key={item.id}>
                             <td className="w-3/4 max-w-0 py-2 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6 capitalize">
@@ -121,16 +121,9 @@ export default function Miles() {
                             <td className="px-3 text-right py-2 text-sm text-gray-500 whitespace-nowrap">
                               {item.daysUsed}
                             </td>
-                            {/* <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                          <a
-                            href="#"
-                            className="text-indigo-600 hover:text-indigo-900"
-                          >
-                            Edit<span className="sr-only">, {person.name}</span>
-                          </a>
-                        </td> */}
+                            
                           </tr>
-                        ))}
+                        ))} */}
                     </tbody>
                   </table>
                 </div>

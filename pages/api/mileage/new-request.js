@@ -4,13 +4,15 @@ import { getSession } from "next-auth/react";
 export default async function handler(req, res) {
   const session = await getSession({ req });
 
+  const miles = req.body.miles.toFixed(2)
+
   try {
     if (session) {
       // save incoming data
 
       const submission = await prisma.mileage.create({
         data: {
-          miles: Number(req.body.miles).toFixed(2),
+          miles: Number(miles),
           Reason: req.body.reason,
           userId: session.user.id,
           status: "pending",
