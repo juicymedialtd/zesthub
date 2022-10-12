@@ -79,10 +79,24 @@ model Mileage {
 
   status        Status @default(pending)
   miles         Float
-  Reason        String
+  reason        String
   startPostcode String
   stops         Json?
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
+}
+
+model Wiki {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  homescreen Boolean @default(false)
+  title      String
+  text       String?
+  public     Boolean @default(true)
+  access     Json?
+  EditedBy   Json?
+  
 }

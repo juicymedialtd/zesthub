@@ -9,6 +9,7 @@ import {
   TruckIcon,
   SunIcon,
   AdjustmentsIcon,
+  PencilIcon,
 } from "@heroicons/react/outline";
 import { BellIcon, PlusSmIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
@@ -46,30 +47,30 @@ export default function SideLayout({ children }) {
       icon: SunIcon,
       current: router.pathname === "/holidays",
     },
-    {
-      name: "Milage",
-      href: "/mileage",
-      icon: TruckIcon,
-      current: router.pathname.includes("/mileage"),
-    },
-    {
-      name: "Expenses",
-      href: "/expenses",
-      icon: CashIcon,
-      current: router.pathname.includes("/expense"),
-    },
+    // {
+    //   name: "Milage",
+    //   href: "/mileage",
+    //   icon: TruckIcon,
+    //   current: router.pathname.includes("/mileage"),
+    // },
+    // {
+    //   name: "Expenses",
+    //   href: "/expenses",
+    //   icon: CashIcon,
+    //   current: router.pathname.includes("/expense"),
+    // },
     // {
     //   name: "Documents",
     //   href: "/documents",
     //   icon: CashIcon,
     //   current: router.pathname.includes("/documents"),
     // },
-    // {
-    //   name: "Wiki",
-    //   href: "/wiki",
-    //   icon: CashIcon,
-    //   current: router.pathname.includes("/wiki"),
-    // },
+    {
+      name: "Wiki",
+      href: "/wiki",
+      icon: PencilIcon,
+      current: router.pathname.includes("/wiki"),
+    },
   ];
 
   function setHeader() {
