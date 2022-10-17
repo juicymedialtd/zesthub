@@ -40,18 +40,17 @@ export default function TipTapEditor({ setContent, value }) {
 
   return (
     <div className="editor">
-      <EditorContent editor={editor} />
       <div className="menu">
-      
-        <button
-          className={classNames("menu-button", {
-            "is-active": editor.isActive("bold"),
-          })}
-          onClick={toggleBold}
-        >
-          <Icons.Bold />
-        </button>
-        {/* <button
+        <div className="menu_left">
+          <button
+            className={classNames("menu-button", {
+              "is-active": editor.isActive("bold"),
+            })}
+            onClick={toggleBold}
+          >
+            <Icons.Bold />
+          </button>
+          {/* <button
           className={classNames("menu-button", {
             "is-active": editor.isActive("underline"),
           })}
@@ -59,46 +58,49 @@ export default function TipTapEditor({ setContent, value }) {
         >
           <Icons.Underline />
         </button> */}
-        <button
-          className={classNames("menu-button", {
-            "is-active": editor.isActive("intalic"),
-          })}
-          onClick={toggleItalic}
-        >
-          <Icons.Italic />
-        </button>
-        <button
-          className={classNames("menu-button", {
-            "is-active": editor.isActive("strike"),
-          })}
-          onClick={toggleStrike}
-        >
-          <Icons.Strikethrough />
-        </button>
-        <button
-          className={classNames("menu-button", {
-            "is-active": editor.isActive("code"),
-          })}
-          onClick={toggleCode}
-        >
-          <Icons.Code />
-        </button>
-
-        <button
-          className="menu-button"
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={!editor.can().undo()}
-        >
-          <Icons.RotateLeft />
-        </button>
-        <button
-          className="menu-button"
-          onClick={() => editor.chain().focus().redo().run()}
-          disabled={!editor.can().redo()}
-        >
-          <Icons.RotateRight />
-        </button>
+          <button
+            className={classNames("menu-button", {
+              "is-active": editor.isActive("intalic"),
+            })}
+            onClick={toggleItalic}
+          >
+            <Icons.Italic />
+          </button>
+          <button
+            className={classNames("menu-button", {
+              "is-active": editor.isActive("strike"),
+            })}
+            onClick={toggleStrike}
+          >
+            <Icons.Strikethrough />
+          </button>
+          <button
+            className={classNames("menu-button", {
+              "is-active": editor.isActive("code"),
+            })}
+            onClick={toggleCode}
+          >
+            <Icons.Code />
+          </button>
+        </div>
+        <div className="menu_right">
+          <button
+            className="menu-button"
+            onClick={() => editor.chain().focus().undo().run()}
+            disabled={!editor.can().undo()}
+          >
+            <Icons.RotateLeft />
+          </button>
+          <button
+            className="menu-button"
+            onClick={() => editor.chain().focus().redo().run()}
+            disabled={!editor.can().redo()}
+          >
+            <Icons.RotateRight />
+          </button>
+        </div>
       </div>
+      <EditorContent editor={editor} />
     </div>
   );
 }

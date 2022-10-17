@@ -1,7 +1,8 @@
 import { PlusIcon } from "@heroicons/react/solid";
-import RequestLeaveModal from "../components/RequestLeaveModal";
 import { useQuery } from "react-query";
 import { format, parseISO } from "date-fns";
+
+import RequestLeaveModal from "../components/RequestLeaveModal";
 
 async function getHolidays() {
   const res = await fetch("/api/holidays/get-user");
@@ -9,7 +10,9 @@ async function getHolidays() {
 }
 
 export default function Holidays() {
-  const { data, status, error } = useQuery("getUserHolidays", getHolidays);
+  const { data, status, error } = useQuery("getUserHolidays", getHolidays, {
+    refetchInterval: 2000
+  });
 
   return (
     <div className="py-6">
@@ -26,7 +29,23 @@ export default function Holidays() {
             <>
               {data.holidays.length > 0 && (
                 <>
-                  <div className="mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
+                  <div className="mt-12 ">
+                    <div className="bg-[#0F2649] p-4 rounded-t-md">
+                      <div className="flex flex-row justify-between align-middle">
+                        <div className="flex flex-col">
+                          <span className="text-[#FED929]">Holidays Left</span>
+                          <h1 className="text-white text-3xl font-bold">
+                            06 of 22
+                          </h1>
+                        </div>
+
+                        <div className="mt-2">
+                          <RequestLeaveModal />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
                     <table className="min-w-full divide-y divide-gray-300">
                       <thead className="bg-topnav-bg">
                         <tr>

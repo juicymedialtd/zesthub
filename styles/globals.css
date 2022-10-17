@@ -90,10 +90,12 @@ html {
   
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
     gap: 8px;
   
     width: calc(100% - 4px);
-    height: 40px;
+    height: 34px;
     margin: 0;
     padding: 0 8px;
   
@@ -102,6 +104,10 @@ html {
     border-bottom: 1px solid var(--color-gray-5);
     background-color: var(--color-white);
     color: var(--color-gray-2);
+  }
+
+  .menu_left, .menu_right {
+    display: flex;
   }
   
   
@@ -135,6 +141,7 @@ html {
   .menu-button {
     width: 32px;
     padding: 0;
+    color: #08152a;
   }
   
   .button:hover,
@@ -147,7 +154,7 @@ html {
   
   .button:disabled,
   .menu-button:disabled {
-    color: var(--color-gray-4);
+    color: #08152a;
   }
   
   .button-save {

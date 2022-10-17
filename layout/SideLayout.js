@@ -214,7 +214,7 @@ export default function SideLayout({ children }) {
                     item.current
                       ? "bg-amber-300 text-gray-900"
                       : "text-white hover:bg-amber-300 hover:text-gray-800",
-                    "group flex items-center px-2 py-2 text-md font-bold rounded-md"
+                    "group flex items-center px-2 py-2 text-md font-bold rounded-md align-middle"
                   )}
                 >
                   <item.icon
@@ -222,7 +222,7 @@ export default function SideLayout({ children }) {
                       item.current
                         ? "text-gray-900"
                         : "text-amber-300 group-hover:text-gray-800",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                      "mr-3 flex-shrink-0 h-6 w-6 mb-1"
                     )}
                     aria-hidden="true"
                   />

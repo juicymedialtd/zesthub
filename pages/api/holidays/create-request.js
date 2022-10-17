@@ -5,7 +5,7 @@ import { differenceInBusinessDays, parseISO } from "date-fns";
 export default async function createRequest(req, res) {
   const session = await getSession({ req });
 
-  const { start, end, type } = req.body;
+  const { start, end, type, half } = req.body;
 
   const daysUsed = differenceInBusinessDays(parseISO(end), parseISO(start));
 
@@ -21,7 +21,7 @@ export default async function createRequest(req, res) {
             startDate: parseISO(start),
             endDate: parseISO(end),
             status: "pending",
-            daysUsed: Number(daysUsed) + 1,
+            daysUsed: half ? "0.5" : String(daysUsed + 1),
           },
         });
 

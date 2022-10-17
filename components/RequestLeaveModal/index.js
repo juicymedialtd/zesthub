@@ -7,6 +7,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -18,11 +19,12 @@ export default function RequestLeaveModal() {
   const [eD, setEndDate] = useState(null);
   const [query, setQuery] = useState("");
   const [selectedType, setSelectedType] = useState();
+  const [half, setHalf] = useState(false)
 
   const HolidayType = [
     { id: 1, name: "Annual Leave", type: "annual" },
     { id: 2, name: "Training", type: "training" },
-    { id: 3, name: "Dentist", type: "detnist" },
+    { id: 3, name: "Dentist", type: "other" },
     { id: 4, name: "Health", type: "health" },
   ];
 
@@ -43,6 +45,7 @@ export default function RequestLeaveModal() {
         start: sD,
         end: eD,
         type: selectedType,
+        half
       }),
     });
     setOpen(false);
@@ -53,7 +56,7 @@ export default function RequestLeaveModal() {
       <button
         onClick={() => setOpen(true)}
         type="button"
-        className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+        className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 h-12 text-sm font-medium text-white shadow-sm hover:bg-secondary sm:w-auto"
       >
         <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
         Request Leave
@@ -104,8 +107,6 @@ export default function RequestLeaveModal() {
                           Please select your requested timeframe
                         </Dialog.Title>
                         <div className="mt-6">
-                        
-
                           <div className="mt-6 w-full">
                             <Combobox
                               as="div"
@@ -202,6 +203,32 @@ export default function RequestLeaveModal() {
                               />
                             </div>
 
+                            {sD !== null &&
+                              eD !== null &&
+                              format(sD, "dd/MM/yyyy") ===
+                                format(eD, "dd/MM/yyyy") && (
+                                <div className="relative flex items-start mt-8">
+                                  <div className="flex h-5 items-center">
+                                    <input
+                                      id="candidates"
+                                      aria-describedby="candidates-description"
+                                      name="candidates"
+                                      type="checkbox"
+                                      className="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-500"
+                                      value={half}
+                                      onChange={() => setHalf(!half)}
+                                    />
+                                  </div>
+                                  <div className="ml-3 text-sm">
+                                    <label
+                                      htmlFor="candidates"
+                                      className="font-medium text-gray-700"
+                                    >
+                                      Half Day?
+                                    </label>
+                                  </div>
+                                </div>
+                              )}
                           </div>
                         </div>
                       </div>

@@ -2,7 +2,6 @@ import { Fragment, useState, useEffect } from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  ClockIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
