@@ -37,6 +37,15 @@ model Team {
   users User[]
 }
 
+model Invites {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  teamID String
+  email  String
+  code   String
+}
+
 model User {
   id               String   @id @default(uuid())
   createdAt        DateTime @default(now())

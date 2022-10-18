@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { Menu, Transition } from "@headlessui/react";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
+
+import InviteUserModal from "../../../components/InviteUserModal";
 
 async function getTeamUsers() {
   const res = await fetch("/api/v1/settings/users/all");
@@ -13,7 +13,10 @@ export default function UserSettings() {
   const { data, status, error } = useQuery("getTeamUsers", getTeamUsers);
 
   return (
-    <div>
+    <>
+      <div className="float-right pb-4 ">
+        <InviteUserModal />
+      </div>
       {status === "success" && (
         <div className="mt-8 ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
           <table className="min-w-full divide-y divide-gray-300">
@@ -88,6 +91,6 @@ export default function UserSettings() {
           </table>
         </div>
       )}
-    </div>
+    </>
   );
 }
