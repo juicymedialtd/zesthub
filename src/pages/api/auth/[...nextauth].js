@@ -9,7 +9,6 @@ const options = {
     Providers({
       name: "Credentials",
       async authorize(credentials, req, res) {
-        console.log(credentials);
         try {
           const user = await prisma.user.findUnique({
             where: { email: credentials.email },
@@ -29,6 +28,7 @@ const options = {
             id: user.id,
             name: user.name,
             role: user.role,
+            team: user.teamId,
           };
         } catch (error) {
           throw new Error(error);
@@ -57,6 +57,7 @@ const options = {
       session.accessToken = token.accessToken;
       session.user.role = token.user.role;
       session.user.id = token.user.id;
+      session.user.teamId = token.user.teamId;
       return session;
     },
   },

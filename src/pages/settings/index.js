@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import UserSettings from "../../views/settings/users";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -62,6 +63,10 @@ export default function Settings() {
                 </nav>
               </div>
             </div>
+          </div>
+
+          <div className="mt-4">
+            {router.asPath === "/settings?filter=users" && <UserSettings />}
           </div>
         </div>
       </div>

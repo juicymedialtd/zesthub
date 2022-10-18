@@ -90,7 +90,7 @@ export default function Miles() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {/* {data.submissions.length > 0 &&
+                      {data.submissions.length > 0 &&
                         data.submissions.map((item) => (
                           <tr key={item.id}>
                             <td className="w-3/4 max-w-0 py-2 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6 capitalize">
@@ -123,7 +123,7 @@ export default function Miles() {
                             </td>
                             
                           </tr>
-                        ))} */}
+                        ))}
                     </tbody>
                   </table>
                 </div>
