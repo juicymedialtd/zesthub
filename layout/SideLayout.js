@@ -10,8 +10,12 @@ import {
   SunIcon,
   AdjustmentsIcon,
   PencilIcon,
+  DocumentIcon,
+  CogIcon,
+  BellIcon,
+  PlusSmIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/outline";
-import { BellIcon, PlusSmIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 
@@ -53,24 +57,24 @@ export default function SideLayout({ children }) {
     //   icon: TruckIcon,
     //   current: router.pathname.includes("/mileage"),
     // },
-    // {
-    //   name: "Expenses",
-    //   href: "/expenses",
-    //   icon: CashIcon,
-    //   current: router.pathname.includes("/expense"),
-    // },
-    // {
-    //   name: "Documents",
-    //   href: "/documents",
-    //   icon: CashIcon,
-    //   current: router.pathname.includes("/documents"),
-    // },
     {
-      name: "Wiki",
-      href: "/wiki",
-      icon: PencilIcon,
-      current: router.pathname.includes("/wiki"),
+      name: "Expenses",
+      href: "/expenses",
+      icon: CashIcon,
+      current: router.pathname.includes("/expense"),
     },
+    {
+      name: "Documents",
+      href: "/documents",
+      icon: DocumentIcon,
+      current: router.pathname.includes("/documents"),
+    },
+    // {
+    //   name: "Wiki",
+    //   href: "/wiki",
+    //   icon: PencilIcon,
+    //   current: router.pathname.includes("/wiki"),
+    // },
   ];
 
   function setHeader() {
@@ -234,26 +238,48 @@ export default function SideLayout({ children }) {
         </div>
         <div className="flex flex-shrink-0 p-4">
           {session.user.role === "ADMIN" && (
-            <a
-              href="/admin"
-              className={classNames(
-                router.pathname === "/admin"
-                  ? "bg-amber-300 text-gray-900"
-                  : "text-white hover:bg-amber-300 hover:text-white",
-                "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
-              )}
-            >
-              <AdjustmentsIcon
+            <div className="w-full space-y-2">
+              <a
+                href="/settings"
+                className={classNames(
+                  router.pathname === "/settings"
+                    ? "bg-amber-300 text-gray-900"
+                    : "text-white hover:bg-amber-300 hover:text-white",
+                  "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
+                )}
+              >
+                <CogIcon
+                  className={classNames(
+                    router.pathname === "/settings"
+                      ? "text-gray-900"
+                      : "text-amber-300 group-hover:text-white",
+                    "mr-3 flex-shrink-0 h-6 w-6"
+                  )}
+                  aria-hidden="true"
+                />
+                Settings
+              </a>
+              <a
+                href="/admin"
                 className={classNames(
                   router.pathname === "/admin"
-                    ? "text-gray-900"
-                    : "text-amber-300 group-hover:text-white",
-                  "mr-3 flex-shrink-0 h-6 w-6"
+                    ? "bg-amber-300 text-gray-900"
+                    : "text-white hover:bg-amber-300 hover:text-white",
+                  "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
                 )}
-                aria-hidden="true"
-              />
-              Admin
-            </a>
+              >
+                <AdjustmentsIcon
+                  className={classNames(
+                    router.pathname === "/admin"
+                      ? "text-gray-900"
+                      : "text-amber-300 group-hover:text-white",
+                    "mr-3 flex-shrink-0 h-6 w-6"
+                  )}
+                  aria-hidden="true"
+                />
+                Admin
+              </a>
+            </div>
           )}
         </div>
       </div>

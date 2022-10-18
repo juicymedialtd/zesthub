@@ -23,7 +23,7 @@ export default function HolidaysRequested() {
     });
   }
 
-  async function denyRequest() {
+  async function denyRequest(id) {
     await fetch(`/api/admin/holidays/${id}/deny`).then(() => {
       HolidayData();
     });
@@ -37,17 +37,6 @@ export default function HolidaysRequested() {
     <>
       {data.length > 0 && (
         <>
-          <div className="sm:flex sm:items-center">
-            <div className="sm:flex-auto">
-              <h1 className="text-xl font-semibold text-white">
-                Active Holiday Requests
-              </h1>
-              <p className="mt-2 text-sm text-white">
-                A list of all the user who currently have pending holiday
-                requests.
-              </p>
-            </div>
-          </div>
           <div className="mt-8 ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
             <table className="min-w-full divide-y divide-gray-300">
               <thead>
