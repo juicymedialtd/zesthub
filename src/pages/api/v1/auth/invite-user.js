@@ -17,7 +17,6 @@ export default async function handler(req, res) {
        }
       });
 
-      const code = 1234;
 
       const invite = await prisma.invites.create({
         data: {
@@ -26,7 +25,8 @@ export default async function handler(req, res) {
         },
       });
 
-      await sendUserInvite(code, email, user.teamId);
+
+      await sendUserInvite(invite.code, email, user.teamId);
 
       res.status(200).json({ sucess: true, message: "Invite sent correctly" });
     } else {

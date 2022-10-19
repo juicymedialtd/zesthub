@@ -4,8 +4,6 @@ export async function sendUserInvite(code, email, team) {
   try {
     let mail;
 
-    console.log(email)
-
     const url = process.env.NODE_ENV === "development" ? `http://localhost:3000/auth/invited?code=${code}` : ''
 
     if (process.env.NODE_ENV === "development") {

@@ -43,7 +43,7 @@ model Invites {
 
   teamID String
   email  String
-  code   String
+  code   String? @default(uuid())
 }
 
 model User {
