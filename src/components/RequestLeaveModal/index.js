@@ -1,4 +1,4 @@
-import { Fragment, useState, forwardRef } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Transition, Combobox } from "@headlessui/react";
 import { XIcon, PlusIcon } from "@heroicons/react/outline";
 import "react-dates/initialize";

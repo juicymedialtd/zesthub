@@ -6,15 +6,14 @@ export default async function handler(req, res) {
 
   try {
     if (session) {
-      // save incoming data
 
-      const submissions = await prisma.mileage.findMany({
+      const miles = await prisma.mileage.findMany({
         where: {
           userId: session.user.id,
         },
       });
 
-      res.status(200).json({ submissions });
+      res.status(200).json({ success: true, miles });
     } else {
       res.status(404).json({ error: "You must be logged in" });
     }

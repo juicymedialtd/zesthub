@@ -51,12 +51,12 @@ export default function SideLayout({ children }) {
       icon: SunIcon,
       current: router.pathname === "/holidays",
     },
-    // {
-    //   name: "Milage",
-    //   href: "/mileage",
-    //   icon: TruckIcon,
-    //   current: router.pathname.includes("/mileage"),
-    // },
+    {
+      name: "Milage",
+      href: "/mileage",
+      icon: TruckIcon,
+      current: router.pathname.includes("/mileage"),
+    },
     {
       name: "Expenses",
       href: "/expenses",
