@@ -25,10 +25,8 @@ export default function Expenses() {
       let t = 0;
 
       for (let i = 0; i < data.length; i++) {
-        if (data[i].status === "APPROVED") {
-          const total = t + data[i].total;
-          t = total;
-        }
+        const total = t + data[i].total;
+        t = total;
       }
 
       setTotal(t);
@@ -54,7 +52,9 @@ export default function Expenses() {
                   <span className="text-primary font-bold">
                     Expenses submitted
                   </span>
-                  {/* <span className="text-4xl font-bold text-white">£500</span> */}
+                  <span className="text-4xl font-bold text-white">
+                    £{total}
+                  </span>
                 </div>
                 <div className="mt-4">
                   <button

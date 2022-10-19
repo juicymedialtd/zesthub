@@ -13,13 +13,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function RequestLeaveModal() {
+export default function RequestLeaveModal({ refetch }) {
   const [open, setOpen] = useState(false);
   const [sD, setStartDate] = useState(null);
   const [eD, setEndDate] = useState(null);
   const [query, setQuery] = useState("");
   const [selectedType, setSelectedType] = useState();
-  const [half, setHalf] = useState(false)
+  const [half, setHalf] = useState(false);
 
   const HolidayType = [
     { id: 1, name: "Annual Leave", type: "annual" },
@@ -45,9 +45,10 @@ export default function RequestLeaveModal() {
         start: sD,
         end: eD,
         type: selectedType,
-        half
+        half,
       }),
     });
+    refetch();
     setOpen(false);
   }
 

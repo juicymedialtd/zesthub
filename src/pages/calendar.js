@@ -73,6 +73,8 @@ export default function Calendar() {
     const res = await fetch("/api/calendar/get").then((res) => res.json());
     const holidays = res.holidays;
 
+    console.log(holidays);
+
     for (let i = 0; i < holidays.length; i++) {
       const d = holidays[i].daysUsed;
       const range = [];
@@ -307,31 +309,41 @@ export default function Calendar() {
                             const i = event.range;
                             const e = event;
 
+                            console.log(e.daysUsed);
+
                             return (
                               <>
-                                {i.slice(0, event.daysUsed).map((date) => {
-                                  return (
-                                    <>
-                                      {isSameDay(date, day) && (
-                                        <ol>
-                                          <li
-                                            key={e.id}
-                                            className={`w-full ${event.colour}`}
-                                          >
-                                            <span
-                                              // href={event.href}
-                                              className="group flex"
+                                {i
+                                  .slice(
+                                    0,
+                                    e.daysUsed === 0.5 ? e.daysUsed : undefined
+                                  )
+                                  .map((date) => {
+                                    return (
+                                      <>
+                                        {isSameDay(date, day) && (
+                                          <ol>
+                                            <li
+                                              key={e.id}
+                                              className={`w-full ${event.colour}`}
                                             >
-                                              <p className="flex-auto truncate font-medium text-white ml-2">
-                                                {e.user.name + " - " + e.type}
-                                              </p>
-                                            </span>
-                                          </li>
-                                        </ol>
-                                      )}
-                                    </>
-                                  );
-                                })}
+                                              <span
+                                                // href={event.href}
+                                                className="group flex"
+                                              >
+                                                <p className="flex-auto truncate font-medium text-white ml-2">
+                                                  {e.User.name + " - " + e.type}{" "}
+                                                  {e.daysUsed === "0.5"
+                                                    ? " - 1/2 day"
+                                                    : ""}
+                                                </p>
+                                              </span>
+                                            </li>
+                                          </ol>
+                                        )}
+                                      </>
+                                    );
+                                  })}
                                 {event.length > 2 && (
                                   <li className="text-gray-500">
                                     + {event.length - 2} more

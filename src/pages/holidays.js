@@ -10,9 +10,10 @@ async function getHolidays() {
 }
 
 export default function Holidays() {
-  const { data, status, error } = useQuery("getUserHolidays", getHolidays, {
-    refetchInterval: 2000
-  });
+  const { data, status, error, refetch } = useQuery(
+    "getUserHolidays",
+    getHolidays
+  );
 
   return (
     <div className="py-6">
@@ -21,7 +22,6 @@ export default function Holidays() {
           {status === "loading" && (
             <div className="flex flex-col justify-center items-center h-screen">
               {/* <Loader color="green" size={100} /> */}
-              ...
             </div>
           )}
 
@@ -40,7 +40,7 @@ export default function Holidays() {
                         </div>
 
                         <div className="mt-2">
-                          <RequestLeaveModal />
+                          <RequestLeaveModal refetch={refetch} />
                         </div>
                       </div>
                     </div>

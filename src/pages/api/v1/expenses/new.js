@@ -16,8 +16,7 @@ export default async function createRequest(req, res) {
   const form = new formidable.IncomingForm();
 
   const s3Client = new S3Client({
-    // endpoint: "https://s3.aws.amazon.com/", // Find your endpoint in the control panel, under Settings. Prepend "https://".
-    region: "eu-west-2", 
+    region: "eu-west-2",
     credentials: {
       accessKeyId: " AKIA5ZU55NWDP246NRKR", // Access key pair. You can create access key pairs using the control panel or API.
       secretAccessKey: process.env.S3_KEY, // Secret access key defined through an environment variable.
@@ -46,7 +45,6 @@ export default async function createRequest(req, res) {
           Bucket: `zesthub`, // The path to the directory you want to upload the object to, starting with your Space name.
           Key: `uploads/reciepts/${session.user.id}/${filename}`, // Object key, referenced whenever you want to access this file later.
           Body: f, // The object's contents. This variable is an object, not a string.
-          // ACL: "public-read",
           ContentType: file.mimetype,
         };
 

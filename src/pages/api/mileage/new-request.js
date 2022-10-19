@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       const submission = await prisma.mileage.create({
         data: {
           miles: Number(miles),
-          Reason: req.body.reason,
+          reason: req.body.reason,
           userId: session.user.id,
           status: "pending",
           stops: req.body.stops,

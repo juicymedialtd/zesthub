@@ -40,8 +40,6 @@ export default function Home() {
     getFeed();
   }, []);
 
-  console.log(holidays);
-
   return (
     <>
       <div className="mt-6">
@@ -55,7 +53,9 @@ export default function Home() {
                   <div className="flex flex-col ">
                     <div className="flex flex-row justify-between">
                       <CashIcon className="h-8 w-8 text-gray-500" />
-                      <PlusIcon className="h8 w-8 text-primary" />
+                      <a href="/expenses/new">
+                        <PlusIcon className="h8 w-8 text-primary" />
+                      </a>
                     </div>
                     <div className="mt-2 space-y-2">
                       <h3 className="truncate text-sm font-medium text-gray-900">
@@ -83,7 +83,9 @@ export default function Home() {
                   <div className="flex flex-col ">
                     <div className="flex flex-row justify-between">
                       <TruckIcon className="h-8 w-8 text-gray-500" />
+                      <a href="/mileage/new">
                       <PlusIcon className="h8 w-8 text-primary" />
+                      </a>
                     </div>
                     <div className="mt-2 space-y-2">
                       <h3 className="truncate text-sm font-medium text-gray-900">
@@ -170,7 +172,7 @@ export default function Home() {
               <div className="w-1/2">
                 <h1 className="text-xl font-bold ">Wiki</h1>
               </div>
-              <div className="w-1/2 pl-4 mr-6" >
+              <div className="w-1/2 pl-4 mr-6">
                 <h1 className="text-xl font-bold ">Documents</h1>
               </div>
             </div>

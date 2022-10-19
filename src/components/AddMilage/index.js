@@ -94,8 +94,8 @@ export default function AddMileage() {
         miles,
       }),
     })
-      // .then((res) => res.json())
-      // .then((res) => router.push("/mileage"));
+      .then((res) => res.json())
+      .then((res) => router.push("/mileage"));
   }
 
   const formatter = new Intl.NumberFormat('en-US', {
