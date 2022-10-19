@@ -2,8 +2,6 @@ const { prisma } = require("../../../../prisma/prisma");
 import { getSession } from "next-auth/react";
 import { sendUserInvite } from "../../../../libs/nodemailer/auth/invite";
 
-// TODO save invited email & teamId to db -> send email
-
 export default async function handler(req, res) {
   const session = await getSession({ req });
 

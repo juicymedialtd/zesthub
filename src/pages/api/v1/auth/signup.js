@@ -1,6 +1,3 @@
-// TODO -> check invite table to see if code exists & then check if the email is the same
-// If both values are the same create new user linked to the teamId in the invite row
-// redirect the user to login screen
 import bcrypt from "bcrypt";
 
 const { prisma } = require("../../../../prisma/prisma");

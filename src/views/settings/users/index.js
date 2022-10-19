@@ -10,7 +10,22 @@ async function getTeamUsers() {
 // TODO -> Fetch all users in Team - Display Users in a table -> CRUD user
 
 export default function UserSettings() {
-  const { data, status, error } = useQuery("getTeamUsers", getTeamUsers);
+  const { data, status, error, refetch } = useQuery(
+    "getTeamUsers",
+    getTeamUsers
+  );
+
+  async function deleteUser(id) {
+    await fetch("/api/v1/auth/user/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    }).then(() => refetch());
+  }
 
   return (
     <>
@@ -66,7 +81,7 @@ export default function UserSettings() {
                     {item.role}
                   </td>
                   <td className="py-2 text-sm whitespace-nowrap space-x-4">
-                    <button
+                    {/* <button
                       type="button"
                       className="inline-flex items-center rounded border border-transparent bg-green-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
@@ -77,12 +92,13 @@ export default function UserSettings() {
                       className="inline-flex items-center rounded border border-transparent bg-primary px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       reset password
-                    </button>
+                    </button> */}
                     <button
                       type="button"
-                      className="inline-flex items-center rounded border border-transparent bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      onClick={() => deleteUser(item.id)}
+                      className="inline-flex items-center rounded border border-transparent bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                      delete
+                      Delete
                     </button>
                   </td>
                 </tr>
