@@ -5,7 +5,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "prisma db seed",
+    "migrate-dev": "prisma migrate dev --preview-feature",
+    "migrate": "prisma migrate deploy",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.95.0",

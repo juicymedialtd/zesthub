@@ -17,14 +17,13 @@ export async function sendUserInvite(code, email, team) {
         },
       });
     } else {
-      let testAccount = await nodeMailer.createTestAccount();
       mail = nodeMailer.createTransport({
-        host: "",
-        port: 1025,
-        secure: false, // true for 465, false for other ports
+        host: "smtp-mail.outlook.com",
+        port: 587,
+        secureConnection: false, // true for 465, false for other ports
         auth: {
-          user: testAccount.user, // generated ethereal user
-          pass: testAccount.pass, // generated ethereal password
+          user: 'jack.andrews@juciymedia.co.uk',
+          pass: 'Baloney1!'
         },
       });
     }
