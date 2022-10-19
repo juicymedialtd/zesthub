@@ -13,7 +13,17 @@ export default async function createRequest(req, res) {
         },
       });
 
-      res.status(200).json({ holidays });
+      const stats = await prisma.user.findUnique({
+        where: {
+          id: session.user.id,
+        },
+        select: {
+          holidaysLeft: true,
+          HolidayAllowance: true,
+        },
+      });
+
+      res.status(200).json({ holidays, stats });
     } else {
       res.status(404).json({ error: "You must be logged in" });
     }

@@ -147,13 +147,13 @@ export default function Home() {
                     <div className="flex space-x-3">
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
                         <span className="text-xs font-medium leading-none text-white">
-                          TW
+                        {item.User.name[0]}
                         </span>
                       </span>
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center justify-between">
                           <h3 className="text-sm font-medium capitalize">
-                            {item.type}
+                          {item.User.name} - {item.type}
                           </h3>
                         </div>
                         <p className="text-sm text-gray-500">

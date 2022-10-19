@@ -35,7 +35,8 @@ export default function Holidays() {
                         <div className="flex flex-col">
                           <span className="text-[#FED929]">Holidays Left</span>
                           <h1 className="text-white text-3xl font-bold">
-                            06 of 22
+                            {data.stats.holidaysLeft} of{" "}
+                            {data.stats.HolidayAllowance}
                           </h1>
                         </div>
 
@@ -157,7 +158,7 @@ export default function Holidays() {
                       Book time off using the link below.
                     </p>
                     <div className="mt-6">
-                      <RequestLeaveModal />
+                      <RequestLeaveModal refetch={refetch} />
                     </div>
                   </div>
                 </>

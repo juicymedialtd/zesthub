@@ -48,7 +48,7 @@ export default function RequestLeaveModal({ refetch }) {
         half,
       }),
     });
-    refetch();
+    if (refetch) refetch();
     setOpen(false);
   }
 

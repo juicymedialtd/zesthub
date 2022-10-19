@@ -25,7 +25,7 @@ export default async function createRequest(req, res) {
         },
         data: {
           holidaysLeft: {
-            decrement: update.daysUsed,
+            decrement: Number(update.daysUsed),
           },
         },
       });

@@ -8,9 +8,16 @@ export default async function handler(req, res) {
     if (session) {
       const feed = await prisma.holiday.findMany({
         where: {
-          status: 'approved',
+          status: "approved",
           startDate: {
             gte: new Date("2020-10-01T14:21:00+0200"),
+          },
+        },
+        include: {
+          User: {
+            select: {
+              name: true,
+            },
           },
         },
       });
