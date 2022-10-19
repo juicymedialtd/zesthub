@@ -8,11 +8,11 @@ export default function AddExpense() {
   async function postData() {
     const formData = new FormData();
 
-    // formData.append("File", receipt[0]);
+    formData.append("File", receipt[0]);
     formData.append("reason", reason);
     formData.append("total", total);
 
-    await fetch("/api/expenses/add", {
+    await fetch("/api/v1/expenses/new", {
       method: "post",
       body: formData,
     });
@@ -25,7 +25,7 @@ export default function AddExpense() {
           Submit a new expense
         </h1>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 bg-white rounded-md shadow">
         <div className="py-4">
           <div className="space-y-8 divide-y divide-gray-200">
             <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
@@ -34,7 +34,7 @@ export default function AddExpense() {
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
                       htmlFor="username"
-                      className="block text-sm font-medium text-white sm:mt-px sm:pt-2"
+                      className="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2"
                     >
                       Reason
                     </label>
@@ -56,7 +56,7 @@ export default function AddExpense() {
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
                       htmlFor="about"
-                      className="block text-sm font-medium text-white sm:mt-px sm:pt-2"
+                      className="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2"
                     >
                       Total
                     </label>
@@ -64,7 +64,7 @@ export default function AddExpense() {
                       <div>
                         <div className="mt-1 relative rounded-md shadow-sm max-w-lg ">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span className="text-white sm:text-sm">£</span>
+                            <span className="text-gray-900 sm:text-sm">£</span>
                           </div>
                           <input
                             type="text"
@@ -92,7 +92,7 @@ export default function AddExpense() {
                   <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                     <label
                       htmlFor="cover-photo"
-                      className="block text-sm font-medium text-white sm:mt-px sm:pt-2"
+                      className="block text-sm font-medium text-gray-900 sm:mt-px sm:pt-2"
                     >
                       Receipt
                     </label>
@@ -116,9 +116,9 @@ export default function AddExpense() {
                           <div className="flex text-sm text-gray-600">
                             <label
                               htmlFor="file-upload"
-                              className="relative text-center cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                              className="relative px-3 text-center cursor-pointer bg-white rounded-md font-medium text-primary hover:text-secondary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-amber-300"
                             >
-                              <span className="pl-6">Upload a file</span>
+                              <span className="">Upload a file</span>
                               <input
                                 id="file-upload"
                                 name="file-upload"
@@ -127,11 +127,10 @@ export default function AddExpense() {
                                 onChange={(e) => setReceipt(e.target.files)}
                               />
                             </label>
-                            {/* <p className="pl-1">or drag and drop</p> */}
                           </div>
-                          <p className="text-xs text-gray-500">
+                          {/* <p className="text-xs text-gray-500">
                             PNG, JPG up to 10MB
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                     </div>

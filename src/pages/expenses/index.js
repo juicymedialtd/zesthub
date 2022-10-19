@@ -10,7 +10,9 @@ export default function Expenses() {
   const [total, setTotal] = useState("0.00");
 
   async function getData() {
-    const res = await fetch("/api/expenses/get").then((res) => res.json());
+    const res = await fetch("/api/v1/expenses/user/all").then((res) =>
+      res.json()
+    );
 
     if (res.expenses) {
       setData(res.expenses);
@@ -52,11 +54,11 @@ export default function Expenses() {
                   <span className="text-primary font-bold">
                     Expenses submitted
                   </span>
-                  <span className="text-4xl font-bold text-white">£500</span>
+                  {/* <span className="text-4xl font-bold text-white">£500</span> */}
                 </div>
                 <div className="mt-4">
                   <button
-                    onClick={() => router.push("/expenses/add")}
+                    onClick={() => router.push("/expenses/new")}
                     type="button"
                     className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                   >
