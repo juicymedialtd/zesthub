@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function AddExpense() {
+  const router = useRouter();
+
   const [reason, setReason] = useState();
   const [total, setTotal] = useState();
   const [receipt, setReceipt] = useState();
@@ -15,7 +18,7 @@ export default function AddExpense() {
     await fetch("/api/v1/expenses/new", {
       method: "post",
       body: formData,
-    });
+    }).then(() => router.push("/expenses"));
   }
 
   return (

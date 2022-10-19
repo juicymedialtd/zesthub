@@ -18,7 +18,7 @@ export default async function createRequest(req, res) {
   const s3Client = new S3Client({
     region: "eu-west-2",
     credentials: {
-      accessKeyId: " AKIA5ZU55NWDP246NRKR", // Access key pair. You can create access key pairs using the control panel or API.
+      accessKeyId: " AKIA5ZU55NWDBO6TLOU2", // Access key pair. You can create access key pairs using the control panel or API.
       secretAccessKey: process.env.S3_KEY, // Secret access key defined through an environment variable.
     },
   });

@@ -62,7 +62,7 @@ export default function Home() {
                         Expense submitted
                       </h3>
                       <div className="">
-                        <span className="text-3xl font-bold">{expenses}</span>
+                        <span className="text-3xl font-bold">£{expenses}</span>
                       </div>
                       <a
                         href="/expenses"
@@ -92,7 +92,7 @@ export default function Home() {
                         Miles submitted
                       </h3>
                       <div className="">
-                        <span className="text-3xl font-bold">{miles}</span>
+                        <span className="text-3xl font-bold">{miles}mi</span>
                       </div>
                       <a
                         href="/mileage"

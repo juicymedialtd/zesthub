@@ -6,19 +6,51 @@ export default async function createRequest(req, res) {
 
   try {
     if (session) {
-
       const holidayCount = await prisma.user.findUnique({
         where: {
           id: session.user.id,
         },
         select: {
-         holidaysLeft: true
+          holidaysLeft: true,
         },
       });
 
-      const totalMilage = 0
+      const expenses = await prisma.expense.findMany({
+        where: {
+          userId: session.user.id,
+        },
+      });
 
-      const totalExpenses = 0
+      const miles = await prisma.mileage.findMany({
+        where: {
+          userId: session.user.id,
+        },
+      });
+
+      let totalExpenses = 0;
+      let totalMilage = 0;
+
+      if (expenses.length !== 0) {
+        let t = 0;
+
+        for (let i = 0; i < expenses.length; i++) {
+          const total = t + expenses[i].total;
+          t = total;
+        }
+
+        totalExpenses = t;
+      }
+
+      if (miles.length !== 0) {
+        let t = 0;
+
+        for (let i = 0; i < miles.length; i++) {
+          const total = t + miles[i].miles;
+          t = total;
+        }
+
+        totalMilage = t;
+      }
 
       res.status(200).json({ holidayCount, totalMilage, totalExpenses });
     } else {
