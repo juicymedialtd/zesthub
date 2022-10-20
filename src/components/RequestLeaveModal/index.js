@@ -50,6 +50,7 @@ export default function RequestLeaveModal({ refetch }) {
     });
     if (refetch) refetch();
     setOpen(false);
+    setHalf(false)
   }
 
   return (

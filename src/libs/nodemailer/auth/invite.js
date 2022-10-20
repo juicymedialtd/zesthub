@@ -4,7 +4,10 @@ export async function sendUserInvite(code, email, team) {
   try {
     let mail;
 
-    const url = process.env.NODE_ENV === "development" ? `http://localhost:3000/auth/invited?code=${code}` : ''
+    const url =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3000/auth/invited?code=${code}`
+        : `http://hub.zestsuite.com/auth/invited?code=${code}`;
 
     if (process.env.NODE_ENV === "development") {
       let testAccount = await nodeMailer.createTestAccount();
@@ -22,8 +25,8 @@ export async function sendUserInvite(code, email, team) {
         port: 587,
         secureConnection: false, // true for 465, false for other ports
         auth: {
-          user: 'jack.andrews@juciymedia.co.uk',
-          pass: 'Baloney1!'
+          user: "jack.andrews@juciymedia.co.uk",
+          pass: "Baloney1!",
         },
       });
     }
