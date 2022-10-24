@@ -136,6 +136,7 @@ export default function Login({ csrfToken }) {
                       type="email"
                       autoComplete="email"
                       required
+                      placeholder="email"
                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
@@ -147,6 +148,7 @@ export default function Login({ csrfToken }) {
                       type="password"
                       autoComplete="current-password"
                       required
+                      placeholder="password"
                       className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
@@ -180,7 +182,7 @@ export default function Login({ csrfToken }) {
                   <div>
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-amber-400 py-2 px-4 text-sm font-bold text-gray-900 shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-amber-400 py-2 px-4 text-sm font-bold text-gray-900 shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
                       Login
                     </button>

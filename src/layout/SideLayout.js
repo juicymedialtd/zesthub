@@ -395,7 +395,7 @@ export default function SideLayout({ children }) {
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    {/* {userNavigation.map((item) => (
+                    {userNavigation.map((item) => (
                       <Menu.Item key={item.name}>
                         {({ active }) => (
                           <a
@@ -409,7 +409,7 @@ export default function SideLayout({ children }) {
                           </a>
                         )}
                       </Menu.Item>
-                    ))} */}
+                    ))}
                     <Menu.Item>
                       {({ active }) => (
                         <span
