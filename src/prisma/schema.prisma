@@ -58,6 +58,7 @@ model User {
   holidaysLeft     Int      @default(21)
   HolidayAllowance Int      @default(21)
   role             Role     @default(USER)
+  profileUrl       String?
 
   holidays  Holiday[]
   expenses  Expense[]
