@@ -63,12 +63,12 @@ export default function SideLayout({ children }) {
       icon: CashIcon,
       current: router.pathname.includes("/expense"),
     },
-    // {
-    //   name: "Documents",
-    //   href: "/documents",
-    //   icon: DocumentIcon,
-    //   current: router.pathname.includes("/documents"),
-    // },
+    {
+      name: "Documents",
+      href: "/documents",
+      icon: DocumentIcon,
+      current: router.pathname.includes("/documents"),
+    },
     // {
     //   name: "Wiki",
     //   href: "/wiki",

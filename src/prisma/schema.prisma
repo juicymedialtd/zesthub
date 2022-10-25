@@ -57,9 +57,10 @@ model User {
   HolidayAllowance Int      @default(21)
   role             Role     @default(USER)
 
-  holidays Holiday[]
-  expenses Expense[]
-  miles    Mileage[]
+  holidays  Holiday[]
+  expenses  Expense[]
+  miles     Mileage[]
+  documents Documents[]
 
   team   Team?   @relation(fields: [teamId], references: [id])
   teamId String?
@@ -119,4 +120,21 @@ model Wiki {
   public     Boolean @default(true)
   access     Json?
   EditedBy   Json?
+}
+
+model Documents {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  homescreen     Boolean  @default(false)
+  title          String
+  public         Boolean  @default(false)
+  access         Json?
+  url            String
+  folder         Boolean? @default(false)
+  folderContents Json?
+
+  uploadedBy User?   @relation(fields: [userId], references: [id])
+  userId     String?
 }
