@@ -1,29 +1,46 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
 import ExpensesRequested from "../components/Admin/ExpensesRequested";
 import HolidaysRequested from "../components/Admin/HolidaysRequested";
 import MilageRequested from "../components/Admin/MilageRequested";
+import UserAdmin from "../views/admin/general";
+import UserSettings from "../views/settings/users";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function AdminPage() {
-  const [show, setShow] = useState("hol");
+export default function AdminPanel() {
+  const router = useRouter();
 
   const tabs = [
-    { name: "Pending Holiday Requests", current: true, id: "hol" },
-    { name: "Pending Expense Requests", current: false, id: "exp" },
-    { name: "Pending Mileage Requests", current: false, id: "mil" },
+    {
+      name: "General",
+      href: "/admin",
+      current: router.asPath === "/admin",
+    },
+    {
+      name: "Holiday Requests",
+      href: "?filter=holidays",
+      current: router.asPath === "/admin?filter=holidays",
+    },
+    {
+      name: "Milage Requests",
+      href: "?filter=milage",
+      current: router.asPath === "/admin?filter=milage",
+    },
+    {
+      name: "Expense Requests",
+      href: "?filter=expenses",
+      current: router.asPath === "/admin?filter=expenses",
+    },
   ];
 
   return (
-    <div className="py-6">
+    <div className="py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <h1 className="text-2xl font-semibold text-white">Admin Panel</h1>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="py-4">
-          <div>
+        <div className="p-4">
+          <div className="bg-nav-bg p-4">
+            <h1 className="text-white text-3xl font-bold">Administration</h1>
             <div className="sm:hidden">
               <label htmlFor="tabs" className="sr-only">
                 Select a tab
@@ -31,8 +48,8 @@ export default function AdminPage() {
               <select
                 id="tabs"
                 name="tabs"
-                className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                defaultValue={tabs.find((tab) => tab.id === show).name}
+                className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                defaultValue={tabs.find((tab) => tab.current).name}
               >
                 {tabs.map((tab) => (
                   <option key={tab.name}>{tab.name}</option>
@@ -40,57 +57,35 @@ export default function AdminPage() {
               </select>
             </div>
             <div className="hidden sm:block">
-              <div className="border-b border-gray-200">
+              <div className="">
                 <nav className="-mb-px flex space-x-8" aria-label="Tabs">
                   {tabs.map((tab) => (
-                    <button
-                      type="button"
-                      key={tab.id}
-                      onClick={() => setShow(tab.id)}
+                    <a
+                      key={tab.name}
+                      href={tab.href}
                       className={classNames(
-                        tab.id === show
-                          ? "border-primary text-white hover:text-secondary"
-                          : "border-transparent text-gray-500 hover:text-secondary hover:border-gray-200",
-                        "whitespace-nowrap flex py-4 px-1 border-b-2 font-medium text-sm"
+                        tab.current
+                          ? "border-[#F59E1E] border-b-4 text-[#FED929]"
+                          : "border-transparent text-white hover:text-[#FED929]",
+                        "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
                       )}
-                      aria-current={show === tab.id ? "page" : undefined}
+                      aria-current={tab.current ? "page" : undefined}
                     >
                       {tab.name}
-                      {/* {data ? (
-                        <span
-                          className={classNames(
-                            tab.id === show
-                              ? "bg-indigo-100 text-indigo-600"
-                              : "bg-gray-100 text-gray-900",
-                            "hidden ml-3 py-0.5 px-2.5 rounded-full text-xs font-medium md:inline-block"
-                          )}
-                        >
-                          {data.length}
-                        </span>
-                      ) : null} */}
-                    </button>
+                    </a>
                   ))}
                 </nav>
               </div>
             </div>
           </div>
 
-          <div className="mt-4">
-            {show === "hol" && (
-              <>
-                <HolidaysRequested />
-              </>
+          <div className="">
+            {router.asPath === "/admin" && <UserAdmin />}
+            {router.asPath === "/admin?filter=holidays" && (
+              <HolidaysRequested />
             )}
-            {show === "exp" && (
-              <>
-                <ExpensesRequested />
-              </>
-            )}
-            {show === "mil" && (
-              <>
-                <MilageRequested />
-              </>
-            )}
+            {router.asPath === "/admin?filter=mileage" && <MilageRequested />}
+            {router.asPath === "/admin?filter=expense" && <ExpensesRequested />}
           </div>
         </div>
       </div>

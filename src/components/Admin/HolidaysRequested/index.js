@@ -9,12 +9,14 @@ function classNames(...classes) {
 
 export default function HolidaysRequested() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function HolidayData() {
     const res = await fetch("/api/admin/holidays/holidays-requested").then(
       (res) => res.json()
     );
     setData(res.holidays);
+    setLoading(false);
   }
 
   async function approveRequest(id) {
@@ -35,52 +37,57 @@ export default function HolidaysRequested() {
 
   return (
     <>
-      {data.length > 0 && (
+      {!loading && data.length > 0 && (
         <>
-          <div className="mt-8 ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead>
+          <div className="ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
+            <table className="min-w-full">
+              <thead className="bg-main-bg">
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
+                    className="py-1.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
                   >
                     Name
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white lg:table-cell"
+                    className="hidden px-3 py-1.5 text-left text-sm font-semibold text-white lg:table-cell"
                   >
                     Reason
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white sm:table-cell"
+                    className="hidden px-3 py-1.5 text-left text-sm font-semibold text-white sm:table-cell"
                   >
                     Start Date
                   </th>
                   <th
                     scope="col"
-                    className="hidden px-3 py-3.5 text-left text-sm font-semibold text-white sm:table-cell"
+                    className="hidden px-3 py-1.5 text-left text-sm font-semibold text-white sm:table-cell"
                   >
                     End Date
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-white"
+                    className="px-3 py-1.5 text-left text-sm font-semibold text-white"
                   >
                     Days Used
                   </th>
-                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">Edit</span>
+                  <th
+                    scope="col"
+                    className="relative py-1.5 pl-3 pr-4 sm:pr-6 text-left"
+                  >
+                    <span className="font-bold text-white text-sm">
+                      Approval
+                    </span>
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="bg-white">
                 {data !== undefined &&
                   data.map((item) => (
-                    <tr key={item.id}>
-                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-white sm:w-auto sm:max-w-none sm:pl-6">
+                    <tr key={item.id} className="">
+                      <td className="w-full max-w-0 py-1.5 pl-4 pr-3 text-sm font-medium sm:w-auto sm:max-w-none sm:pl-6 ">
                         {item.User.name}
                         <dl className="font-normal lg:hidden">
                           <dd className="mt-1 truncate text-gray-700">
@@ -92,31 +99,31 @@ export default function HolidaysRequested() {
                           </dd>
                         </dl>
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-white lg:table-cell">
+                      <td className="hidden px-3 py-1.5 text-sm  lg:table-cell">
                         {item.type}
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-white sm:table-cell">
+                      <td className="hidden px-3 py-1.5 text-sm  sm:table-cell">
                         {format(parseISO(item.startDate), "dd/MM/yyyy")}
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-white sm:table-cell">
+                      <td className="hidden px-3 py-1.5 text-sm  sm:table-cell">
                         {format(parseISO(item.endDate), "dd/MM/yyyy")}
                       </td>
-                      <td className="px-3 py-4 text-sm text-white whitespace-nowrap sm:table-cell">
+                      <td className="px-3 py-1.5 text-sm  whitespace-nowrap sm:table-cell">
                         {item.daysUsed} days
                       </td>
-                      <td className="py-4 text-right text-sm font-medium whitespace-nowrap">
+                      <td className="py-1.5 text-left text-sm font-medium whitespace-nowrap">
                         <div className="hidden sm:block space-x-4">
                           <button
                             onClick={() => approveRequest(item.id)}
                             type="button"
-                            className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            className="inline-flex items-center text-xs font-bold text-green-600 hover:text-green-500"
                           >
                             Approve
                           </button>
                           <button
                             type="button"
                             onClick={() => denyRequest(item.id)}
-                            className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            className="inline-flex items-center text-xs font-bold text-red-600 hover:text-red-700 "
                           >
                             Deny
                           </button>
@@ -154,7 +161,7 @@ export default function HolidaysRequested() {
                                         active
                                           ? "bg-gray-100 text-white"
                                           : "text-gray-700",
-                                        "block px-4 py-2 text-sm"
+                                        "block px-4 py-1.5 text-sm"
                                       )}
                                     >
                                       Approve
@@ -170,7 +177,7 @@ export default function HolidaysRequested() {
                                         active
                                           ? "bg-gray-100 text-white"
                                           : "text-gray-700",
-                                        "block px-4 py-2 text-sm"
+                                        "block px-4 py-1.5 text-sm"
                                       )}
                                     >
                                       Deny

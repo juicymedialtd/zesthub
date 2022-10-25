@@ -155,11 +155,11 @@ export default function SideLayout({ children }) {
                   </div>
                 </Transition.Child>
                 <div className="flex-shrink-0 flex items-center px-4">
-                  {/* <img
-                    className="h-8 w-auto"
-                    src="https://www.juicymedia.co.uk/application/themes/juicy/images/juicy-logo.svg"
-                    alt="Workflow"
-                  /> */}
+                  <img
+                    className="w-auto"
+                    src="/zest-draft-logo.svg"
+                    alt="logo"
+                  />
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
@@ -188,6 +188,52 @@ export default function SideLayout({ children }) {
                     ))}
                   </nav>
                 </div>
+                <div className="flex flex-shrink-0 p-4">
+                  {session.user.role === "ADMIN" && (
+                    <div className="w-full space-y-2">
+                      <a
+                        href="/settings"
+                        className={classNames(
+                          router.pathname === "/settings"
+                            ? "bg-amber-300 text-gray-900"
+                            : "text-white hover:bg-amber-300 hover:text-white",
+                          "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
+                        )}
+                      >
+                        <CogIcon
+                          className={classNames(
+                            router.pathname === "/settings"
+                              ? "text-gray-900"
+                              : "text-amber-300 group-hover:text-white",
+                            "mr-3 flex-shrink-0 h-6 w-6"
+                          )}
+                          aria-hidden="true"
+                        />
+                        Settings
+                      </a>
+                      <a
+                        href="/admin"
+                        className={classNames(
+                          router.pathname === "/admin"
+                            ? "bg-amber-300 text-gray-900"
+                            : "text-white hover:bg-amber-300 hover:text-white",
+                          "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
+                        )}
+                      >
+                        <AdjustmentsIcon
+                          className={classNames(
+                            router.pathname === "/admin"
+                              ? "text-gray-900"
+                              : "text-amber-300 group-hover:text-white",
+                            "mr-3 flex-shrink-0 h-6 w-6"
+                          )}
+                          aria-hidden="true"
+                        />
+                        Admin
+                      </a>
+                    </div>
+                  )}
+                </div>
               </Dialog.Panel>
             </Transition.Child>
             <div className="flex-shrink-0 w-14" aria-hidden="true">
@@ -203,7 +249,7 @@ export default function SideLayout({ children }) {
         <div className="flex flex-col flex-grow pt-5 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4 py-4">
             <img
-              className="h-20 w-auto mx-auto"
+              className="h-18 w-auto mx-auto"
               src="/zest-draft-logo.svg"
               alt="Workflow"
             />

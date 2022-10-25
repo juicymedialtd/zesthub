@@ -1,6 +1,6 @@
 
-export default function AdminPanel() {
 
+export default function UserAdmin() {
     return (
         <div>
             
