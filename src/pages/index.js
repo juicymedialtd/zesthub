@@ -3,6 +3,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { CashIcon, SunIcon, TruckIcon } from "@heroicons/react/outline";
 import { format, parse, parseISO } from "date-fns";
 import { PlusIcon } from "@heroicons/react/solid";
+import RequestLeaveModalDashboard from "../components/RequestLeaveModal/dashboard";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -54,7 +55,7 @@ export default function Home() {
                     <div className="flex flex-row justify-between">
                       <CashIcon className="h-8 w-8 text-gray-500" />
                       <a href="/expenses/new">
-                        <PlusIcon className="h8 w-8 text-primary" />
+                        <PlusIcon className="h-8 w-8 text-primary" />
                       </a>
                     </div>
                     <div className="mt-2 space-y-2">
@@ -84,7 +85,7 @@ export default function Home() {
                     <div className="flex flex-row justify-between">
                       <TruckIcon className="h-8 w-8 text-gray-500" />
                       <a href="/mileage/new">
-                      <PlusIcon className="h8 w-8 text-primary" />
+                      <PlusIcon className="h-8 w-8 text-primary" />
                       </a>
                     </div>
                     <div className="mt-2 space-y-2">
@@ -113,7 +114,7 @@ export default function Home() {
                   <div className="flex flex-col ">
                     <div className="flex flex-row justify-between">
                       <SunIcon className="h-8 w-8 text-gray-500" />
-                      <PlusIcon className="h8 w-8 text-primary" />
+                      <RequestLeaveModalDashboard />
                     </div>
                     <div className="mt-2 space-y-2">
                       <h3 className="truncate text-sm font-medium text-gray-900">

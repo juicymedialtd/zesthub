@@ -111,6 +111,9 @@ export default function Calendar() {
         case "other":
           colour = other;
           break;
+        case "birthday":
+          colour = "bg-teal-800";
+          break;
       }
 
       events.push(...range);
@@ -149,6 +152,10 @@ export default function Calendar() {
           <div className="flex flex-row gap-2">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#B8354C] font-semibold text-white" />
             <span className="text-white">Other</span>
+          </div>
+          <div className="flex flex-row gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-teal-800 font-semibold text-white" />
+            <span className="text-white">Birthday</span>
           </div>
         </div>
       </div>
