@@ -21,12 +21,12 @@ export async function sendUserInvite(code, email, team) {
       });
     } else {
       mail = nodeMailer.createTransport({
-        host: "smtp-mail.outlook.com",
+        host: process.env.SMTP_ENDPOINT,
         port: 587,
         secureConnection: false, // true for 465, false for other ports
         auth: {
-          user: "jack.andrews@juciymedia.co.uk",
-          pass: "Baloney1!",
+          user: process.env.SMTP_USERNAME,
+          pass: process.env.SMTP_PASSWORD,
         },
       });
     }

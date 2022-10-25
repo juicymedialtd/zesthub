@@ -10,11 +10,13 @@ export default async function handler(req, res) {
   try {
     if (session && session.user.role === "ADMIN") {
       const user = await prisma.user.findUnique({
-       where: {
-        id: session.user.id,
-       }
+        where: {
+          id: session.user.id,
+        },
+        include: {
+          team: true,
+        },
       });
-
 
       const invite = await prisma.invites.create({
         data: {
@@ -23,8 +25,7 @@ export default async function handler(req, res) {
         },
       });
 
-
-      await sendUserInvite(invite.code, email, user.teamId);
+      await sendUserInvite(invite.code, email, user.team.name);
 
       res.status(200).json({ sucess: true, message: "Invite sent correctly" });
     } else {
