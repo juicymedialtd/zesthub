@@ -1,9 +1,10 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition, Combobox } from "@headlessui/react";
-import { XIcon, PlusIcon } from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/outline";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { PlusIcon } from "@heroicons/react/solid";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -56,7 +57,7 @@ export default function RequestLeaveModalDashboard({}) {
   return (
     <>
       <button onClick={() => setOpen(true)} type="button" className="">
-        <PlusIcon className="h-8 w-auto text-primary" />
+        <PlusIcon className="h-8 w-8 text-primary" />
       </button>
       <>
         <Transition.Root show={open} as={Fragment}>

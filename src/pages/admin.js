@@ -24,9 +24,9 @@ export default function AdminPanel() {
       current: router.asPath === "/admin?filter=holidays",
     },
     {
-      name: "Milage Requests",
-      href: "?filter=milage",
-      current: router.asPath === "/admin?filter=milage",
+      name: "Mileage Requests",
+      href: "?filter=mileage",
+      current: router.asPath === "/admin?filter=mileage",
     },
     {
       name: "Expense Requests",

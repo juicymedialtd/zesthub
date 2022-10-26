@@ -42,9 +42,9 @@ export default function MilageRequested() {
     <>
       {data.length > 0 && (
         <>
-          <div className="mt-8 ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead>
+          <div className="ring-black ring-opacity-5 sm:-mx-6 md:mx-0">
+            <table className="min-w-full">
+              <thead className="bg-main-bg">
                 <tr>
                   <th
                     scope="col"
@@ -76,38 +76,35 @@ export default function MilageRequested() {
                   >
                     Cost
                   </th>
-                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span className="sr-only">Edit</span>
+                  <th scope="col" className="relative py-3.5 pl-3 pr-4 text-left sm:pr-6">
+                    <span className=" text-white">Approval</span>
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="bg-white">
                 {data !== undefined &&
                   data.map((item) => (
                     <tr key={item.id}>
-                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-white sm:w-auto sm:max-w-none sm:pl-6">
+                      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium sm:w-auto sm:max-w-none sm:pl-6">
                         {item.User.name}
                         <dl className="font-normal lg:hidden">
-                          <dd className="mt-1 truncate text-gray-700">
-                            {item.Reason}
-                          </dd>
-                         
+                          <dd className="mt-1 truncate">{item.reason}</dd>
                         </dl>
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-white lg:table-cell">
-                        {item.Reason}
+                      <td className="hidden px-3 py-4 text-sm truncate lg:table-cell">
+                        {item.reason}
                       </td>
-                      <td className="hidden px-3 py-4 text-sm text-white sm:table-cell">
+                      <td className="hidden px-3 py-4 text-sm sm:table-cell">
                         {format(parseISO(item.createdAt), "dd/MM/yyyy")}
                       </td>
 
-                      <td className="px-3 py-4 text-sm text-white whitespace-nowrap sm:table-cell">
+                      <td className="px-3 py-4 text-sm whitespace-nowrap sm:table-cell">
                         {item.miles}
                       </td>
-                      <td className="px-3 py-4 text-sm text-white whitespace-nowrap sm:table-cell">
+                      <td className="px-3 py-4 text-sm whitespace-nowrap sm:table-cell">
                         {formatter.format(item.miles * 0.45)}
                       </td>
-                      <td className="py-4 text-right text-sm font-medium whitespace-nowrap">
+                      <td className="py-4 text-left text-sm font-medium whitespace-nowrap">
                         <div className="hidden sm:block space-x-4">
                           <button
                             onClick={() => approveRequest(item.id)}

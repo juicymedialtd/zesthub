@@ -7,13 +7,11 @@ export default async function handler(req, res) {
   try {
     if (session) {
 
-      const miles = await prisma.mileage.findMany({
-        where: {
-          userId: session.user.id,
-        },
-      });
+     const mileage = await prisma.mileage.findMany({})
 
-      res.status(200).json({ success: true, miles });
+      console.log(typeof mileage)
+
+      res.status(200).json({ success: true, mileage });
     } else {
       res.status(404).json({ error: "You must be logged in" });
     }

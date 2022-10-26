@@ -134,8 +134,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row">
-          <div className="bg-white w-full sm:w-1/4 mr-8 rounded-md">
+        <div className="mt-8 flex flex-col lg:flex-row">
+          <div className="bg-white w-full lg:w-1/4 mr-8 rounded-md">
             <div className="p-4">
               <h1 className="font-bold text-xl">Upcoming Events</h1>
               {feed !== undefined &&
@@ -169,7 +169,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full sm:w-3/4 sm:ml-8 mt-4 sm:mt-0 mb-12 sm:mb-4 rounded-md bg-white">
+          <div className="w-full lg:w-3/4 lg:ml-8 mt-4 lg:mt-0 mb-12 lg:mb-0 rounded-md bg-white">
             <div className="p-4 flex flex-row divide-x h-full divide-gray-600">
               <div className="w-1/2">
                 <h1 className="text-xl font-bold ">Wiki</h1>
