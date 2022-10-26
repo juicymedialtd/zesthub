@@ -1,8 +1,9 @@
-const { prisma } = require("../../../../prisma/prisma");
 import { getSession } from "next-auth/react";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import formidable from "formidable";
 import fs from "fs";
+
+const { prisma } = require("../../../../prisma/prisma");
 
 export const config = {
   api: {
@@ -10,7 +11,7 @@ export const config = {
   },
 };
 
-export default async function createRequest(req, res) {
+export default async function handler(req, res) {
   const session = await getSession({ req });
 
   const form = new formidable.IncomingForm();
@@ -36,14 +37,15 @@ export default async function createRequest(req, res) {
           });
         }
 
-        const file = files.File;
+        const file = files.photo;
         const filename = file.originalFilename;
+        const k = `uploads/profile/${session.user.id}/${filename}`;
 
         const f = fs.readFileSync(file.filepath);
 
         const params = {
           Bucket: `zesthub`, // The path to the directory you want to upload the object to, starting with your Space name.
-          Key: `uploads/reciepts/${session.user.id}/${filename}`, // Object key, referenced whenever you want to access this file later.
+          Key: k, // Object key, referenced whenever you want to access this file later.
           Body: f, // The object's contents. This variable is an object, not a string.
           ContentType: file.mimetype,
         };
@@ -54,17 +56,12 @@ export default async function createRequest(req, res) {
           "Successfully uploaded object: " + params.Bucket + "/" + params.Key
         );
 
-        const url =
-          process.env.BUCKET_ENDPOINT +
-          `reciepts/${session.user.id}/${filename}`;
-
-        await prisma.expense.create({
+        await prisma.user.update({
+          where: {
+            id: session.user.id,
+          },
           data: {
-            title: fields.reason,
-            total: Number(fields.total),
-            receipt: "url",
-            userId: session.user.id,
-            status: "pending",
+            profileUrl: k,
           },
         });
       });

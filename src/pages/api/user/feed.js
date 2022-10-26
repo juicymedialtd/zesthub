@@ -17,6 +17,7 @@ export default async function handler(req, res) {
           User: {
             select: {
               name: true,
+              profileUrl: true,
             },
           },
         },

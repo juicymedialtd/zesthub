@@ -424,11 +424,16 @@ export default function SideLayout({ children }) {
                 <div>
                   <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     <span className="sr-only">Open user menu</span>
-                    <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
+                    {/* <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-500">
                       <span className="text-sm font-medium leading-none text-white">
                         {session.user.name[0].toLocaleUpperCase()}
                       </span>
-                    </span>
+                    </span> */}
+                    <img
+                      className="inline-block h-8 w-8 rounded-full"
+                      src="https://zesthub.s3.eu-west-2.amazonaws.com/uploads/profile/24faff9c-1db6-46f1-b42d-224618d99a4a/profile_face.jpg"
+                      alt=""
+                    />
                   </Menu.Button>
                 </div>
                 <Transition

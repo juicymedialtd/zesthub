@@ -29,6 +29,7 @@ const options = {
             name: user.name,
             role: user.role,
             team: user.teamId,
+            profile: user.profileUrl,
           };
         } catch (error) {
           throw new Error(error);
@@ -58,6 +59,7 @@ const options = {
       session.user.role = token.user.role;
       session.user.id = token.user.id;
       session.user.teamId = token.user.teamId;
+      session.user.profile = token.user.profile;
       return session;
     },
   },

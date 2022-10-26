@@ -38,7 +38,8 @@
     "react-dates": "^21.8.0",
     "react-dom": "18.1.0",
     "react-leaflet": "^4.1.0",
-    "react-query": "^3.39.0"
+    "react-query": "^3.39.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

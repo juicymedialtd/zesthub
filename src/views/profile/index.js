@@ -1,7 +1,32 @@
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+
 export default function ProfilePage() {
+  const session = useSession();
+  const router = useRouter();
+
+  const [email, setEmail] = useState();
+  const [photo, setPhoto] = useState();
+
+  async function postData() {
+    const formData = new FormData();
+
+    formData.append("photo", photo[0]);
+    formData.append("email", email ? email : session.data.user.email);
+
+    await fetch("/api/v1/user/update", {
+      method: "post",
+      body: formData,
+    }).then(() => router.reload());
+
+  }
+
+  console.log(session)
+  
   return (
     <div className="bg-white p-[2rem]">
-      <form className="space-y-8 divide-y divide-gray-200">
+      <div className="space-y-8 divide-y divide-gray-200">
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div>
@@ -32,6 +57,7 @@ export default function ProfilePage() {
                     id="email"
                     autoComplete="email"
                     className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    defaultValue={session.data.user.email}
                   />
                 </div>
               </div>
@@ -62,7 +88,13 @@ export default function ProfilePage() {
                   >
                     Change
                   </button>
-                  <input type="file" id="myFileInput" className="hidden" />
+                  <input
+                    type="file"
+                    id="myFileInput"
+                    className="hidden"
+                    onChange={(e) => setPhoto(e.target.files)}
+                    accept="image/gif, image/jpeg, image/png"
+                  />
                 </div>
               </div>
             </div>
@@ -319,6 +351,7 @@ export default function ProfilePage() {
         <div className="pt-5">
           <div className="flex justify-end">
             <button
+              onClick={() => postData()}
               type="submit"
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
@@ -326,7 +359,7 @@ export default function ProfilePage() {
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

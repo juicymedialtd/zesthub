@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { CashIcon, SunIcon, TruckIcon } from "@heroicons/react/outline";
-import { format, parse, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { PlusIcon } from "@heroicons/react/solid";
 import RequestLeaveModalDashboard from "../components/RequestLeaveModal/dashboard";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function Home() {
   const [events, setEvents] = useState([]);
@@ -85,7 +81,7 @@ export default function Home() {
                     <div className="flex flex-row justify-between">
                       <TruckIcon className="h-8 w-8 text-gray-500" />
                       <a href="/mileage/new">
-                      <PlusIcon className="h-8 w-8 text-primary" />
+                        <PlusIcon className="h-8 w-8 text-primary" />
                       </a>
                     </div>
                     <div className="mt-2 space-y-2">
@@ -146,15 +142,20 @@ export default function Home() {
                 feed.map((item) => (
                   <div key={item.id} className="py-4">
                     <div className="flex space-x-3">
-                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
+                      {/* <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
                         <span className="text-xs font-medium leading-none text-white">
                         {item.User.name[0]}
                         </span>
-                      </span>
+                      </span> */}
+                      <img
+                        className="inline-block h-8 w-8 rounded-full"
+                        src={`${process.env.NEXT_PUBLIC_S3}/${item.User.profileUrl}`}
+                        alt=""
+                      />
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center justify-between">
                           <h3 className="text-sm font-medium capitalize">
-                          {item.User.name} - {item.type}
+                            {item.User.name} - {item.type}
                           </h3>
                         </div>
                         <p className="text-sm text-gray-500">
