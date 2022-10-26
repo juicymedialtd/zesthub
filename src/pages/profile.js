@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import ResetPasswordModal from "../components/ResetPasswordModal";
+import ProfilePage from "../views/profile";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -58,6 +59,10 @@ export default function UserProfile() {
                 </nav>
               </div>
             </div>
+          </div>
+
+          <div>
+            {router.asPath === '/profile' && <ProfilePage />}
           </div>
         </div>
       </div>

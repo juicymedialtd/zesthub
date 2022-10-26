@@ -15,7 +15,8 @@ export default async function createRequest(req, res) {
         include: {
           User: {
             select: {
-              name: true
+              name: true,
+              holidaysLeft: true
             }
           }
         }

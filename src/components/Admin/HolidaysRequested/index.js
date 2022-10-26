@@ -75,6 +75,12 @@ export default function HolidaysRequested() {
                   </th>
                   <th
                     scope="col"
+                    className="px-3 py-1.5 text-left text-sm font-semibold text-white"
+                  >
+                    Days Left
+                  </th>
+                  <th
+                    scope="col"
                     className="relative py-1.5 pl-3 pr-4 sm:pr-6 text-left"
                   >
                     <span className="font-bold text-white text-sm">
@@ -110,6 +116,9 @@ export default function HolidaysRequested() {
                       </td>
                       <td className="px-3 py-1.5 text-sm  whitespace-nowrap sm:table-cell">
                         {item.daysUsed} days
+                      </td>
+                      <td className="px-3 py-1.5 text-sm  whitespace-nowrap sm:table-cell">
+                        {item.User.holidaysLeft} days
                       </td>
                       <td className="py-1.5 text-left text-sm font-medium whitespace-nowrap">
                         <div className="hidden sm:block space-x-4">
