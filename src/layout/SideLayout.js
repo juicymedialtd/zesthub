@@ -33,8 +33,6 @@ export default function SideLayout({ children }) {
 
   const { data: session, status } = useSession();
 
-  console.log(session)
-
   const navigation = [
     {
       name: "Dashboard",

@@ -5,7 +5,7 @@ import { format, parseISO } from "date-fns";
 import RequestLeaveModal from "../components/RequestLeaveModal";
 
 async function getHolidays() {
-  const res = await fetch("/api/holidays/get-user");
+  const res = await fetch("/api/v1/user/holidays/all");
   return res.json();
 }
 

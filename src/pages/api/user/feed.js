@@ -10,14 +10,14 @@ export default async function handler(req, res) {
         where: {
           status: "approved",
           startDate: {
-            gte: new Date("2020-10-01T14:21:00+0200"),
+            gte: new Date("2022-10-25T14:21:00+0200"),
           },
         },
         include: {
           User: {
             select: {
               name: true,
-              profileUrl: true,
+              profileUrl: true
             },
           },
         },

@@ -1,15 +1,17 @@
-const { prisma } = require("../../../prisma/prisma");
+const { prisma } = require("../../../../../prisma/prisma");
 import { getSession } from "next-auth/react";
 
 export default async function createRequest(req, res) {
   const session = await getSession({ req });
+
+  console.log(session);
 
   try {
     if (session) {
       // When everything is green code is executed below :)
       const holidays = await prisma.holiday.findMany({
         where: {
-          userId: session.user.Id,
+          userId: session.user.id,
         },
       });
 

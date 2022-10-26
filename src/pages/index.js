@@ -4,8 +4,11 @@ import { CashIcon, SunIcon, TruckIcon } from "@heroicons/react/outline";
 import { format, parseISO } from "date-fns";
 import { PlusIcon } from "@heroicons/react/solid";
 import RequestLeaveModalDashboard from "../components/RequestLeaveModal/dashboard";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const session = useSession();
+
   const [events, setEvents] = useState([]);
   const [expenses, setExpenses] = useState();
   const [miles, setMiles] = useState();
@@ -18,6 +21,8 @@ export default function Home() {
 
     setEvents(holidays);
   }
+
+  console.log(session);
 
   async function getStats() {
     const res = await fetch("/api/user/stats").then((res) => res.json());
@@ -142,16 +147,20 @@ export default function Home() {
                 feed.map((item) => (
                   <div key={item.id} className="py-4">
                     <div className="flex space-x-3">
-                      {/* <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
-                        <span className="text-xs font-medium leading-none text-white">
-                        {item.User.name[0]}
+                      {session.data.user.profile !== null ? (
+                        <img
+                          className="inline-block h-8 w-8 rounded-full"
+                          src={`${process.env.NEXT_PUBLIC_S3}/${item.User.profileUrl}`}
+                          alt=""
+                        />
+                      ) : (
+                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
+                          <span className="text-xs font-medium leading-none text-white">
+                            {item.User.name[0]}
+                          </span>
                         </span>
-                      </span> */}
-                      <img
-                        className="inline-block h-8 w-8 rounded-full"
-                        src={`${process.env.NEXT_PUBLIC_S3}/${item.User.profileUrl}`}
-                        alt=""
-                      />
+                      )}
+
                       <div className="flex-1 space-y-1">
                         <div className="flex items-center justify-between">
                           <h3 className="text-sm font-medium capitalize">
