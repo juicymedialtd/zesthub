@@ -30,7 +30,6 @@ export default async function handler(req, res) {
 
       res.redirect(307, '/auth/login')
 
-    //   res.status(200).json({ sucess: true, message: "Signed up successfully" });
     } else {
       res.status(403).json({ sucess: true, message: "Missing fields" });
     }

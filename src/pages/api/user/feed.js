@@ -1,8 +1,14 @@
 const { prisma } = require("../../../prisma/prisma");
 import { getSession } from "next-auth/react";
+import {endOfDay, addWeeks} from 'date-fns'
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
+
+  const d = new Date()
+  const weeks = addWeeks(d, 2)
+
+  console.log(d, "2022-10-25T14:21:00+0200")
 
   try {
     if (session) {
@@ -10,8 +16,11 @@ export default async function handler(req, res) {
         where: {
           status: "approved",
           startDate: {
-            gte: new Date("2022-10-25T14:21:00+0200"),
+            gte: d,
           },
+          endDate: {
+            lte: weeks
+          }
         },
         include: {
           User: {

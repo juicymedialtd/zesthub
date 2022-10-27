@@ -104,7 +104,7 @@ export default function Miles() {
                               {item.stops.length}
                             </td>
                             <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
-                              {item.createdAt}
+                              {format(parseISO(item.createdAt), 'dd/MM/yyyy')}
                             </td>
                             <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
                               {item.miles}

@@ -22,8 +22,7 @@ export default function ProfilePage() {
 
   }
 
-  console.log(session)
-  
+
   return (
     <div className="bg-white p-[2rem]">
       <div className="space-y-8 divide-y divide-gray-200">
@@ -88,6 +87,9 @@ export default function ProfilePage() {
                   >
                     Change
                   </button>
+                  {photo !== undefined && (
+                      <span className="text-sm ml-4">{photo[0].name}</span>
+                  )}
                   <input
                     type="file"
                     id="myFileInput"

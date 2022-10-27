@@ -50,7 +50,7 @@ export default function SideLayout({ children }) {
       name: "Holidays",
       href: "/holidays",
       icon: SunIcon,
-      current: router.pathname === "/holidays",
+      current: router.pathname === "/history",
     },
     {
       name: "Milage",
@@ -84,7 +84,7 @@ export default function SideLayout({ children }) {
       setPageName("Dashboard");
     } else if (path.includes("/calendar")) {
       setPageName("Calendar");
-    } else if (path.includes("/holidays")) {
+    } else if (path.includes("/history")) {
       setPageName("Holidays");
     } else if (path.includes("/mileage")) {
       setPageName("Milage");

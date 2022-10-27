@@ -4,6 +4,7 @@ import HolidaysRequested from "../components/Admin/HolidaysRequested";
 import MilageRequested from "../components/Admin/MilageRequested";
 import UserAdmin from "../views/admin/general";
 import UserSettings from "../views/settings/users";
+import History from "../views/admin/history";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,6 +12,8 @@ function classNames(...classes) {
 
 export default function AdminPanel() {
   const router = useRouter();
+
+  console.log(router.asPath.includes("/admin?history"))
 
   const tabs = [
     {
@@ -20,8 +23,8 @@ export default function AdminPanel() {
     },
     {
       name: "Holiday Requests",
-      href: "?filter=holidays",
-      current: router.asPath === "/admin?filter=holidays",
+      href: "?filter=history",
+      current: router.asPath === "/admin?filter=history",
     },
     {
       name: "Mileage Requests",
@@ -32,6 +35,11 @@ export default function AdminPanel() {
       name: "Expense Requests",
       href: "?filter=expenses",
       current: router.asPath === "/admin?filter=expenses",
+    },
+    {
+      name: "History",
+      href: "?history=holidays",
+      current: router.asPath === "?history=holidays",
     },
   ];
 
@@ -49,7 +57,7 @@ export default function AdminPanel() {
                 id="tabs"
                 name="tabs"
                 className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                defaultValue={tabs.find((tab) => tab.current).name}
+                defaultValue={tabs.find((tab) => tab.current) !== undefined ? tabs.find((tab) => tab.current).name : ""}
               >
                 {tabs.map((tab) => (
                   <option key={tab.name}>{tab.name}</option>
@@ -81,11 +89,12 @@ export default function AdminPanel() {
 
           <div className="">
             {router.asPath === "/admin" && <UserAdmin />}
-            {router.asPath === "/admin?filter=holidays" && (
+            {router.asPath === "/admin?filter=history" && (
               <HolidaysRequested />
             )}
             {router.asPath === "/admin?filter=mileage" && <MilageRequested />}
             {router.asPath === "/admin?filter=expense" && <ExpensesRequested />}
+            {router.asPath.includes("/admin?history") && <History />}
           </div>
         </div>
       </div>

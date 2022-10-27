@@ -1,3 +1,5 @@
+import {approveHoliday} from "../../../../../libs/nodemailer/holidays/approved";
+
 const { prisma } = require("../../../../../prisma/prisma");
 import { getSession } from "next-auth/react";
 
@@ -19,7 +21,7 @@ export default async function createRequest(req, res) {
         },
       });
 
-      await prisma.user.update({
+      const user = await prisma.user.update({
         where: {
           id: update.userId,
         },
@@ -30,7 +32,8 @@ export default async function createRequest(req, res) {
         },
       });
 
-      console.log(update);
+     await approveHoliday(user.email)
+
 
       res.status(200).json({ message: "Record updated :)" });
     } else {

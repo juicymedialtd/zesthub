@@ -57,7 +57,7 @@ export default function RequestLeaveModalDashboard({}) {
   return (
     <>
       <button onClick={() => setOpen(true)} type="button" className="">
-        <PlusIcon className="h-8 w-8 text-primary" />
+        <PlusIcon className="h-8 w-8 text-primary hover:text-main-bg" />
       </button>
       <>
         <Transition.Root show={open} as={Fragment}>

@@ -12,6 +12,7 @@ export default async function createRequest(req, res) {
         },
         select: {
           holidaysLeft: true,
+          HolidayAllowance: true,
         },
       });
 

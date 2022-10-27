@@ -1,3 +1,5 @@
+import {deniedHoliday} from "../../../../../libs/nodemailer/holidays/denied";
+
 const { prisma } = require("../../../../../prisma/prisma");
 import { getSession } from "next-auth/react";
 
@@ -10,7 +12,7 @@ export default async function createRequest(req, res) {
     if (session && session.user.role === "ADMIN") {
       // When everything is green code is executed below :)
 
-      await prisma.holiday.update({
+     const hol = await prisma.holiday.update({
         where: {
           id,
         },
@@ -18,6 +20,13 @@ export default async function createRequest(req, res) {
           status: "denied",
         },
       });
+
+     const u = prisma.user.findUnique({
+         where: {
+             id: hol.userId
+         }
+     })
+        await deniedHoliday(u.email)
 
       res.status(200).json({ message: "Record updated" });
     } else {

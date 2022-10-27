@@ -7,8 +7,6 @@ async function getTeamUsers() {
   return res.json();
 }
 
-// TODO -> Fetch all users in Team - Display Users in a table -> CRUD user
-
 export default function UserSettings() {
   const { data, status, error, refetch } = useQuery(
     "getTeamUsers",
