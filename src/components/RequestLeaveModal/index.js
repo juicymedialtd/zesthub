@@ -7,7 +7,7 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
+import { format, addDays, startOfDay } from "date-fns";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -26,6 +26,7 @@ export default function RequestLeaveModal({ refetch }) {
     { id: 2, name: "Training", type: "training" },
     { id: 3, name: "Dentist", type: "other" },
     { id: 4, name: "Health", type: "health" },
+    { id: 5, name: "Birthday", type: "birthday" },
   ];
 
   const filteredPeople =

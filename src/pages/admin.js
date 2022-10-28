@@ -13,8 +13,6 @@ function classNames(...classes) {
 export default function AdminPanel() {
   const router = useRouter();
 
-  console.log(router.asPath.includes("/admin?history"))
-
   const tabs = [
     {
       name: "General",
@@ -47,7 +45,7 @@ export default function AdminPanel() {
     <div className="py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="p-4">
-          <div className="bg-nav-bg p-4">
+          <div className="p-4">
             <h1 className="text-white text-3xl font-bold">Administration</h1>
             <div className="sm:hidden">
               <label htmlFor="tabs" className="sr-only">
@@ -75,7 +73,7 @@ export default function AdminPanel() {
                         tab.current
                           ? "border-[#F59E1E] border-b-4 text-[#FED929]"
                           : "border-transparent text-white hover:text-[#FED929]",
-                        "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                        "whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm"
                       )}
                       aria-current={tab.current ? "page" : undefined}
                     >

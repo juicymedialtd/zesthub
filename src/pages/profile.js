@@ -20,7 +20,7 @@ export default function UserProfile() {
     <div className="py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="p-4">
-          <div className="bg-nav-bg p-4">
+          <div className="p-4">
             <h1 className="text-white text-3xl font-bold">Profile</h1>
             <div className="sm:hidden">
               <label htmlFor="tabs" className="sr-only">
@@ -38,7 +38,7 @@ export default function UserProfile() {
               </select>
             </div>
             <div className="hidden sm:block">
-              <div className="border-b border-gray-200">
+              <div className="border-gray-200">
                 <nav className="-mb-px flex space-x-8" aria-label="Tabs">
                   {tabs.map((tab) => (
                     <a

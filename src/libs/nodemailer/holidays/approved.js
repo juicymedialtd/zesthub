@@ -4,11 +4,6 @@ export async function approveHoliday(email) {
     try {
         let mail;
 
-        const url =
-            process.env.NODE_ENV === "development"
-                ? `http://localhost:3000/auth/invited?code=${code}`
-                : `http://hub.zestsuite.com/auth/invited?code=${code}`;
-
         if (process.env.NODE_ENV === "development") {
             let testAccount = await nodeMailer.createTestAccount();
             mail = nodeMailer.createTransport({
