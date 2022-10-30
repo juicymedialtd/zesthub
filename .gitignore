@@ -34,3 +34,5 @@ env
 
 # vercel
 .vercel
+
+.idea

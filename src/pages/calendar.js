@@ -296,7 +296,7 @@ export default function Calendar() {
                       className={classNames(
                         dayIdx === 0 && colStartClasses[getDay(day)],
                         currentMonth ? "bg-white" : "bg-gray-50 text-gray-500",
-                        "relative h-32"
+                        "relative h-24 2xl:h-40"
                       )}
                     >
                       <div

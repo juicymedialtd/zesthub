@@ -43,6 +43,12 @@ export default function AdminAllHolidays() {
                                                             scope="col"
                                                             className="py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
                                                         >
+                                                            Created By
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            className="py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6"
+                                                        >
                                                             Reason
                                                         </th>
                                                         <th
@@ -74,6 +80,9 @@ export default function AdminAllHolidays() {
                                                     <tbody className="divide-y divide-gray-200 bg-white">
                                                     {holidays.map((item) => (
                                                         <tr key={item.id}>
+                                                            <td className="px-3 text-right py-2 text-sm text-gray-500 whitespace-nowrap">
+                                                                {item.User.name}
+                                                            </td>
                                                             <td className="w-3/4 max-w-0 py-2 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6 capitalize">
                                                                 {item.type}
                                                                 <dl className="font-normal lg:hidden">
@@ -102,14 +111,6 @@ export default function AdminAllHolidays() {
                                                             <td className="px-3 text-right py-2 text-sm text-gray-500 whitespace-nowrap">
                                                                 {item.daysUsed}
                                                             </td>
-                                                            {/* <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                          <a
-                            href="#"
-                            className="text-indigo-600 hover:text-indigo-900"
-                          >
-                            Edit<span className="sr-only">, {person.name}</span>
-                          </a>
-                        </td> */}
                                                         </tr>
                                                     ))}
                                                     </tbody>

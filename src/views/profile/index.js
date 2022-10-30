@@ -25,7 +25,7 @@ export default function ProfilePage() {
 
   return (
     <div className="bg-white p-[2rem]">
-      <div className="space-y-8 divide-y divide-gray-200">
+      <div className="space-y-8">
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div>
@@ -261,93 +261,93 @@ export default function ProfilePage() {
             </div>
           </div> */}
 
-          <div className="pt-8">
-            <div>
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Notifications
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                We'll always let you know about important updates, but here you
-                can pick what else you want to hear about.
-              </p>
-            </div>
-            <div className="mt-6">
-              <fieldset>
-                <legend className="sr-only">By Email</legend>
-                <div
-                  className="text-base font-medium text-gray-900"
-                  aria-hidden="true"
-                >
-                  By Email
-                </div>
-                <div className="mt-4 space-y-4">
-                  <div className="relative flex items-start">
-                    <div className="flex h-5 items-center">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="comments"
-                        className="font-medium text-gray-700"
-                      >
-                        Holidays
-                      </label>
-                      <p className="text-gray-500">
-                        Get notified when an admin approves a holiday request
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex items-start">
-                    <div className="flex h-5 items-center">
-                      <input
-                        id="candidates"
-                        name="candidates"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="candidates"
-                        className="font-medium text-gray-700"
-                      >
-                        Milage
-                      </label>
-                      <p className="text-gray-500">
-                        Get notified when an admin approves a milage request
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex items-start">
-                    <div className="flex h-5 items-center">
-                      <input
-                        id="offers"
-                        name="offers"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="offers"
-                        className="font-medium text-gray-700"
-                      >
-                        Expenses
-                      </label>
-                      <p className="text-gray-500">
-                        Get notified when an admin approves an expense request
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-          </div>
+          {/*<div className="pt-8">*/}
+          {/*  <div>*/}
+          {/*    <h3 className="text-lg font-medium leading-6 text-gray-900">*/}
+          {/*      Notifications*/}
+          {/*    </h3>*/}
+          {/*    <p className="mt-1 text-sm text-gray-500">*/}
+          {/*      We'll always let you know about important updates, but here you*/}
+          {/*      can pick what else you want to hear about.*/}
+          {/*    </p>*/}
+          {/*  </div>*/}
+          {/*  <div className="mt-6">*/}
+          {/*    <fieldset>*/}
+          {/*      <legend className="sr-only">By Email</legend>*/}
+          {/*      <div*/}
+          {/*        className="text-base font-medium text-gray-900"*/}
+          {/*        aria-hidden="true"*/}
+          {/*      >*/}
+          {/*        By Email*/}
+          {/*      </div>*/}
+          {/*      <div className="mt-4 space-y-4">*/}
+          {/*        <div className="relative flex items-start">*/}
+          {/*          <div className="flex h-5 items-center">*/}
+          {/*            <input*/}
+          {/*              id="comments"*/}
+          {/*              name="comments"*/}
+          {/*              type="checkbox"*/}
+          {/*              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"*/}
+          {/*            />*/}
+          {/*          </div>*/}
+          {/*          <div className="ml-3 text-sm">*/}
+          {/*            <label*/}
+          {/*              htmlFor="comments"*/}
+          {/*              className="font-medium text-gray-700"*/}
+          {/*            >*/}
+          {/*              Holidays*/}
+          {/*            </label>*/}
+          {/*            <p className="text-gray-500">*/}
+          {/*              Get notified when an admin approves a holiday request*/}
+          {/*            </p>*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*        <div className="relative flex items-start">*/}
+          {/*          <div className="flex h-5 items-center">*/}
+          {/*            <input*/}
+          {/*              id="candidates"*/}
+          {/*              name="candidates"*/}
+          {/*              type="checkbox"*/}
+          {/*              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"*/}
+          {/*            />*/}
+          {/*          </div>*/}
+          {/*          <div className="ml-3 text-sm">*/}
+          {/*            <label*/}
+          {/*              htmlFor="candidates"*/}
+          {/*              className="font-medium text-gray-700"*/}
+          {/*            >*/}
+          {/*              Milage*/}
+          {/*            </label>*/}
+          {/*            <p className="text-gray-500">*/}
+          {/*              Get notified when an admin approves a milage request*/}
+          {/*            </p>*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*        <div className="relative flex items-start">*/}
+          {/*          <div className="flex h-5 items-center">*/}
+          {/*            <input*/}
+          {/*              id="offers"*/}
+          {/*              name="offers"*/}
+          {/*              type="checkbox"*/}
+          {/*              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"*/}
+          {/*            />*/}
+          {/*          </div>*/}
+          {/*          <div className="ml-3 text-sm">*/}
+          {/*            <label*/}
+          {/*              htmlFor="offers"*/}
+          {/*              className="font-medium text-gray-700"*/}
+          {/*            >*/}
+          {/*              Expenses*/}
+          {/*            </label>*/}
+          {/*            <p className="text-gray-500">*/}
+          {/*              Get notified when an admin approves an expense request*/}
+          {/*            </p>*/}
+          {/*          </div>*/}
+          {/*        </div>*/}
+          {/*      </div>*/}
+          {/*    </fieldset>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
 
         <div className="pt-5">
@@ -355,7 +355,7 @@ export default function ProfilePage() {
             <button
               onClick={() => postData()}
               type="submit"
-              className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-primary py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-main-bg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               Save
             </button>

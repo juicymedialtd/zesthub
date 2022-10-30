@@ -197,7 +197,7 @@ export default function Holidays() {
               )}
               {data.holidays.length === 0 && (
                 <>
-                  <div className="text-center mt-[24rem]">
+                  <div className="text-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="mx-auto h-12 w-12 text-white"

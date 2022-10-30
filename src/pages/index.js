@@ -67,7 +67,7 @@ export default function Home() {
                                             <a
                                                 href="/expenses"
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-gradient-to-r from-primary to-secondary px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
+                                                className="inline-flex items-center rounded-md border border-transparent bg-primary hover:bg-main-bg hover:text-white px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
                                             >
                                                 View All
                                             </a>
@@ -97,7 +97,7 @@ export default function Home() {
                                             <a
                                                 href="/mileage"
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-gradient-to-r from-primary to-secondary px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
+                                                className="inline-flex items-center rounded-md border border-transparent bg-primary hover:bg-main-bg hover:text-white px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
                                             >
                                                 View All
                                             </a>
@@ -128,7 +128,7 @@ export default function Home() {
                                             <a
                                                 href="holidays"
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-transparent bg-gradient-to-r from-primary to-secondary px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
+                                                className="inline-flex items-center rounded-md border border-transparent bg-primary hover:bg-main-bg hover:text-white px-8 py-3 text-sm font-bold leading-4 text-gray-900 shadow-sm"
                                             >
                                                 View All
                                             </a>
@@ -148,19 +148,18 @@ export default function Home() {
                                 feed.map((item) => (
                                     <div key={item.id} className="py-4">
                                         <div className="flex space-x-3">
-                                            {session.data.user.profile !== null ? (
+                                            {item.User.profileUrl ? (
                                                 <img
                                                     className="inline-block h-8 w-8 rounded-full"
                                                     src={`${process.env.NEXT_PUBLIC_S3}/${item.User.profileUrl}`}
                                                     alt=""
                                                 />
                                             ) : (
-                                                <span
-                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
-                          <span className="text-xs font-medium leading-none text-white">
-                            {item.User.name[0]}
-                          </span>
-                        </span>
+                                                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
+                                                  <span className="text-xs font-medium leading-none text-white">
+                                                    {item.User.name[0]}
+                                                  </span>
+                                                </span>
                                             )}
 
                                             <div className="flex-1 space-y-1">
