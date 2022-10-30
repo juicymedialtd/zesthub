@@ -5,7 +5,7 @@ import { CheckIcon } from "@heroicons/react/outline";
 export default function FeedbackModel() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
-  const [submitted, setSubmitted] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
 
   async function postFeedback() {
     await fetch("/api/v1/feedback/post", {

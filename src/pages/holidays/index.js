@@ -1,9 +1,10 @@
 import { useQuery } from "react-query";
 import { format, parseISO } from "date-fns";
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { PlusIcon } from "@heroicons/react/solid";
 
-import RequestLeaveModal from "../components/RequestLeaveModal";
+import RequestLeaveModal from "../../components/RequestLeaveModal";
 
 async function getHolidays() {
   const res = await fetch("/api/v1/user/holidays/all");
@@ -17,17 +18,17 @@ export default function Holidays() {
   );
 
   function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(" ");
   }
 
   async function deleteHoliday(id) {
     await fetch(`/api/v1/user/holidays/${id}/delete`, {
-      method: 'DELETE'
+      method: "DELETE",
     })
-        .then((res) => res.json())
-        .then(() => {
-          refetch()
-        })
+      .then((res) => res.json())
+      .then(() => {
+        refetch();
+      });
   }
 
   return (
@@ -56,7 +57,16 @@ export default function Holidays() {
                         </div>
 
                         <div className="mt-2">
-                          <RequestLeaveModal refetch={refetch} />
+                          <a
+                            href="/holidays/new"
+                            className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 h-12 text-sm font-bold text-white shadow-sm hover:bg-secondary sm:w-auto"
+                          >
+                            <PlusIcon
+                              className="-ml-1 mr-2 h-5 w-5"
+                              aria-hidden="true"
+                            />
+                            Request Leave
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -96,11 +106,9 @@ export default function Holidays() {
                             Days Used
                           </th>
                           <th
-                              scope="col"
-                              className="px-3 py-2 text-right text-sm font-semibold text-white"
-                          >
-
-                          </th>
+                            scope="col"
+                            className="px-3 py-2 text-right text-sm font-semibold text-white"
+                          ></th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200 bg-white">
@@ -135,52 +143,73 @@ export default function Holidays() {
                               {item.daysUsed}
                             </td>
                             <td className="px-3 text-right py-2 text-sm text-gray-500 whitespace-nowrap">
-                              <Menu as="div" className="relative inline-block text-left">
+                              <Menu
+                                as="div"
+                                className="relative inline-block text-left"
+                              >
                                 <div>
                                   <Menu.Button className="flex items-center text-gray-800 hover:text-gray-400 ">
-                                    <span className="sr-only">Open options</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                    <span className="sr-only">
+                                      Open options
+                                    </span>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth={1.5}
+                                      stroke="currentColor"
+                                      className="w-6 h-6"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                                      />
                                     </svg>
-
                                   </Menu.Button>
                                 </div>
 
                                 <Transition
-                                    as={Fragment}
-                                    enter="transition ease-out duration-100"
-                                    enterFrom="transform opacity-0 scale-95"
-                                    enterTo="transform opacity-100 scale-100"
-                                    leave="transition ease-in duration-75"
-                                    leaveFrom="transform opacity-100 scale-100"
-                                    leaveTo="transform opacity-0 scale-95"
+                                  as={Fragment}
+                                  enter="transition ease-out duration-100"
+                                  enterFrom="transform opacity-0 scale-95"
+                                  enterTo="transform opacity-100 scale-100"
+                                  leave="transition ease-in duration-75"
+                                  leaveFrom="transform opacity-100 scale-100"
+                                  leaveTo="transform opacity-0 scale-95"
                                 >
                                   <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
                                       <Menu.Item>
                                         {({ active }) => (
-                                            <a
-                                                href="#"
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm'
-                                                )}
-                                            >
-                                              Edit
-                                            </a>
+                                          <a
+                                            href="#"
+                                            className={classNames(
+                                              active
+                                                ? "bg-gray-100 text-gray-900"
+                                                : "text-gray-700",
+                                              "block px-4 py-2 text-sm"
+                                            )}
+                                          >
+                                            Edit
+                                          </a>
                                         )}
                                       </Menu.Item>
                                       <Menu.Item>
                                         {({ active }) => (
-                                            <button
-                                                onClick={() => deleteHoliday(item.id)}
-                                                className={classNames(
-                                                    active ? 'bg-gray-100 text-red-900' : 'text-red-700',
-                                                    'block px-4 py-2 text-sm w-full text-left'
-                                                )}
-                                            >
-                                              Delete
-                                            </button>
+                                          <button
+                                            onClick={() =>
+                                              deleteHoliday(item.id)
+                                            }
+                                            className={classNames(
+                                              active
+                                                ? "bg-gray-100 text-red-900"
+                                                : "text-red-700",
+                                              "block px-4 py-2 text-sm w-full text-left"
+                                            )}
+                                          >
+                                            Delete
+                                          </button>
                                         )}
                                       </Menu.Item>
                                     </div>
