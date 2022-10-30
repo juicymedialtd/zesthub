@@ -18,6 +18,7 @@ import {
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import FeedbackModel from "../components/Feedback";
 
 const userNavigation = [{ name: "Your Profile", href: "/profile" }];
 
@@ -421,6 +422,7 @@ export default function SideLayout({ children }) {
                 <BellIcon className="h-4 w-4" aria-hidden="true" />
               </button> */}
               {/* Profile dropdown */}
+              <FeedbackModel />
               <Menu as="div" className="ml-3 relative z-40">
                 <div>
                   <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
