@@ -57,7 +57,7 @@ export default function FeedbackModel() {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative transform rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all mt-3 mr-4 sm:w-full sm:max-w-sm sm:p-6">
+                <Dialog.Panel className="relative transform rounded-lg bg-white w-3/4 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:mt-3 sm:mr-4 sm:w-full sm:max-w-md sm:p-6">
                   <div>
                     <div className="text-sm font-bold">FEEDBACK</div>
 

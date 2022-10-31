@@ -70,7 +70,7 @@ export default function RequestHoliday() {
           </div>
         </div>
         <div className="mt-6 bg-white rounded-md p-8">
-          <div className="mt-6 w-1/3">
+          <div className="mt-6 w-full lg:w-1/3">
             <Combobox as="div" value={selectedType} onChange={setSelectedType}>
               <Combobox.Label className="block text-sm font-medium text-gray-700">
                 Type of Leave
@@ -139,7 +139,7 @@ export default function RequestHoliday() {
             </Combobox>
           </div>
 
-          <div className="flex flex-row mt-8 mb-12">
+          <div className="flex flex-col gap-4 lg:flex-row mt-8 mb-12">
             <div>
               <label>Start Date</label>
               <DatePicker

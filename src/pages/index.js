@@ -113,7 +113,9 @@ export default function Home() {
                                     <div className="flex flex-col ">
                                         <div className="flex flex-row justify-between">
                                             <SunIcon className="h-8 w-8 text-gray-500"/>
-                                            <RequestLeaveModalDashboard/>
+                                                <a href="/holidays/new">
+                                                <PlusIcon className="h-8 w-8 text-primary hover:text-main-bg"/>
+                                            </a>
                                         </div>
                                         <div className="mt-2 space-y-2">
                                             <h3 className="truncate text-sm font-medium text-gray-900">
