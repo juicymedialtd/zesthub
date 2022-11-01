@@ -3,7 +3,6 @@ import {Menu, Transition} from "@headlessui/react";
 import {CashIcon, SunIcon, TruckIcon} from "@heroicons/react/outline";
 import {format, parseISO} from "date-fns";
 import {PlusIcon} from "@heroicons/react/solid";
-import RequestLeaveModalDashboard from "../components/RequestLeaveModal/dashboard";
 import {useSession} from "next-auth/react";
 
 export default function Home() {

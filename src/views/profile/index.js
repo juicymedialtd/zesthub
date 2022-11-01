@@ -24,7 +24,7 @@ export default function ProfilePage() {
 
 
   return (
-    <div className="bg-white p-[2rem]">
+    <div className="bg-white rounded-md p-[2rem]">
       <div className="space-y-8">
         <div className="space-y-8 divide-y divide-gray-200">
           <div>

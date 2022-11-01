@@ -4,8 +4,6 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/solid";
 
-import RequestLeaveModal from "../../components/RequestLeaveModal";
-
 async function getHolidays() {
   const res = await fetch("/api/v1/user/holidays/all");
   return res.json();
