@@ -194,26 +194,6 @@ export default function SideLayout({ children }) {
                   {session.user.role === "ADMIN" && (
                     <div className="w-full space-y-2">
                       <a
-                        href="/settings"
-                        className={classNames(
-                          router.pathname === "/settings"
-                            ? "bg-amber-300 text-gray-900"
-                            : "text-white hover:bg-amber-300 hover:text-white",
-                          "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
-                        )}
-                      >
-                        <CogIcon
-                          className={classNames(
-                            router.pathname === "/settings"
-                              ? "text-gray-900"
-                              : "text-amber-300 group-hover:text-white",
-                            "mr-3 flex-shrink-0 h-6 w-6"
-                          )}
-                          aria-hidden="true"
-                        />
-                        Settings
-                      </a>
-                      <a
                         href="/admin"
                         className={classNames(
                           router.pathname === "/admin"
@@ -286,27 +266,7 @@ export default function SideLayout({ children }) {
         </div>
         <div className="flex flex-shrink-0 p-4">
           {session.user.role === "ADMIN" && (
-            <div className="w-full space-y-2">
-              <a
-                href="/settings"
-                className={classNames(
-                  router.pathname === "/settings"
-                    ? "bg-amber-300 text-gray-900"
-                    : "text-white hover:bg-amber-300 hover:text-white",
-                  "group flex items-center px-2 py-2 text-md font-bold rounded-md w-full"
-                )}
-              >
-                <CogIcon
-                  className={classNames(
-                    router.pathname === "/settings"
-                      ? "text-gray-900"
-                      : "text-amber-300 group-hover:text-white",
-                    "mr-3 flex-shrink-0 h-6 w-6"
-                  )}
-                  aria-hidden="true"
-                />
-                Settings
-              </a>
+            <div className="w-full space-y-2">             
               <a
                 href="/admin"
                 className={classNames(
