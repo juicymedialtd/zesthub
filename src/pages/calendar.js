@@ -2,6 +2,7 @@ import { Fragment, useState, useEffect } from "react";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
+  ClockIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/solid";
 import { Menu, Transition } from "@headlessui/react";
@@ -16,7 +17,6 @@ import {
   parse,
   parseISO,
   startOfToday,
-  addBusinessDays,
   addDays,
 } from "date-fns";
 
@@ -52,18 +52,6 @@ export default function Calendar() {
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
-  let selectedDayEvents = events.filter((event) => {
-    const data = [];
-
-    for (let i = 0; i < event.range.length; i++) {
-      if (isSameDay(event.range[i], selectedDay)) {
-        data.push(event);
-      }
-    }
-
-    return data;
-  });
-
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
@@ -72,8 +60,6 @@ export default function Calendar() {
   async function CalendarData() {
     const res = await fetch("/api/calendar/get").then((res) => res.json());
     const holidays = res.holidays;
-
-    console.log(holidays);
 
     for (let i = 0; i < holidays.length; i++) {
       const d = holidays[i].daysUsed;
@@ -132,7 +118,7 @@ export default function Calendar() {
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <h1 className="text-2xl font-semibold text-white">Overview</h1>
-        <div className="flex flex-row mt-2 gap-4">
+        <div className="flex flex-row flex-wrap mt-2 gap-4">
           <div className="flex flex-row gap-2">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#6261A5] font-semibold text-white" />
             <span className="text-white">Annual Leave</span>
@@ -301,7 +287,7 @@ export default function Calendar() {
                     >
                       <div
                         className={classNames(
-                          isEqual(selectedDay, day)
+                          isEqual(today, day)
                             ? "flex h-6 w-6 items-center justify-center rounded-full bg-secondary font-semibold text-white"
                             : undefined,
                           "ml-2 mt-1"
@@ -315,8 +301,6 @@ export default function Calendar() {
                           events.map((event) => {
                             const i = event.range;
                             const e = event;
-
-                            console.log(e.daysUsed);
 
                             return (
                               <>
@@ -435,40 +419,49 @@ export default function Calendar() {
                 </div>
               </div>
             </div>
-            {selectedDayEvents.length > 0 && (
-              <div className="py-10 px-2 lg:hidden">
-                <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5">
-                  {selectedDayEvents.map((event) => (
-                    <li
-                      key={event.id}
-                      className="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-50"
-                    >
-                      <div className="flex-auto">
-                        <p className="font-semibold text-gray-900">
-                          {event.reason}
-                        </p>
-                        {/* <time
-                          dateTime={event.startDate}
-                          className="mt-2 flex items-center text-gray-700"
-                        >
-                          <ClockIcon
-                            className="mr-2 h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          {event.startDate}
-                        </time> */}
-                      </div>
-                      {/* <a
-                        href={event.href}
-                        className="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100"
-                      >
-                        Edit<span className="sr-only">, {event.name}</span>
-                      </a> */}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
+
+            {events.length > 0 &&
+              events.map((event) => {
+                const i = event.range;
+                const e = event;
+
+                return (
+                  <>
+                    {i
+                      .slice(0, e.daysUsed === 0.5 ? e.daysUsed : undefined)
+                      .map((date) => (
+                        <>
+                          {isSameDay(date, selectedDay) && (
+                            <div className="py-10 px-2 lg:hidden">
+                              <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5">
+                                <li
+                                  key={event.id}
+                                  className="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-5 gap-4"
+                                >
+                                  <div className="flex-auto">
+                                    <p className="font-semibold text-gray-900">
+                                      {event.type} - {event.User.name}
+                                    </p>
+                                    <time
+                                      dateTime={event.startDate}
+                                      className="mt-2 flex items-center text-gray-700"
+                                    >
+                                      <ClockIcon className="mr-2 h-5 w-5 text-gray-400" />
+                                      {format(
+                                        parseISO(event.startDate),
+                                        "dd/MM/yyyy"
+                                      )}
+                                    </time>
+                                  </div>
+                                </li>
+                              </ol>
+                            </div>
+                          )}
+                        </>
+                      ))}
+                  </>
+                );
+              })}
           </div>
         </div>
       </div>
