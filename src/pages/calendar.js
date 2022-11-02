@@ -116,7 +116,7 @@ export default function Calendar() {
 
   return (
     <div className="py-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 md:px-8">
         <h1 className="text-2xl font-semibold text-white">Overview</h1>
         <div className="flex flex-row flex-wrap mt-2 gap-4">
           <div className="flex flex-row gap-2">
@@ -145,7 +145,7 @@ export default function Calendar() {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 md:px-8">
         <div className="py-4">
           <div className="lg:flex lg:h-full lg:flex-col border bg-white rounded-md">
             <header className="relative flex items-center space-x-12 border-b border-gray-200 py-4 ml-4 lg:flex-none">

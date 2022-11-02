@@ -3,7 +3,6 @@ import ExpensesRequested from "../components/Admin/ExpensesRequested";
 import HolidaysRequested from "../components/Admin/HolidaysRequested";
 import MilageRequested from "../components/Admin/MilageRequested";
 import UserAdmin from "../views/admin/general";
-import UserSettings from "../views/settings/users";
 import History from "../views/admin/history";
 import AdminUserProfile from "../views/admin/user/[id]";
 
@@ -14,7 +13,6 @@ function classNames(...classes) {
 export default function AdminPanel() {
   const router = useRouter();
 
-  console.log(router);
 
   const tabs = [
     {

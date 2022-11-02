@@ -64,7 +64,7 @@ export default function UserAdmin() {
                     ) : (
                       <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
                         <span className="text-xs font-medium leading-none text-white">
-                          {item.User.name[0]}
+                          {person.name[0]}
                         </span>
                       </span>
                     )}
@@ -82,7 +82,7 @@ export default function UserAdmin() {
                       </div>
                       <div className="-ml-px flex w-0 flex-1">
                         <a
-                          href={`tel:${person.telephone}`}
+                          // href={`tel:${person.telephone}`}
                           className="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
                         >
                           <GlobeAltIcon className="h-5 w-5 text-gray-400" />
