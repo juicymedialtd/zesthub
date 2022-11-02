@@ -5,7 +5,7 @@ export default function Login() {
 
   return (
     <div className="h-screen bg-main-bg bg-pattern">
-      <div className="flex min-h-full">
+      <div className="flex min-h-full justify-center">
         <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
@@ -106,7 +106,7 @@ export default function Login() {
             </div>
           </div>
         </div>
-        <div className="relative hidden w-0 flex-1 lg:block"></div>
+        {/* <div className="relative hidden w-0 flex-1 lg:block"></div> */}
       </div>
     </div>
   );

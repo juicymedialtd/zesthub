@@ -61,8 +61,8 @@ export default function AdminUserProfile({ user }) {
                           alt=""
                         />
                       ) : (
-                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500">
-                          <span className="text-xs font-medium leading-none text-white">
+                        <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-gray-500">
+                          <span className="text-4xl capitalize font-bold leading-none text-white">
                             {profile.name[0]}
                           </span>
                         </span>

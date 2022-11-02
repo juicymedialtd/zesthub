@@ -178,7 +178,7 @@ export default function Holidays() {
                                 >
                                   <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
-                                      <Menu.Item>
+                                      {/* <Menu.Item>
                                         {({ active }) => (
                                           <a
                                             href="#"
@@ -192,7 +192,7 @@ export default function Holidays() {
                                             Edit
                                           </a>
                                         )}
-                                      </Menu.Item>
+                                      </Menu.Item> */}
                                       <Menu.Item>
                                         {({ active }) => (
                                           <button
@@ -246,7 +246,16 @@ export default function Holidays() {
                       Book time off using the link below.
                     </p>
                     <div className="mt-6">
-                      <RequestLeaveModal refetch={refetch} />
+                      <a
+                        href="/holidays/new"
+                        className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 h-12 text-sm font-bold text-white shadow-sm hover:bg-secondary sm:w-auto"
+                      >
+                        <PlusIcon
+                          className="-ml-1 mr-2 h-5 w-5"
+                          aria-hidden="true"
+                        />
+                        Request Leave
+                      </a>
                     </div>
                   </div>
                 </>

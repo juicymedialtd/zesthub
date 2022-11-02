@@ -7,11 +7,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://zesthub:B%40loney1!@35.178.166.153/zesthubschema=public&connection_limit=100"
+  url      = env("DATABASE_URL")
 }
-
-
-// env("DATABASE_URL")
 
 enum Role {
   USER
