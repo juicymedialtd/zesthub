@@ -77,16 +77,7 @@ export default function UserAdmin() {
                           className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
                         >
                           <ArrowsExpandIcon className="h-5 w-5 text-gray-400" />
-                          <span className="ml-3">History</span>
-                        </a>
-                      </div>
-                      <div className="-ml-px flex w-0 flex-1">
-                        <a
-                          // href={`tel:${person.telephone}`}
-                          className="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
-                        >
-                          <GlobeAltIcon className="h-5 w-5 text-gray-400" />
-                          <span className="ml-3">Allowance</span>
+                          <span className="ml-3"></span>
                         </a>
                       </div>
                     </div>
