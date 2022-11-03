@@ -9,16 +9,12 @@ import {
   TruckIcon,
   SunIcon,
   AdjustmentsIcon,
-  PencilIcon,
   DocumentIcon,
-  CogIcon,
-  BellIcon,
-  PlusSmIcon,
-  ChevronDownIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
 import FeedbackModel from "../components/Feedback";
+import ShortCut from "../components/Shortcuts";
 
 const userNavigation = [{ name: "Your Profile", href: "/profile" }];
 
@@ -95,6 +91,8 @@ export default function SideLayout({ children }) {
       setPageName("Documents");
     } else if (path.includes("/wiki")) {
       setPageName("Wiki");
+    } else if(path.includes("/holidays")) {
+      setPageName('Holidays')
     }
   }
 
@@ -304,7 +302,8 @@ export default function SideLayout({ children }) {
 
           <div className="flex-1 px-4 flex justify-between">
             <div className="flex-1 flex">
-              <h1 className="text-3xl font-bold text-white p-3">{pageName}</h1>
+              {/* <h1 className="text-3xl font-bold text-white p-3">{pageName}</h1> */}
+              <ShortCut />
             </div>
             <div className="ml-4 flex items-center space-x-4">
               <Menu as="div" className="relative inline-block text-left">

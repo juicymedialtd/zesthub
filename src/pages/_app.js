@@ -7,6 +7,7 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import SideLayout from "../layout/SideLayout";
+import KeyboardShortcut from "../components/Shortcuts";
 
 const queryClient = new QueryClient();
 
@@ -52,9 +53,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <SessionProvider session={session}>
         <QueryClientProvider client={queryClient}>
           <Auth>
-            <SideLayout>
-              <Component {...pageProps} />
-            </SideLayout>
+              <SideLayout>
+                <Component {...pageProps} />
+              </SideLayout>
           </Auth>
         </QueryClientProvider>
       </SessionProvider>
