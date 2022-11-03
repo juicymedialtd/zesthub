@@ -302,8 +302,8 @@ export default function SideLayout({ children }) {
 
           <div className="flex-1 px-4 flex justify-between">
             <div className="flex-1 flex">
-              {/* <h1 className="text-3xl font-bold text-white p-3">{pageName}</h1> */}
-              <ShortCut />
+              <h1 className="text-3xl font-bold text-white p-3">{pageName}</h1>
+              {/* <ShortCut /> */}
             </div>
             <div className="ml-4 flex items-center space-x-4">
               <Menu as="div" className="relative inline-block text-left">

@@ -8,6 +8,7 @@ import {
   PaperAirplaneIcon,
 } from "@heroicons/react/solid";
 import { format, parseISO } from "date-fns";
+import EditAllowanceModal from "../../../components/EditAllowanceModal";
 
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: "bg-gray-400" },
@@ -92,12 +93,10 @@ export default function AdminUserProfile({ user }) {
                   </div>
                 </div>
                 <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-                  >
-                    Edit Leave Allowance
-                  </button>
+                  <EditAllowanceModal
+                    id={profile.id}
+                    allowed={profile.HolidayAllowance}
+                  />
                 </div>
               </div>
 
@@ -305,7 +304,8 @@ export default function AdminUserProfile({ user }) {
                     </h2>
 
                     <div>
-                      {profile.holidaysLeft} of {profile.HolidayAllowance} days used this year
+                      {profile.holidaysLeft} of {profile.HolidayAllowance} days
+                      used this year
                     </div>
 
                     {/* Activity Feed */}

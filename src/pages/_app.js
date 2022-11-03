@@ -7,7 +7,6 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import SideLayout from "../layout/SideLayout";
-import KeyboardShortcut from "../components/Shortcuts";
 
 const queryClient = new QueryClient();
 
