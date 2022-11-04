@@ -73,7 +73,7 @@ export default async function createRequest(req, res) {
         const user = session.user.email;
         const name = session.user.name;
 
-        const admins = prisma.user.findMany({
+        const admins = await prisma.user.findMany({
           where: {
             teamId: session.user.teamId,
             role: "ADMIN",

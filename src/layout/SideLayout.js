@@ -381,6 +381,7 @@ export default function SideLayout({ children }) {
                 <BellIcon className="h-4 w-4" aria-hidden="true" />
               </button> */}
               {/* Profile dropdown */}
+              {/* <img src="/desk.svg" className="h-28 w-auto" /> */}
               <FeedbackModel />
               <Menu as="div" className="ml-3 relative z-40">
                 <div>

@@ -54,14 +54,16 @@ export default async function HolidayCreationEmail(user, name, admins) {
     for (let k = 0; k < admins.length; k++) {
       let info = await mail.sendMail({
         from: "holidays@zestsuite.com", // sender address
-        to: admins.email,
+        to: admins[k].email,
         subject: `Holiday Request Created`, // Subject line
         html: `<!doctype html>
               <html>
               <p>
               Hello! 
               <br>
-              ${name}, has just requested
+              ${name}, has just submitted a holiday request, 
+              <br>
+              <a href="https://hub.zestsuite.com/admin?filter=history">View Request</a>
               <br>
               regards,
               <br>
