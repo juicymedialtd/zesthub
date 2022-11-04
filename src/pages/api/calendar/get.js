@@ -16,6 +16,7 @@ export default async function createRequest(req, res) {
           User: {
             select: {
               name: true,
+              profileUrl: true
             },
           },
         },

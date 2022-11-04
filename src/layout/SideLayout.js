@@ -232,9 +232,18 @@ export default function SideLayout({ children }) {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col flex-grow pt-5 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4 py-4">
-            <div className="h-18 w-auto mx-auto">
-              <Lottie loop={false} animationData={lottie} play />
-            </div>
+            <img
+              className="h-18 w-auto mx-auto"
+              src="/zest-draft-logo.svg"
+              alt="Workflow"
+            />
+            {/* <div  className="h-18 w-auto mx-auto">
+              <Lottie
+                loop={false}
+                animationData={lottie}
+                play
+              />
+            </div> */}
           </div>
           <div className="mt-5 flex-grow flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
@@ -450,12 +459,10 @@ export default function SideLayout({ children }) {
           </div>
         </div>
 
-        <main className="flex-1 relative z-0 focus:outline-none overflow-y-auto bg-main-bg bg-pattern">
-          <>
-            <div className="max-w-screen-2xl mx-auto px-4 sm:px-6">
+        <main className="flex-1 relative z-0 focus:outline-none overflow-y-auto bg-main-bg bg-pattern h-full">
+            <div className="max-w-screen-2xl h-[90vh] mx-auto px-4 sm:px-6">
               <>{children}</>
             </div>
-          </>
         </main>
       </div>
     </div>
