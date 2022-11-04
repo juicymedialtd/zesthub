@@ -16,6 +16,10 @@ import { signOut, useSession } from "next-auth/react";
 import FeedbackModel from "../components/Feedback";
 import ShortCut from "../components/Shortcuts";
 
+import Lottie from "react-lottie-player";
+
+import lottie from "../../public/nav.json";
+
 const userNavigation = [{ name: "Your Profile", href: "/profile" }];
 
 function classNames(...classes) {
@@ -91,8 +95,8 @@ export default function SideLayout({ children }) {
       setPageName("Documents");
     } else if (path.includes("/wiki")) {
       setPageName("Wiki");
-    } else if(path.includes("/holidays")) {
-      setPageName('Holidays')
+    } else if (path.includes("/holidays")) {
+      setPageName("Holidays");
     }
   }
 
@@ -228,11 +232,9 @@ export default function SideLayout({ children }) {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col flex-grow pt-5 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4 py-4">
-            <img
-              className="h-18 w-auto mx-auto"
-              src="/zest-draft-logo.svg"
-              alt="Workflow"
-            />
+            <div className="h-18 w-auto mx-auto">
+              <Lottie loop={false} animationData={lottie} play />
+            </div>
           </div>
           <div className="mt-5 flex-grow flex flex-col">
             <nav className="flex-1 px-2 pb-4 space-y-1">
@@ -264,7 +266,7 @@ export default function SideLayout({ children }) {
         </div>
         <div className="flex flex-shrink-0 p-4">
           {session.user.role === "ADMIN" && (
-            <div className="w-full space-y-2">             
+            <div className="w-full space-y-2">
               <a
                 href="/admin"
                 className={classNames(
