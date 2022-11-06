@@ -54,7 +54,7 @@ export default function SideLayout({ children }) {
       current: router.pathname === "/history",
     },
     {
-      name: "Milage",
+      name: "Mileage",
       href: "/mileage",
       icon: TruckIcon,
       current: router.pathname.includes("/mileage"),
@@ -109,7 +109,7 @@ export default function SideLayout({ children }) {
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-40 md:hidden"
+          className="relative z-40 lg:hidden"
           onClose={setSidebarOpen}
         >
           <Transition.Child
@@ -228,7 +228,7 @@ export default function SideLayout({ children }) {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 bg-nav-bg ">
+      <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 bg-nav-bg ">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col flex-grow pt-5 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4 py-4">
@@ -300,7 +300,7 @@ export default function SideLayout({ children }) {
           )}
         </div>
       </div>
-      <div className="flex flex-col flex-1 min-h-screen md:pl-64">
+      <div className="flex flex-col flex-1 min-h-screen lg:pl-64">
         <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-topnav-bg">
           <button
             type="button"

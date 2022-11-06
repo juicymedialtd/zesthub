@@ -187,7 +187,7 @@ export default function RequestHoliday() {
             </div>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex flex-col 2xl:flex-row">
           <div className="mt-6 bg-white rounded-md p-8">
             <div className="mt-6 w-full">
               <Combobox
@@ -323,7 +323,7 @@ export default function RequestHoliday() {
             </div>
           </div>
 
-          <div className="ml-4 mt-6 bg-white rounded-md p-8">
+          <div className="2xl:ml-4 mt-6 bg-white rounded-md p-8">
             <div className="md:grid md:grid-cols-2 md:divide-x md:divide-gray-200">
               <div className="md:pr-6">
                 <div className="flex items-center">

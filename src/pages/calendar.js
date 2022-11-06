@@ -322,7 +322,7 @@ export default function Calendar() {
                                                 // href={event.href}
                                                 className="group flex"
                                               >
-                                                <p className="flex-auto truncate font-medium text-white ml-2">
+                                                <p className="flex-auto truncate font-medium text-white ml-2 capitalize">
                                                   {e.User.name + " - " + e.type}{" "}
                                                   {e.daysUsed === "0.5"
                                                     ? " - 1/2 day"

@@ -10,7 +10,7 @@ import lottie from "../../public/spinner.json";
 export default function Home() {
   const session = useSession();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [expenses, setExpenses] = useState();
   const [miles, setMiles] = useState();
   const [holidays, setHolidays] = useState();
@@ -29,8 +29,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    getStats();
-    getFeed();
+    Promise.all([getStats(), getFeed()]).then(() => setLoading(false));
   }, []);
 
   return (
