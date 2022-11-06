@@ -29,6 +29,16 @@ export default function Holidays() {
       });
   }
 
+  function check(item) {
+    if (isAfter(new Date(item.startDate), new Date())) {
+      return true;
+    } else if (!isAfter(new Date(item.startDate), new Date())) {
+      if (item.status !== "approved") {
+        return true;
+      }
+    }
+  }
+
   return (
     <div className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -141,10 +151,7 @@ export default function Holidays() {
                               {item.daysUsed}
                             </td>
                             <td className="px-3 text-right py-2 text-sm text-gray-500 whitespace-nowrap">
-                              {isAfter(
-                                new Date(item.startDate),
-                                new Date()
-                              ) && (
+                              {check(item) && (
                                 <Menu
                                   as="div"
                                   className="relative inline-block text-left"
