@@ -176,9 +176,9 @@ export default function RequestHoliday() {
   console.log(events);
 
   return (
-    <div className="flex justify-center h-full items-center py-6 pb-24">
+    <div className="flex justify-center 2xl:h-full items-center py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="mt-12 ">
+        <div className="">
           <div className="rounded-t-md">
             <div className="flex flex-row justify-between align-middle">
               <div className="flex flex-col">

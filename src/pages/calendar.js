@@ -18,6 +18,7 @@ import {
   parseISO,
   startOfToday,
   addDays,
+  isWeekend,
 } from "date-fns";
 
 function classNames(...classes) {
@@ -63,14 +64,21 @@ export default function Calendar() {
 
     for (let i = 0; i < holidays.length; i++) {
       const d = holidays[i].daysUsed;
-      const range = [];
       const events = [];
 
-      let currentDate = parseISO(holidays[i].startDate);
+      let s = new Date(holidays[i].startDate);
+      const e = new Date(holidays[i].endDate);
 
-      for (let i = 0; i < d; i++) {
-        range.push(currentDate);
-        currentDate = addDays(currentDate, 1);
+      function calcR(start, end) {
+        let range = []
+        let curDate = new Date(start.getTime());
+        while (curDate <= end) {
+          const dayOfWeek = curDate.getDay();
+          if (dayOfWeek !== 0 && dayOfWeek !== 6) range.push(curDate);
+          // curDate.setDate(curDate.getDate() + 1);
+          curDate = addDays(curDate, 1)
+        }
+        return range
       }
 
       let colour;
@@ -102,7 +110,7 @@ export default function Calendar() {
           break;
       }
 
-      events.push(...range);
+      events.push(...calcR(s, e));
       holidays[i].range = events;
       holidays[i].colour = colour;
     }
@@ -113,6 +121,8 @@ export default function Calendar() {
   useEffect(() => {
     CalendarData();
   }, []);
+
+  console.log(events);
 
   return (
     <div className="py-6">
