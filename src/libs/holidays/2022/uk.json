@@ -1,52 +1,52 @@
 [
   {
     "id": 1,
-    "date": "01/03/2022",
+    "date": "01/03/2022 00:00:00",
     "name": "New Years Day"
   },
   {
     "id": 2,
-    "date": "04/15/2022",
+    "date": "04/15/2022 00:00:00",
     "name": "Good Friday"
   },
   {
     "id": 3,
-    "date": "04/18/2022",
+    "date": "04/18/2022 00:00:00",
     "name": "Easter Monday"
   },
   {
     "id": 4,
-    "date": "05/02/2022",
+    "date": "05/02/2022 00:00:00",
     "name": "May Bank Holiday"
   },
   {
     "id": 5,
-    "date": "06/02/2022",
+    "date": "06/02/2022 00:00:00",
     "name": "Spring Bank Holiday"
   },
   {
     "id": 6,
-    "date": "06/03/2022",
+    "date": "06/03/2022 00:00:00",
     "name": "Platinum Jubilee Bank Holiday"
   },
   {
     "id": 7,
-    "date": "08/29/2022",
+    "date": "08/29/2022 00:00:00",
     "name": "August Bank Holiday"
   },
   {
     "id": 8,
-    "date": "09/19/2022",
+    "date": "09/19/2022 00:00:00",
     "name": "State Funeral of Queen Elizabeth II"
   },
   {
-    "id": 9,
-    "date": "12/27/2022",
-    "name": "Christmas Day (sub)"
+    "id": 10,
+    "date": "12/26/2022 00:00:00",
+    "name": "Boxing Day"
   },
   {
-    "id": 10,
-    "date": "12/26/2022",
-    "name": "Boxing Day"
+    "id": 9,
+    "date": "12/27/2022 00:00:00",
+    "name": "Christmas Day (sub)"
   }
 ]

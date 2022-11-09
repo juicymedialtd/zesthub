@@ -1,4 +1,4 @@
-import prisma from "../../../prisma/prisma"
+import prisma from "../../../prisma/prisma";
 import { getSession } from "next-auth/react";
 import { parseISO, addHours, isSameDay } from "date-fns";
 import HolidayCreationEmail from "../../../libs/nodemailer/holidays/creation";
@@ -14,7 +14,6 @@ export default async function createRequest(req, res) {
     const baseTzOffset = utcOffsetHrs * 60;
     const tzOffset = date.getTimezoneOffset();
     const d = new Date(date.valueOf() + (baseTzOffset + tzOffset) * 60 * 1000);
-    console.log(d);
     return addHours(d, 2);
   }
 
@@ -30,16 +29,17 @@ export default async function createRequest(req, res) {
   // Loop over bankHolidayArray and return true or false
   function checkBankHoliday(date) {
     const d = new Date(date);
-    let t = null;
+    const dTZ = formatDate(d, 0);
+    let t;
     for (let k = 0; k < bankHols.length; k++) {
       const bank = new Date(bankHols[k].date);
-      if (isSameDay(bank, date)) {
-        console.log(true);
-        t = true;
-      } else {
-        t = false;
-      }
+      t = isSameDay(d, bank)
+        ? true
+        : false;
+      if (t) break;
     }
+
+    console.log(t);
 
     return t;
   }
