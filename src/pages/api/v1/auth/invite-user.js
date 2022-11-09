@@ -1,4 +1,4 @@
-const { prisma } = require("../../../../prisma/prisma");
+import prisma from"../../../../prisma/prisma";
 import { getSession } from "next-auth/react";
 import { sendUserInvite } from "../../../../libs/nodemailer/auth/invite";
 

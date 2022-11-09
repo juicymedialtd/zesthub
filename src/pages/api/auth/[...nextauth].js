@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { prisma } from "../../../prisma/prisma";
+import prisma from "../../../prisma/prisma";
 
 const options = {
   site: process.env.NEXTAUTH_URL,

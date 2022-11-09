@@ -1,4 +1,4 @@
-const { prisma } = require("../../../prisma/prisma");
+import prisma from"../../../prisma/prisma";
 import { getSession } from "next-auth/react";
 
 export default async function createRequest(req, res) {
@@ -16,7 +16,7 @@ export default async function createRequest(req, res) {
           User: {
             select: {
               name: true,
-              profileUrl: true
+              profileUrl: true,
             },
           },
         },

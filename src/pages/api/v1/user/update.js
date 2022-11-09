@@ -3,7 +3,7 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import formidable from "formidable";
 import fs from "fs";
 
-const { prisma } = require("../../../../prisma/prisma");
+import prisma from"../../../../prisma/prisma";
 
 export const config = {
   api: {

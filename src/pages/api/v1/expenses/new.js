@@ -1,4 +1,4 @@
-const { prisma } = require("../../../../prisma/prisma");
+import prisma from"../../../../prisma/prisma";
 import { getSession } from "next-auth/react";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import formidable from "formidable";
