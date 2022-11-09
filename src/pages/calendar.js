@@ -25,6 +25,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+import bankhols from "../libs/holidays/2022/uk.json";
+
 let colStartClasses = [
   "",
   "col-start-2",
@@ -37,6 +39,7 @@ let colStartClasses = [
 
 export default function Calendar() {
   const [events, setEvents] = useState([]);
+  const [national, setNational] = useState(bankhols);
 
   const today = startOfToday();
   const [selectedDay, setSelectedDay] = useState(today);
@@ -70,15 +73,14 @@ export default function Calendar() {
       const e = new Date(holidays[i].endDate);
 
       function calcR(start, end) {
-        let range = []
+        let range = [];
         let curDate = new Date(start.getTime());
         while (curDate <= end) {
           const dayOfWeek = curDate.getDay();
           if (dayOfWeek !== 0 && dayOfWeek !== 6) range.push(curDate);
-          // curDate.setDate(curDate.getDate() + 1);
-          curDate = addDays(curDate, 1)
+          curDate = addDays(curDate, 1);
         }
-        return range
+        return range;
       }
 
       let colour;
@@ -333,7 +335,16 @@ export default function Calendar() {
                                                 className="group flex"
                                               >
                                                 <p className="flex-auto truncate font-medium text-white ml-2 capitalize">
-                                                  {e.User.name + " - " + e.type}{" "}
+                                                  {e.User.profileUrl ? (
+                                                    <img
+                                                      className="inline-block h-4 w-4 mr-1 rounded-full"
+                                                      src={`${process.env.NEXT_PUBLIC_S3}/${e.User.profileUrl}`}
+                                                      alt=""
+                                                    />
+                                                  ) : (
+                                                    ""
+                                                  )}{" "}
+                                                  {e.User.name + " - " + e.type}
                                                   {e.daysUsed === "0.5"
                                                     ? " - 1/2 day"
                                                     : ""}
@@ -353,6 +364,31 @@ export default function Calendar() {
                               </>
                             );
                           })}
+                        {bankhols.map((item) => {
+                          const d = new Date(item.date);
+
+                          return (
+                            <div key={item.id}>
+                              {isSameDay(d, day) && (
+                                <ol>
+                                  <li
+                                    key={item.id}
+                                    className={`w-full bg-[#E37638]`}
+                                  >
+                                    <span
+                                      // href={event.href}
+                                      className="group flex"
+                                    >
+                                      <p className="flex-auto truncate font-medium text-white ml-2 capitalize">
+                                        {item.name}
+                                      </p>
+                                    </span>
+                                  </li>
+                                </ol>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   ))}

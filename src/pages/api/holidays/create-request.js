@@ -1,7 +1,9 @@
-const { prisma } = require("../../../prisma/prisma");
+import prisma from "../../../prisma/prisma"
 import { getSession } from "next-auth/react";
-import { parseISO, addHours } from "date-fns";
+import { parseISO, addHours, isSameDay } from "date-fns";
 import HolidayCreationEmail from "../../../libs/nodemailer/holidays/creation";
+
+import bankHols from "../../../libs/holidays/2022/uk.json";
 
 export default async function createRequest(req, res) {
   const session = await getSession({ req });
@@ -25,12 +27,30 @@ export default async function createRequest(req, res) {
   var endDate = eTZ;
   var numOfDates = getBusinessDatesCount(startDate, endDate);
 
+  // Loop over bankHolidayArray and return true or false
+  function checkBankHoliday(date) {
+    const d = new Date(date);
+    let t = null;
+    for (let k = 0; k < bankHols.length; k++) {
+      const bank = new Date(bankHols[k].date);
+      if (isSameDay(bank, date)) {
+        console.log(true);
+        t = true;
+      } else {
+        t = false;
+      }
+    }
+
+    return t;
+  }
+
   function getBusinessDatesCount(startDate, endDate) {
     let count = 0;
     const curDate = new Date(startDate.getTime());
     while (curDate <= endDate) {
       const dayOfWeek = curDate.getDay();
-      if (dayOfWeek !== 0 && dayOfWeek !== 6) count++;
+      const bankholiday = checkBankHoliday(curDate);
+      if (dayOfWeek !== 0 && dayOfWeek !== 6 && !bankholiday) count++;
       curDate.setDate(curDate.getDate() + 1);
     }
     return count;
